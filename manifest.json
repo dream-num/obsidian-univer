@@ -1,11 +1,11 @@
 {
-	"id": "sample-plugin",
-	"name": "Sample Plugin",
-	"version": "1.0.0",
+	"id": "univer-plugin",
+	"name": "Univer Plugin",
+	"version": "0.0.1",
 	"minAppVersion": "0.15.0",
-	"description": "Demonstrates some of the capabilities of the Obsidian API.",
+	"description": "This is a univer docs and sheets plugin for Obsidian (https://github.com/dream-num/univer)",
 	"author": "Obsidian",
-	"authorUrl": "https://obsidian.md",
-	"fundingUrl": "https://obsidian.md/pricing",
+	"authorUrl": "https://github.com/orgs/dream-num/teams/dream",
+	"fundingUrl": "https://github.com/dream-num/univer",
 	"isDesktopOnly": false
 }
