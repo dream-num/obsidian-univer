@@ -10,3 +10,19 @@ If your plugin does not need CSS, delete this file.
 text {
 	color: red;
 }
+
+.modal-title {
+	text-align: center;
+}
+
+.buttons-container {
+	display: flex;
+	justify-content: center;
+	gap: 20px;
+	margin-top: 20px;
+}
+
+.modal-button {
+	padding: 8px 20px;
+	cursor: pointer;
+}
