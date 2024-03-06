@@ -9,7 +9,7 @@
 		"version": "node version-bump.mjs && git add manifest.json versions.json"
 	},
 	"keywords": [],
-	"author": "",
+	"author": "Univer-karl",
 	"license": "MIT",
 	"devDependencies": {
 		"@types/node": "^16.11.6",
@@ -24,6 +24,13 @@
 		"typescript": "4.7.4"
 	},
 	"dependencies": {
+		"@univerjs/core": "^0.1.1",
+		"@univerjs/design": "^0.1.1",
+		"@univerjs/docs": "^0.1.1",
+		"@univerjs/docs-ui": "^0.1.1",
+		"@univerjs/engine-formula": "^0.1.1",
+		"@univerjs/engine-render": "^0.1.1",
+		"@univerjs/ui": "^0.1.1",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0"
 	}
