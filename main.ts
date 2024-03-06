@@ -1,5 +1,5 @@
 import { App, Editor, MarkdownView, Modal, Notice, Plugin, PluginSettingTab, Setting } from 'obsidian';
-
+import { UniverService } from './UniverService';
 // Remember to rename these classes and interfaces!
 
 interface MyPluginSettings {
@@ -84,7 +84,15 @@ export default class MyPlugin extends Plugin {
 	}
 
 	async loadSettings() {
-		this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
+		// this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
+
+		const data = await this.loadData()
+		if(data) {
+			this.settings = Object.assign({}, DEFAULT_SETTINGS, data)
+		} else {
+			this.settings = DEFAULT_SETTINGS
+			await this.saveData(this.settings)
+		}
 	}
 
 	async saveSettings() {
