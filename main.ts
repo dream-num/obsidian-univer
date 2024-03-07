@@ -1,6 +1,5 @@
-// import { MyReactView } from "UniverService";
-import { App, Modal, Plugin } from "obsidian";
-import { MyReactView } from 'demo'
+import { App, ItemView, Modal, Plugin, WorkspaceLeaf } from "obsidian";
+import { initialUniverDocs, initialUniverSheets } from "docs";
 
 interface MyPluginSettings {
 	mySetting: string;
@@ -24,7 +23,6 @@ export default class MyPlugin extends Plugin {
 				const modal = new ChooseTypeModal(this.app);
 				modal.plugin = this;
 				modal.open();
-				this.activateView();
 			}
 		);
 		ribbonIconEl.addClass("my-plugin-ribbon-class");
@@ -33,15 +31,28 @@ export default class MyPlugin extends Plugin {
 		statusBarItemEl.setText("Hello Univer");
 
 		this.registerView(
-			MyReactView.viewType,
-			(leaf) => new MyReactView(leaf)
+			UniverDocView.viewType,
+			(leaf) => new UniverDocView(leaf)
+		);
+
+		this.registerView(
+			UniverSheetView.viewType,
+			(leaf) => new UniverSheetView(leaf)
 		);
 
 		this.addCommand({
 			id: "open-my-react-view",
-			name: "Open My React View",
+			name: "create univer doc",
 			callback: () => {
-				this.activateView();
+				this.activateView('doc');
+			},
+		});
+
+		this.addCommand({
+			id: "open-my-react-view",
+			name: "create univer sheet",
+			callback: () => {
+				this.activateView('sheet');
 			},
 		});
 
@@ -54,14 +65,17 @@ export default class MyPlugin extends Plugin {
 		});
 	}
 
-	async activateView() {
-		let leaf = this.app.workspace.getLeaf(true); // 获取或创建一个leaf
+	async activateView(type: "doc" | "sheet") {
+		let leaf = this.app.workspace.getLeaf(true); 
+	
 		await leaf.setViewState({
-			type: MyReactView.viewType,
+			type: type === "doc" ? UniverDocView.viewType : UniverSheetView.viewType,
 			active: true,
+		}).then(() => {
+			this.app.workspace.revealLeaf(leaf);
 		});
-		this.app.workspace.revealLeaf(leaf); // 显示这个leaf
 	}
+
 
 	onunload() {
 		console.log("univer plugin has ended");
@@ -114,14 +128,14 @@ class ChooseTypeModal extends Modal {
 
 		docButton.onclick = () => {
 			console.log("begin to create docs");
-			this.plugin.activateView();
-			// how to do
+			this.plugin.activateView('doc');
 			this.close();
 		};
 
 		sheetButton.onclick = () => {
 			console.log("begin to create sheet");
-			this.close;
+			this.plugin.activateView('sheet');
+			this.close();
 		};
 	}
 
@@ -130,4 +144,60 @@ class ChooseTypeModal extends Modal {
 		console.log("ops~");
 		contentEl.empty();
 	}
+}
+
+class UniverDocView extends ItemView {
+	static viewType = "univer-doc";
+
+	constructor(leaf: WorkspaceLeaf) {
+		super(leaf);
+	}
+
+	getViewType(): string {
+		return UniverDocView.viewType;
+	}
+
+	getDisplayText(): string {
+		return "univer doc view";
+	}
+
+	async onOpen() {
+		const appContainer = document.createElement("div");
+		appContainer.id = "doc-app";
+		this.containerEl.childNodes[1].appendChild(appContainer);
+
+		const univerdocContainer = document.createElement("div");
+		univerdocContainer.id = "univerdoc";
+		this.containerEl.childNodes[1].appendChild(univerdocContainer);
+
+		initialUniverDocs();
+	}
+
+	async onClose() {}
+}
+
+class UniverSheetView extends ItemView {
+	static viewType = "univer-sheet";
+
+	constructor(leaf: WorkspaceLeaf) {
+		super(leaf);
+	}
+
+	getViewType(): string {
+		return UniverSheetView.viewType;
+	}
+
+	getDisplayText(): string {
+		return "univer sheet view";
+	}
+
+	async onOpen() {
+		const appContainer = document.createElement("div");
+		appContainer.id = "sheet-app";
+		this.containerEl.childNodes[1].appendChild(appContainer);
+
+		initialUniverSheets();
+	}
+
+	async onClose() {}
 }
