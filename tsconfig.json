@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
-	"jsx": "react",
+	  "jsx": "react",
     "inlineSourceMap": true,
     "inlineSources": true,
     "module": "ESNext",
@@ -21,5 +22,6 @@
   },
   "include": [
     "**/*.ts"
-  ]
+  ],
+
 }
