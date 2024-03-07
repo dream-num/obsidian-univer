@@ -1,6 +1,7 @@
 import { App, ItemView, Modal, Plugin, WorkspaceLeaf } from "obsidian";
 import { initialUniverDocs, initialUniverSheets } from "docs";
 
+
 interface MyPluginSettings {
 	mySetting: string;
 }
@@ -164,13 +165,10 @@ class UniverDocView extends ItemView {
 	async onOpen() {
 		const appContainer = document.createElement("div");
 		appContainer.id = "doc-app";
-		this.containerEl.childNodes[1].appendChild(appContainer);
+		this.contentEl.appendChild(appContainer)
+		appContainer.style.height = '100%'
 
-		const univerdocContainer = document.createElement("div");
-		univerdocContainer.id = "univerdoc";
-		this.containerEl.childNodes[1].appendChild(univerdocContainer);
-
-		initialUniverDocs();
+		await initialUniverDocs();
 	}
 
 	async onClose() {}
@@ -194,7 +192,7 @@ class UniverSheetView extends ItemView {
 	async onOpen() {
 		const appContainer = document.createElement("div");
 		appContainer.id = "sheet-app";
-		this.containerEl.childNodes[1].appendChild(appContainer);
+		this.containerEl.appendChild(appContainer);
 
 		initialUniverSheets();
 	}
