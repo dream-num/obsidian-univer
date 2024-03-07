@@ -30,6 +30,13 @@
 		"@univerjs/docs-ui": "^0.1.2",
 		"@univerjs/engine-formula": "^0.1.2",
 		"@univerjs/engine-render": "^0.1.2",
+		"@univerjs/find-replace": "^0.1.2",
+		"@univerjs/rpc": "^0.1.2",
+		"@univerjs/sheets": "^0.1.2",
+		"@univerjs/sheets-formula": "^0.1.2",
+		"@univerjs/sheets-numfmt": "^0.1.2",
+		"@univerjs/sheets-ui": "^0.1.2",
+		"@univerjs/sheets-zen-editor": "^0.1.2",
 		"@univerjs/ui": "^0.1.2",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0"
