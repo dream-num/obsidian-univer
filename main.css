@@ -1,34 +1,3 @@
-/*
-
-This CSS file will be included with your plugin, and
-available in the app when your plugin is enabled.
-
-If your plugin does not need CSS, delete this file.
-
-*/
-button:not(.clickable-icon) {
-  box-shadow: none;
-  background-color: transparent;
-}
-
-
-.modal-title {
-	text-align: center;
-}
-
-.buttons-container {
-	display: flex;
-	justify-content: center;
-	gap: 20px;
-	margin-top: 20px;
-}
-
-.modal-button {
-	padding: 8px 20px;
-	cursor: pointer;
-}
-
-
 /* node_modules/.pnpm/@univerjs+design@0.1.2_react-dom@18.2.0_react@18.2.0_rxjs@7.8.1/node_modules/@univerjs/design/lib/index.css */
 .univer-avatar {
   position: relative;
@@ -922,7 +891,6 @@ button:not(.clickable-icon) {
   display: flex;
   gap: var(--margin-xs);
   align-items: center;
-  color: black;
 }
 .univer-menu-item,
 .univer-menu-submenu {
