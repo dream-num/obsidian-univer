@@ -1,6 +1,7 @@
 import esbuild from "esbuild";
 import process from "process";
 import builtins from "builtin-modules";
+import cssModulesPlugin from 'esbuild-plugin-css-modules'
 
 const banner =
 `/*
@@ -16,6 +17,11 @@ const context = await esbuild.context({
 		js: banner,
 	},
 	entryPoints: ["main.ts"],
+	plugins: [
+		cssModulesPlugin({
+
+		})
+	],
 	bundle: true,
 	external: [
 		"obsidian",
@@ -38,6 +44,9 @@ const context = await esbuild.context({
 	sourcemap: prod ? false : "inline",
 	treeShaking: true,
 	outfile: "main.js",
+	loader: {
+		'.css': 'css'
+	}
 });
 
 if (prod) {

@@ -1,6 +1,11 @@
+import "@univerjs/design/lib/index.css";
+import "@univerjs/ui/lib/index.css";
+import "@univerjs/docs-ui/lib/index.css";
+import "@univerjs/sheets-ui/lib/index.css";
+import "@univerjs/sheets-formula/lib/index.css";
+
 import { App, ItemView, Modal, Plugin, WorkspaceLeaf } from "obsidian";
 import { initialUniverDocs, initialUniverSheets } from "docs";
-
 
 interface MyPluginSettings {
 	mySetting: string;
@@ -45,7 +50,7 @@ export default class MyPlugin extends Plugin {
 			id: "open-my-react-view",
 			name: "create univer doc",
 			callback: () => {
-				this.activateView('doc');
+				this.activateView("doc");
 			},
 		});
 
@@ -53,7 +58,7 @@ export default class MyPlugin extends Plugin {
 			id: "open-my-react-view",
 			name: "create univer sheet",
 			callback: () => {
-				this.activateView('sheet');
+				this.activateView("sheet");
 			},
 		});
 
@@ -67,16 +72,20 @@ export default class MyPlugin extends Plugin {
 	}
 
 	async activateView(type: "doc" | "sheet") {
-		let leaf = this.app.workspace.getLeaf(true); 
-	
-		await leaf.setViewState({
-			type: type === "doc" ? UniverDocView.viewType : UniverSheetView.viewType,
-			active: true,
-		}).then(() => {
-			this.app.workspace.revealLeaf(leaf);
-		});
-	}
+		let leaf = this.app.workspace.getLeaf(true);
 
+		await leaf
+			.setViewState({
+				type:
+					type === "doc"
+						? UniverDocView.viewType
+						: UniverSheetView.viewType,
+				active: true,
+			})
+			.then(() => {
+				this.app.workspace.revealLeaf(leaf);
+			});
+	}
 
 	onunload() {
 		console.log("univer plugin has ended");
@@ -129,13 +138,13 @@ class ChooseTypeModal extends Modal {
 
 		docButton.onclick = () => {
 			console.log("begin to create docs");
-			this.plugin.activateView('doc');
+			this.plugin.activateView("doc");
 			this.close();
 		};
 
 		sheetButton.onclick = () => {
 			console.log("begin to create sheet");
-			this.plugin.activateView('sheet');
+			this.plugin.activateView("sheet");
 			this.close();
 		};
 	}
@@ -165,9 +174,9 @@ class UniverDocView extends ItemView {
 	async onOpen() {
 		const appContainer = document.createElement("div");
 		appContainer.id = "doc-app";
-		this.contentEl.appendChild(appContainer)
-		appContainer.style.height = '100%'
-
+		this.contentEl.appendChild(appContainer);
+		appContainer.style.height = "100%";
+		// await loadStyleSheet(shadowRoot);
 		await initialUniverDocs();
 	}
 
@@ -192,10 +201,24 @@ class UniverSheetView extends ItemView {
 	async onOpen() {
 		const appContainer = document.createElement("div");
 		appContainer.id = "sheet-app";
-		this.containerEl.appendChild(appContainer);
-
+		this.contentEl.appendChild(appContainer);
+		appContainer.style.height = "100%";
 		initialUniverSheets();
 	}
 
 	async onClose() {}
 }
+
+// async function loadStyleSheet(root: ShadowRoot) {
+// 	const cssUrl = "./main.css";
+// 	try {
+// 		const response = await fetch(cssUrl);
+// 		const cssText = await response.text();
+
+// 		const styleEl = document.createElement("style");
+// 		styleEl.textContent = cssText;
+// 		root.append(styleEl);
+// 	} catch (error) {
+// 		console.error("failed to load style.sheet");
+// 	}
+// }
