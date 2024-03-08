@@ -12,7 +12,6 @@ import { UniverDocsUIPlugin } from "@univerjs/docs-ui";
 import { UniverUIPlugin } from "@univerjs/ui";
 import { UniverDocsPlugin } from "@univerjs/docs";
 import { UniverSheetsPlugin } from "@univerjs/sheets";
-// import { UniverSheetsFindPlugin } from '@univerjs/sheets-find-replace';
 import { UniverSheetsFormulaPlugin } from "@univerjs/sheets-formula";
 import { UniverSheetsNumfmtPlugin } from "@univerjs/sheets-numfmt";
 import { UniverSheetsUIPlugin } from "@univerjs/sheets-ui";
