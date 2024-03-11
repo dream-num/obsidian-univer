@@ -6,9 +6,26 @@ available in the app when your plugin is enabled.
 If your plugin does not need CSS, delete this file.
 
 */
+#sheet-app {
+  color: black;
+}
+
+
 button:not(.clickable-icon) {
   box-shadow: none;
   background-color: transparent;
+}
+
+input[type='text'],
+input[type='search'],
+input[type='email'],
+input[type='number'] {
+  height: auto;
+  background-color: transparent;
+}
+
+input[type='text']:focus-visible {
+  box-shadow: none;
 }
 
 
@@ -2989,6 +3006,7 @@ button:not(.clickable-icon) {
   align-items: center;
   padding: var(--padding-xs) 6px;
   transition: box-shadow .2s;
+  color: black;
 }
 .univer-slide-tab-item {
   cursor: pointer;

@@ -1,6 +1,30 @@
-import { App, ItemView, Modal, Plugin, WorkspaceLeaf } from "obsidian";
-import { initialUniverDocs, initialUniverSheets } from "docs";
+import "@univerjs/design/lib/index.css";
+import "@univerjs/ui/lib/index.css";
+import "@univerjs/docs-ui/lib/index.css";
+import "@univerjs/sheets-ui/lib/index.css";
+import "@univerjs/sheets-formula/lib/index.css";
 
+import { App, ItemView, Modal, Plugin, WorkspaceLeaf } from "obsidian";
+
+import { LocaleType, Univer, LogLevel } from "@univerjs/core";
+import { defaultTheme } from "@univerjs/design";
+import { UniverRenderEnginePlugin } from "@univerjs/engine-render";
+import { UniverFormulaEnginePlugin } from "@univerjs/engine-formula";
+import { UniverDocsUIPlugin } from "@univerjs/docs-ui";
+import { UniverUIPlugin } from "@univerjs/ui";
+import { UniverDocsPlugin } from "@univerjs/docs";
+import { UniverSheetsPlugin } from "@univerjs/sheets";
+import { UniverSheetsFormulaPlugin } from "@univerjs/sheets-formula";
+import { UniverSheetsNumfmtPlugin } from "@univerjs/sheets-numfmt";
+import { UniverSheetsUIPlugin } from "@univerjs/sheets-ui";
+import { UniverSheetsZenEditorPlugin } from "@univerjs/sheets-zen-editor";
+import {
+	UniverRPCMainThreadPlugin,
+	IUniverRPCMainThreadConfig,
+} from "@univerjs/rpc";
+import { UniverFindReplacePlugin } from "@univerjs/find-replace";
+import { DEFAULT_DOCUMENT_DATA_CN } from "./data/default-document-data-cn";
+import { DEFAULT_WORKBOOK_DATA_DEMO } from "./data/default-workbook-data-demo";
 
 interface MyPluginSettings {
 	mySetting: string;
@@ -45,7 +69,7 @@ export default class MyPlugin extends Plugin {
 			id: "open-my-react-view",
 			name: "create univer doc",
 			callback: () => {
-				this.activateView('doc');
+				this.activateView("doc");
 			},
 		});
 
@@ -53,7 +77,7 @@ export default class MyPlugin extends Plugin {
 			id: "open-my-react-view",
 			name: "create univer sheet",
 			callback: () => {
-				this.activateView('sheet');
+				this.activateView("sheet");
 			},
 		});
 
@@ -67,16 +91,20 @@ export default class MyPlugin extends Plugin {
 	}
 
 	async activateView(type: "doc" | "sheet") {
-		let leaf = this.app.workspace.getLeaf(true); 
-	
-		await leaf.setViewState({
-			type: type === "doc" ? UniverDocView.viewType : UniverSheetView.viewType,
-			active: true,
-		}).then(() => {
-			this.app.workspace.revealLeaf(leaf);
-		});
-	}
+		const leaf = this.app.workspace.getLeaf(true);
 
+		await leaf
+			.setViewState({
+				type:
+					type === "doc"
+						? UniverDocView.viewType
+						: UniverSheetView.viewType,
+				active: true,
+			})
+			.then(() => {
+				this.app.workspace.revealLeaf(leaf);
+			});
+	}
 
 	onunload() {
 		console.log("univer plugin has ended");
@@ -108,6 +136,7 @@ class ChooseTypeModal extends Modal {
 		const { contentEl } = this;
 		console.log("whoa!");
 
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		const title = contentEl.createEl("h3", {
 			text: "请选择要创建的文件类型",
 			cls: "modal-title",
@@ -129,13 +158,13 @@ class ChooseTypeModal extends Modal {
 
 		docButton.onclick = () => {
 			console.log("begin to create docs");
-			this.plugin.activateView('doc');
+			this.plugin.activateView("doc");
 			this.close();
 		};
 
 		sheetButton.onclick = () => {
 			console.log("begin to create sheet");
-			this.plugin.activateView('sheet');
+			this.plugin.activateView("sheet");
 			this.close();
 		};
 	}
@@ -165,9 +194,9 @@ class UniverDocView extends ItemView {
 	async onOpen() {
 		const appContainer = document.createElement("div");
 		appContainer.id = "doc-app";
-		this.contentEl.appendChild(appContainer)
-		appContainer.style.height = '100%'
-
+		this.contentEl.appendChild(appContainer);
+		appContainer.style.height = "100%";
+		// await loadStyleSheet(shadowRoot);
 		await initialUniverDocs();
 	}
 
@@ -192,10 +221,101 @@ class UniverSheetView extends ItemView {
 	async onOpen() {
 		const appContainer = document.createElement("div");
 		appContainer.id = "sheet-app";
-		this.containerEl.appendChild(appContainer);
-
+		this.contentEl.appendChild(appContainer);
+		appContainer.style.height = "100%";
 		initialUniverSheets();
 	}
 
 	async onClose() {}
+}
+
+// async function loadStyleSheet(root: ShadowRoot) {
+// 	const cssUrl = "./main.css";
+// 	try {
+// 		const response = await fetch(cssUrl);
+// 		const cssText = await response.text();
+
+// 		const styleEl = document.createElement("style");
+// 		styleEl.textContent = cssText;
+// 		root.append(styleEl);
+// 	} catch (error) {
+// 		console.error("failed to load style.sheet");
+// 	}
+// }
+
+
+
+export async function initialUniverDocs() {
+
+	const univer = new Univer({
+		theme: defaultTheme,
+		locale: LocaleType.ZH_CN,
+	});
+
+	univer.registerPlugin(UniverRenderEnginePlugin);
+	univer.registerPlugin(UniverFormulaEnginePlugin);
+
+	univer.registerPlugin(UniverUIPlugin, {
+		container: "doc-app",
+		header: true,
+		toolbar: true,
+	});
+
+	univer.registerPlugin(UniverDocsPlugin, {
+		standalone: true,
+	});
+	univer.registerPlugin(UniverDocsUIPlugin, {
+		container: "univerdoc",
+		layout: {
+			docContainerConfig: {
+				innerLeft: false,
+			},
+		},
+	});
+
+	univer.createUniverDoc(DEFAULT_DOCUMENT_DATA_CN);
+}
+
+export function initialUniverSheets() {
+	const univer = new Univer({
+		theme: defaultTheme,
+		locale: LocaleType.ZH_CN,
+		logLevel: LogLevel.VERBOSE,
+	});
+
+	univer.registerPlugin(UniverDocsPlugin, {
+		hasScroll: false,
+	});
+	univer.registerPlugin(UniverRenderEnginePlugin);
+	univer.registerPlugin(UniverUIPlugin, {
+		container: "sheet-app",
+		header: true,
+		toolbar: true,
+		footer: true,
+	});
+
+	univer.registerPlugin(UniverDocsUIPlugin);
+
+	univer.registerPlugin(UniverSheetsPlugin, {
+		notExecuteFormula: true,
+	});
+	univer.registerPlugin(UniverSheetsUIPlugin);
+
+	// sheet feature plugins
+
+	univer.registerPlugin(UniverSheetsNumfmtPlugin);
+	univer.registerPlugin(UniverSheetsZenEditorPlugin);
+	univer.registerPlugin(UniverFormulaEnginePlugin, {
+		notExecuteFormula: true,
+	});
+	univer.registerPlugin(UniverSheetsFormulaPlugin);
+	univer.registerPlugin(UniverRPCMainThreadPlugin, {
+		workerURL: "./worker.js",
+	} as IUniverRPCMainThreadConfig);
+
+	// find replace
+	univer.registerPlugin(UniverFindReplacePlugin);
+
+	// create univer sheet instance
+	univer.createUniverSheet(DEFAULT_WORKBOOK_DATA_DEMO);
 }

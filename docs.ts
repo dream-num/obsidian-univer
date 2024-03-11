@@ -62,7 +62,6 @@ export function initialUniverSheets() {
 		logLevel: LogLevel.VERBOSE,
 	});
 
-	// core plugins
 	univer.registerPlugin(UniverDocsPlugin, {
 		hasScroll: false,
 	});
@@ -95,7 +94,6 @@ export function initialUniverSheets() {
 
 	// find replace
 	univer.registerPlugin(UniverFindReplacePlugin);
-	// univer.registerPlugin(UniverSheetsFindPlugin);
 
 	// create univer sheet instance
 	univer.createUniverSheet(DEFAULT_WORKBOOK_DATA_DEMO);
