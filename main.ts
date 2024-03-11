@@ -1,8 +1,8 @@
-import "@univerjs/design/lib/index.css";
-import "@univerjs/ui/lib/index.css";
-import "@univerjs/docs-ui/lib/index.css";
-import "@univerjs/sheets-ui/lib/index.css";
-import "@univerjs/sheets-formula/lib/index.css";
+import designCss from "@univerjs/design/lib/index.css";
+import uiCss from "@univerjs/ui/lib/index.css";
+import docuiCss from "@univerjs/docs-ui/lib/index.css";
+import sheetsuiCss from "@univerjs/sheets-ui/lib/index.css";
+import sheetsFormulaCss from "@univerjs/sheets-formula/lib/index.css";
 
 import { App, ItemView, Modal, Plugin, WorkspaceLeaf } from "obsidian";
 
@@ -33,6 +33,15 @@ interface MyPluginSettings {
 const DEFAULT_SETTINGS: MyPluginSettings = {
 	mySetting: "default",
 };
+
+const univerCss = [
+	designCss,
+	uiCss,
+	docuiCss,
+	sheetsuiCss,
+	sheetsFormulaCss,
+];
+
 
 export default class MyPlugin extends Plugin {
 	settings: MyPluginSettings;
@@ -196,7 +205,8 @@ class UniverDocView extends ItemView {
 		appContainer.id = "doc-app";
 		this.contentEl.appendChild(appContainer);
 		appContainer.style.height = "100%";
-		// await loadStyleSheet(shadowRoot);
+
+		injectStyles(univerCss);
 		await initialUniverDocs();
 	}
 
@@ -223,30 +233,23 @@ class UniverSheetView extends ItemView {
 		appContainer.id = "sheet-app";
 		this.contentEl.appendChild(appContainer);
 		appContainer.style.height = "100%";
+		injectStyles(univerCss);
+
 		initialUniverSheets();
 	}
 
 	async onClose() {}
 }
 
-// async function loadStyleSheet(root: ShadowRoot) {
-// 	const cssUrl = "./main.css";
-// 	try {
-// 		const response = await fetch(cssUrl);
-// 		const cssText = await response.text();
-
-// 		const styleEl = document.createElement("style");
-// 		styleEl.textContent = cssText;
-// 		root.append(styleEl);
-// 	} catch (error) {
-// 		console.error("failed to load style.sheet");
-// 	}
-// }
-
-
+function injectStyles(cssStrings: string[]) {
+	cssStrings.forEach(cssString => {
+		const styleEl = document.createElement("style");
+		styleEl.textContent = cssString;
+		document.head.appendChild(styleEl);
+	})
+}
 
 export async function initialUniverDocs() {
-
 	const univer = new Univer({
 		theme: defaultTheme,
 		locale: LocaleType.ZH_CN,
