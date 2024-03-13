@@ -23,6 +23,6 @@
   "include": [
     "**/*.ts",
     "custom.d.ts"
-  ],
+, "docs/main.tsx", "sheets/main.tsx"  ],
 
 }

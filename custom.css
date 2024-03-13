@@ -1,0 +1,32 @@
+.univer-menu-item {
+	color: black;
+}
+
+button.univer-button-text,
+button.univer-toolbar-btn
+button.univer-sheet-bar-btn
+{
+	background-color: transparent;
+	box-shadow: none;
+}
+
+button.univer-toolbar-btn-active {
+	background-color: rgb(var(--grey-100));
+}
+
+
+.modal-buttons-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+}
+
+.modal-button {
+	margin: 0 10px;
+}
+
+.modal-title {
+	margin: 20px auto;
+	text-align: center;
+}

@@ -1,7 +1,8 @@
 import esbuild from "esbuild";
 import process from "process";
 import builtins from "builtin-modules";
-import fs from 'fs'
+import { promises as fs } from 'fs';
+// import path from "path";
 
 const banner =
 	`/*
@@ -12,25 +13,50 @@ if you want to view the source, please visit the github repository of this plugi
 
 const prod = (process.argv[2] === "production");
 
+const rebuildPlugin = {
+	name: "rebuild-handler",
+	setup(build) {
+		build.onEnd(async () => {
+			try {
+				await fs.writeFile('styles.css', '')
+
+				const customCssContent = await fs.readFile("custom.css", "utf-8");
+				await fs.appendFile('styles.css', customCssContent)
+
+				const mainCssContent = await fs.readFile("main.css", "utf-8");
+				await fs.appendFile('styles.css', mainCssContent)
+
+				console.log('styles.css has been updated')
+
+			} catch (error) {
+				console.error('build styles.css failed', error)
+			}
+
+		});
+	},
+};
+
+
 const context = await esbuild.context({
 	banner: {
 		js: banner,
 	},
 	entryPoints: ["main.ts"],
-	plugins: [
-		{
-			name: 'inline-css',
-			setup(build) {
-				build.onLoad({ filter: /\.css$/ }, async (args) => {
-					const contents = await fs.promises.readFile(args.path, 'utf8');
-					return {
-						contents: `const css = ${JSON.stringify(contents)}; export default css;`,
-						loader: 'js',
-					};
-				});
-			},
-		}
-	],
+	plugins: [rebuildPlugin],
+	// plugins: [
+	// 	{
+	// 		name: 'inline-css',
+	// 		setup(build) {
+	// 			build.onLoad({ filter: /\.css$/ }, async (args) => {
+	// 				const contents = await fs.promises.readFile(args.path, 'utf8');
+	// 				return {
+	// 					contents: `const css = ${JSON.stringify(contents)}; export default css;`,
+	// 					loader: 'js',
+	// 				};
+	// 			});
+	// 		},
+	// 	}
+	// ],
 	bundle: true,
 	external: [
 		"obsidian",
