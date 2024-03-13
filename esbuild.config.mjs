@@ -1,7 +1,7 @@
 import esbuild from "esbuild";
 import process from "process";
 import builtins from "builtin-modules";
-import fs from 'fs';
+import { promises as fs } from 'fs';
 // import path from "path";
 
 const banner =
@@ -17,11 +17,21 @@ const rebuildPlugin = {
 	name: "rebuild-handler",
 	setup(build) {
 		build.onEnd(async () => {
-			await fs.promises.rename("main.css", "styles.css");
-			// await fs.promises.copyFile(
-			// 	path.join(path.resolve(), "manifest.json"),
-			// 	path.join(path.resolve(), "dist", "manifest.json")
-			// );
+			try {
+				await fs.writeFile('styles.css', '')
+
+				const customCssContent = await fs.readFile("custom.css", "utf-8");
+				await fs.appendFile('styles.css', customCssContent)
+
+				const mainCssContent = await fs.readFile("main.css", "utf-8");
+				await fs.appendFile('styles.css', mainCssContent)
+
+				console.log('styles.css has been updated')
+
+			} catch (error) {
+				console.error('build styles.css failed', error)
+			}
+
 		});
 	},
 };

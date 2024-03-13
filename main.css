@@ -1,35 +1,4 @@
-.univer-menu-item {
-	color: black;
-}
-
-button.univer-button-text,
-button.univer-toolbar-btn
-button.button.univer-toolbar-btn
-{
-	background-color: transparent;
-	box-shadow: none;
-}
-
-button.univer-toolbar-btn-active {
-	background-color: rgb(var(--grey-100));
-}
-
-
-.modal-buttons-container {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 100%;
-}
-
-.modal-button {
-	margin: 0 10px;
-}
-
-.modal-title {
-	margin: 20px auto;
-	text-align: center;
-}/* node_modules/.pnpm/@univerjs+design@0.1.2_react-dom@18.2.0_react@18.2.0_rxjs@7.8.1/node_modules/@univerjs/design/lib/index.css */
+/* node_modules/.pnpm/@univerjs+design@0.1.2_react-dom@18.2.0_react@18.2.0_rxjs@7.8.1/node_modules/@univerjs/design/lib/index.css */
 .univer-avatar {
   position: relative;
   overflow: hidden;
