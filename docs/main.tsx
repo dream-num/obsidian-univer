@@ -42,6 +42,10 @@ export function UniverDocComponent({
 			});
 
 			univer.createUniverDoc(DEFAULT_DOCUMENT_DATA_CN);
+
+			return () => {
+				univer.dispose();
+			}
 		} else {
 			console.error("UIContainer is not exist");
 		}
