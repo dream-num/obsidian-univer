@@ -2,7 +2,6 @@ import esbuild from "esbuild";
 import process from "process";
 import builtins from "builtin-modules";
 import { promises as fs } from 'fs';
-// import path from "path";
 
 const banner =
 	`/*
@@ -42,20 +41,6 @@ const context = await esbuild.context({
 	},
 	entryPoints: ["main.ts"],
 	plugins: [rebuildPlugin],
-	// plugins: [
-	// 	{
-	// 		name: 'inline-css',
-	// 		setup(build) {
-	// 			build.onLoad({ filter: /\.css$/ }, async (args) => {
-	// 				const contents = await fs.promises.readFile(args.path, 'utf8');
-	// 				return {
-	// 					contents: `const css = ${JSON.stringify(contents)}; export default css;`,
-	// 					loader: 'js',
-	// 				};
-	// 			});
-	// 		},
-	// 	}
-	// ],
 	bundle: true,
 	external: [
 		"obsidian",
