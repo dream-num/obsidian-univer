@@ -3,57 +3,84 @@ import { TextFileView } from "obsidian";
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { UniverDocComponent } from "./docs/main";
-import { UniverSheetComponent } from './sheets/main';
+import { UniverSheetComponent } from "./sheets/main";
 
 import "@univerjs/design/lib/index.css";
 import "@univerjs/ui/lib/index.css";
 import "@univerjs/docs-ui/lib/index.css";
 import "@univerjs/sheets-ui/lib/index.css";
 import "@univerjs/sheets-formula/lib/index.css";
+import "@univerjs/sheets-numfmt/lib/index.css";
 
 export const VIEW_TYPE_UNIVERDOCS = "univer-doc-view";
 export const VIEW_TYPE_UNIVERSHEETS = "univer-sheet-view";
 
-export class UniverDocsView extends TextFileView {
+function setCtxPos(el: HTMLElement) {
+	const rect = el.getBoundingClientRect();
+	const p = { x: rect.left, y: rect.top };
+
+	const r = document.querySelector(":root") as HTMLElement;
+
+	if (r && p.x) {
+		r.style.setProperty("--ctx_menu_x", -1 * p.x + "px");
+		r.style.setProperty("--ctx_menu_y", -1 * p.y + 50 + "px");
+	}
+}
+
+abstract class UniverBaseView extends TextFileView {
 	root: any;
-	docElement: HTMLElement;
-	univerDocContainer: HTMLElement;
+	univerElement: HTMLElement;
+	univerContainer: HTMLElement;
+	resizeObserver: ResizeObserver | void;
+	contianerId: string;
+	inData: any;
+	outData: any;
+
+	abstract getViewType(): string;
+	abstract getContainerId(): string;
+	abstract getDisplayText(): string;
+	abstract renderComponent(container: HTMLElement): React.ReactElement;
 
 	getViewData(): string {
-		return this.data;
+		console.log("getViewData", this.outData);
+		return JSON.stringify(this.outData);
 	}
 
 	setViewData(data: string, clear: boolean): void {
-		this.data = data;
+		if (data.trim()) {
+			this.inData = JSON.parse(data);
+		} else {
+			this.inData = {};
+		}
+		console.log("setViewData", this.inData);
 
 		this.refresh();
 	}
 
 	refresh() {
-		this.docElement.empty();
-        const docContainer = document.createElement('div');
-        docContainer.style.height = '100%';
-        docContainer.id = 'doc-app'
-        this.docElement.appendChild(docContainer);
+		this.univerElement.empty();
+		const container = document.createElement("div");
+		container.style.height = "100%";
+		container.id = this.getContainerId();
+		this.univerElement.appendChild(container);
 
-		this.univerDocContainer = docContainer;
+		this.resizeObserver = new ResizeObserver(() => {
+			window.dispatchEvent(new Event("resize"));
+			setCtxPos(container);
+		}).observe(container);
 
-		this.root = createRoot(docContainer);
-		this.root.render(<UniverDocComponent UIContainer={docContainer} />);
+		this.univerContainer = container;
+		if (!this.root) {
+			this.root = createRoot(container);
+		}
+		this.root.render(this.renderComponent(container));
 	}
 
-	clear(): void {}
-
-	getViewType(): string {
-		return VIEW_TYPE_UNIVERDOCS;
-	}
-
-	getDisplayText(): string {
-		return "univer docs view";
+	clear(): void {
 	}
 
 	async onOpen() {
-		this.docElement = this.contentEl;
+		this.univerElement = this.contentEl;
 	}
 
 	async onClose() {
@@ -67,56 +94,38 @@ export class UniverDocsView extends TextFileView {
 	}
 }
 
-
-export class UniverSheetsView extends TextFileView {
-	root: any;
-	docElement: HTMLElement;
-	univerDocContainer: HTMLElement;
-
-	getViewData(): string {
-		return this.data;
-	}
-
-	setViewData(data: string, clear: boolean): void {
-		this.data = data;
-
-		this.refresh();
-	}
-
-	refresh() {
-		this.docElement.empty();
-        const docContainer = document.createElement('div');
-        docContainer.style.height = '100%';
-        docContainer.id = 'sheet-app'
-        this.docElement.appendChild(docContainer);
-
-		this.univerDocContainer = docContainer;
-
-		this.root = createRoot(docContainer);
-		this.root.render(<UniverSheetComponent UIContainer={docContainer} />);
-	}
-
-	clear(): void {}
-
+export class UniverDocsView extends UniverBaseView {
 	getViewType(): string {
 		return VIEW_TYPE_UNIVERDOCS;
+	}
+
+	getContainerId(): string {
+		return "doc-app";
 	}
 
 	getDisplayText(): string {
 		return "univer docs view";
 	}
 
-	async onOpen() {
-		this.docElement = this.contentEl;
+	renderComponent(container: HTMLDivElement): React.ReactElement {
+		return <UniverDocComponent UIContainer={container} />;
+	}
+}
+
+export class UniverSheetsView extends UniverBaseView {
+	getViewType(): string {
+		return VIEW_TYPE_UNIVERSHEETS;
 	}
 
-	async onClose() {
-		this.requestSave();
+	getContainerId(): string {
+		return "sheet-app";
+	}
 
-		if (this.root) {
-			this.root.unmount();
-		}
+	getDisplayText(): string {
+		return "univer sheets view";
+	}
 
-		this.contentEl.empty();
+	renderComponent(container: HTMLDivElement): React.ReactElement {
+		return <UniverSheetComponent UIContainer={container} />;
 	}
 }

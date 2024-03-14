@@ -19,12 +19,11 @@ const rebuildPlugin = {
 		build.onEnd(async () => {
 			try {
 				await fs.writeFile('styles.css', '')
+				const mainCssContent = await fs.readFile("main.css", "utf-8");
+				await fs.appendFile('styles.css', mainCssContent)
 
 				const customCssContent = await fs.readFile("custom.css", "utf-8");
 				await fs.appendFile('styles.css', customCssContent)
-
-				const mainCssContent = await fs.readFile("main.css", "utf-8");
-				await fs.appendFile('styles.css', mainCssContent)
 
 				console.log('styles.css has been updated')
 
