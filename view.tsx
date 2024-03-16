@@ -4,6 +4,7 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import { UniverDocComponent } from "./docs/main";
 import { UniverSheetComponent } from "./sheets/main";
+import UniverSheet from "./sheets/sheet";
 
 import "@univerjs/design/lib/index.css";
 import "@univerjs/ui/lib/index.css";
@@ -14,6 +15,12 @@ import "@univerjs/sheets-numfmt/lib/index.css";
 
 export const VIEW_TYPE_UNIVERDOCS = "univer-doc-view";
 export const VIEW_TYPE_UNIVERSHEETS = "univer-sheet-view";
+
+export interface UniverDataSetting {
+	UIContainer: HTMLElement;
+	data: any;
+	onChange: (data: any) => void;
+}
 
 function setCtxPos(el: HTMLElement) {
 	const rect = el.getBoundingClientRect();
@@ -27,6 +34,7 @@ function setCtxPos(el: HTMLElement) {
 	}
 }
 
+
 abstract class UniverBaseView extends TextFileView {
 	root: any;
 	univerElement: HTMLElement;
@@ -35,6 +43,7 @@ abstract class UniverBaseView extends TextFileView {
 	contianerId: string;
 	inData: any;
 	outData: any;
+	isSaveingData: boolean;
 
 	abstract getViewType(): string;
 	abstract getContainerId(): string;
@@ -42,17 +51,17 @@ abstract class UniverBaseView extends TextFileView {
 	abstract renderComponent(container: HTMLElement): React.ReactElement;
 
 	getViewData(): string {
-		console.log("getViewData", this.outData);
+		console.log("getViewData------------", this.outData);
 		return JSON.stringify(this.outData);
 	}
 
 	setViewData(data: string, clear: boolean): void {
+		console.log("setViewData------------", data);
 		if (data.trim()) {
 			this.inData = JSON.parse(data);
 		} else {
-			this.inData = {};
+			this.inData = {name: "sheet1"};
 		}
-		console.log("setViewData", this.inData);
 
 		this.refresh();
 	}
@@ -73,11 +82,19 @@ abstract class UniverBaseView extends TextFileView {
 		if (!this.root) {
 			this.root = createRoot(container);
 		}
+		// const setting = {
+		// 	UIContainer: container,
+		// 	data: this.inData,
+		// 	onChange: (data: any) => {
+		// 		this.outData = data;
+		// 		this.autoSaveData();
+		// 	},
+		// }
+
 		this.root.render(this.renderComponent(container));
 	}
 
-	clear(): void {
-	}
+	clear(): void {}
 
 	async onOpen() {
 		this.univerElement = this.contentEl;
@@ -91,6 +108,20 @@ abstract class UniverBaseView extends TextFileView {
 		}
 
 		this.contentEl.empty();
+	}
+
+	autoSaveData() {
+		console.log("begin to auto save data");
+		if (this.isSaveingData) {
+			return;
+		}
+
+		this.isSaveingData = true;
+		setTimeout(() => {
+			this.requestSave();
+			console.log("auto save data");
+			this.isSaveingData = false;
+		}, 5000);
 	}
 }
 
@@ -112,7 +143,7 @@ export class UniverDocsView extends UniverBaseView {
 	}
 }
 
-export class UniverSheetsView extends UniverBaseView {
+export class UniverSheetsView2 extends UniverBaseView {
 	getViewType(): string {
 		return VIEW_TYPE_UNIVERSHEETS;
 	}
@@ -127,5 +158,111 @@ export class UniverSheetsView extends UniverBaseView {
 
 	renderComponent(container: HTMLDivElement): React.ReactElement {
 		return <UniverSheetComponent UIContainer={container} />;
+	}
+}
+
+export class UniverSheetsView extends TextFileView {
+	root: any;
+	univerElement: HTMLElement;
+	univerContainer: HTMLElement;
+	resizeObserver: ResizeObserver | void;
+	contianerId: string;
+	inData: any;
+	outData: any;
+	isSaveingData: boolean;
+
+	getViewType(): string {
+		return VIEW_TYPE_UNIVERSHEETS;
+	}
+
+	getContainerId(): string {
+		return "sheet-app";
+	}
+
+	getDisplayText(): string {
+		return "univer sheets view";
+	}
+
+	getViewData(): string {
+		console.log('get view data+++++++++++++++')
+		if (this.outData) {
+			const r = JSON.stringify(this.outData);
+			console.log("univer saved!!", r);
+			return r;
+		} else {
+			console.log("univer null saved!!");
+			return "";
+		}
+	}
+
+	setViewData(data: string, clear: boolean): void {
+		console.log("setViewData------------", data);
+		if (data.trim()) {
+			this.inData = JSON.parse(data);
+		} else {
+			this.inData = [{name: "sheet1"}];
+		}
+
+		this.refresh();
+	}
+
+	refresh() {
+		console.log("refresh---------");
+		this.univerElement.empty();
+		const container = document.createElement("div");
+		container.style.height = "100%";
+		container.id = this.getContainerId();
+		this.univerElement.appendChild(container);
+
+		this.resizeObserver = new ResizeObserver(() => {
+			window.dispatchEvent(new Event("resize"));
+			setCtxPos(container);
+		}).observe(container);
+
+		this.univerContainer = container;
+		if (!this.root) {
+			this.root = createRoot(container);
+		}
+		const setting = {
+			UIContainer: container,
+			data: this.inData,
+			onChange: (data: any) => {
+				this.outData = data;
+				this.autoSaveData();
+			},
+		};
+
+		this.root.render(<UniverSheet {...setting} />);
+	}
+
+	clear(): void {}
+
+	async onOpen() {
+		this.univerElement = this.contentEl;
+	}
+
+	async onClose() {
+		console.log("onClose");
+		this.requestSave();
+
+		if (this.root) {
+			this.root.unmount();
+		}
+
+		this.contentEl.empty();
+	}
+
+	autoSaveData() {
+		console.log("begin to auto save data");
+		if (this.isSaveingData) {
+			return;
+		}
+
+		this.isSaveingData = true;
+		setTimeout(() => {
+			this.requestSave();
+			console.log("auto save data");
+			this.isSaveingData = false;
+		}, 1000);
 	}
 }

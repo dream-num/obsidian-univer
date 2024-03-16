@@ -49,7 +49,7 @@ export function UniverSheetComponent({
 			univer.createUniverSheet({});
 			return () => {
 				univer.dispose();
-			}
+			};
 		} else {
 			console.error("UIContainer is not exist");
 		}
@@ -57,3 +57,4 @@ export function UniverSheetComponent({
 
 	return null;
 }
+
