@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "target": "ES2018",
+    "jsx": "preserve",
+    "lib": [
+      "DOM",
+      "ES5",
+      "ES6",
+      "ES7"
+    ],
+    "baseUrl": ".",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "paths": {
+      "~": [
+        "src"
+      ],
+      "~/*": [
+        "src/*"
+      ],
+      "@": [
+        "src"
+      ],
+      "@/*": [
+        "src/*"
+      ]
+    },
+    "allowJs": true,
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "importHelpers": true,
+    "inlineSourceMap": true,
+    "inlineSources": true,
+    "isolatedModules": true
+  },
+  "include": [
+    "src/**/*"
+  ]
+}
