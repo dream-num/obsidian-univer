@@ -1,8 +1,8 @@
 import type { IWorkbookData, Univer, Workbook } from '@univerjs/core'
 import type { WorkspaceLeaf } from 'obsidian'
 import { TextFileView } from 'obsidian'
+import { FUniver } from '@univerjs/facade'
 import { sheetInit } from '~/utils/univer'
-import { FUniver } from "@univerjs/facade";
 
 export const Type = 'univer-sheet'
 
@@ -48,7 +48,6 @@ export class USheetView extends TextFileView {
       this.requestSave()
     })
   }
-
 
   getViewType() {
     return Type
