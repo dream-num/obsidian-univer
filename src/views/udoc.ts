@@ -1,4 +1,4 @@
-import { IWorkbookData, Univer, Workbook } from "@univerjs/core";
+import {  Univer, DocumentDataModel, Tools } from "@univerjs/core";
 import { FUniver } from "@univerjs/facade";
 import { TextFileView, WorkspaceLeaf } from "obsidian";
 import { docInit } from "~/utils/univer";
@@ -7,7 +7,7 @@ import { DEFAULT_DOCUMENT_DATA_CN } from "../data/default-document-data-cn";
 export const Type = "univer-doc";
 
 export class UDocView extends TextFileView {
-  workbook: any;
+  documentData: DocumentDataModel;
   univer: Univer;
   FUniver: FUniver;
   rootContainer: HTMLDivElement;
@@ -17,7 +17,8 @@ export class UDocView extends TextFileView {
   }
 
   getViewData(): string {
-    return JSON.stringify(this.workbook.save());
+    console.log('doc saving')
+    return JSON.stringify(Tools.deepClone(this.documentData.getSnapshot()));
   }
 
   setViewData(data: string, clear: boolean): void {
@@ -30,7 +31,7 @@ export class UDocView extends TextFileView {
     });
     this.FUniver = FUniver.newAPI(this.univer);
 
-    let docData: IWorkbookData | object;
+    let docData: DocumentDataModel | object;
 
     try {
       docData = JSON.parse(data);
@@ -39,7 +40,7 @@ export class UDocView extends TextFileView {
     }
 
     setTimeout(() => {
-      this.workbook = this.univer.createUniverDoc(docData);
+      this.documentData = this.univer.createUniverDoc(docData);
     }, 0);
 
     this.FUniver.onCommandExecuted(() => {
