@@ -1,7 +1,7 @@
 import type { IWorkbookData, Univer, Workbook } from '@univerjs/core'
 import type { WorkspaceLeaf } from 'obsidian'
 import { TextFileView } from 'obsidian'
-import { init } from '~/utils/univer'
+import { sheetInit } from '~/utils/univer'
 import { FUniver } from "@univerjs/facade";
 
 export const Type = 'univer-sheet'
@@ -25,7 +25,7 @@ export class USheetView extends TextFileView {
   setViewData(data: string, _: boolean): void {
     if (this.univer)
       this.univer.dispose()
-    this.univer = init({
+    this.univer = sheetInit({
       container: 'usheet-app',
       header: true,
       toolbar: true,
