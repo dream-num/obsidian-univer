@@ -2,6 +2,7 @@ import type { IWorkbookData, Univer, Workbook } from '@univerjs/core'
 import type { WorkspaceLeaf } from 'obsidian'
 import { TextFileView } from 'obsidian'
 import { init } from '~/utils/univer'
+import { FUniver } from "@univerjs/facade";
 
 export const Type = 'univer-sheet'
 
@@ -10,12 +11,14 @@ export class USheetView extends TextFileView {
   rootContainer: HTMLDivElement
   univer: Univer
   workbook: Workbook
+  FUniver: FUniver
 
   constructor(leaf: WorkspaceLeaf) {
     super(leaf)
   }
 
   getViewData(): string {
+    console.log('saveing')
     return JSON.stringify(this.workbook.save())
   }
 
@@ -28,6 +31,7 @@ export class USheetView extends TextFileView {
       toolbar: true,
       footer: true,
     })
+    this.FUniver = FUniver.newAPI(this.univer)
     let sheetData: IWorkbookData | object
 
     try {
@@ -39,7 +43,12 @@ export class USheetView extends TextFileView {
     setTimeout(() => {
       this.workbook = this.univer.createUniverSheet(sheetData)
     }, 0)
+
+    this.FUniver.onCommandExecuted(() => {
+      this.requestSave()
+    })
   }
+
 
   getViewType() {
     return Type
@@ -57,7 +66,6 @@ export class USheetView extends TextFileView {
   }
 
   async onClose() {
-    // Nothing to clean up.
     this.requestSave()
     this.univer.dispose()
   }
