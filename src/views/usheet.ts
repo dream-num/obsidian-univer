@@ -3,7 +3,7 @@ import type { WorkspaceLeaf } from 'obsidian'
 import { TextFileView } from 'obsidian'
 import { init } from '~/utils/univer'
 
-export const Type = 'univer-sheet-view'
+export const Type = 'univer-sheet'
 
 export class USheetView extends TextFileView {
   contentData: string

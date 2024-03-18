@@ -1,4 +1,4 @@
-import './style/style.css'
+import './style/univer.css'
 import { defu } from 'defu'
 import { Plugin } from 'obsidian'
 import { Type as USheetType, USheetView } from './views/usheet'
