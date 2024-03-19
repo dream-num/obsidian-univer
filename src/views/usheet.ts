@@ -61,11 +61,11 @@ export class USheetView extends TextFileView {
     this.rootContainer = this.contentEl as HTMLDivElement
     this.rootContainer.id = 'usheet-app'
     this.rootContainer.classList.add('usheet-container')
-    this.rootContainer.empty()
   }
 
   async onClose() {
     this.requestSave()
     this.univer.dispose()
+
   }
 }
