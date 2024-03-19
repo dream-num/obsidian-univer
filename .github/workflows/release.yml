@@ -25,6 +25,12 @@ jobs:
           npm install
           npm run build
           mkdir ${{ env.PLUGIN_NAME }}
+          echo "Waiting for build files..."
+          while [ ! -f dist/main.js ] || [ ! -f dist/manifest.json ] || [ ! -f dist/styles.css ]; do
+            echo "Still waiting for build files..."
+            sleep 1
+          done
+          echo "All build files are ready."
           cp dist/main.js dist/manifest.json dist/styles.css ${{ env.PLUGIN_NAME }}
           zip -r ${{ env.PLUGIN_NAME }}.zip ${{ env.PLUGIN_NAME }}
           ls
