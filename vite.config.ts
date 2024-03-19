@@ -7,9 +7,12 @@ import dotenv from 'dotenv'
 import Package from './package.json'
 
 dotenv.config()
-const buildDir = process.env.DIST_DIR ?? 'dist'
+let buildDir = process.env.DIST_DIR ?? 'dist'
 
 function generate(isDev?: boolean) {
+  if(!isDev) {
+    buildDir = 'dist'
+  }
   return {
     name: 'obsidian',
     async writeBundle() {
@@ -20,8 +23,8 @@ function generate(isDev?: boolean) {
         minAppVersion: '0.15.0',
         description: Package.description,
         author: Package.author,
-        authorUrl: 'https://obsidian.md',
-        fundingUrl: 'https://obsidian.md/pricing',
+        authorUrl: 'https://github.com/karlsbeard/obsidian-univer',
+        fundingUrl: 'https://opencollective.com/univer',
         isDesktopOnly: false,
       }))
       if (isDev)
