@@ -1,14 +1,14 @@
 # Obsidian Univer Plugin
-This plugin gives you all the features of a standard doc and sheet tool in Obisidian. You can build powerful Sheet or Doc within Obsidian.
+This plugin gives you all the features of a standard doc and sheet tool in Obisidian. You can build a powerful Sheet or Doc within Obsidian.
 
-This plugin is based on [Univer](https://github.com/dream-num/univer), which is based on [DreanNum](https://github.com/dream-num)
+This plugin is based on [Univer](https://github.com/dream-num/univer), which is based on [DreamNum](https://github.com/dream-num)
 
 
 ### Features
 
 #### Sheet
 - Rich text formatting - change fonts, size, colors, borders, cell color, line-wrapping, etc
-- Formulas - serveral build in formulas
+- Formulas - several build in formulas
 - Filter and sort
 - Cells - merge cells, resize cells, drag cells
 
@@ -22,9 +22,9 @@ This plugin is based on [Univer](https://github.com/dream-num/univer), which is 
 
 ### How to perfect the plugin
 
-Univer team is so glad that u can join and help us perfect the plugin and the Univer ecology, You have many ways to join and help us.
-- Clone the repository and `pnpm i` then `pnpm dev` or `pnpm build`, so that you can prefect the univer-plugin.
-- You can create Univer plugins in the community which you want. You can concat us so that we can help u publicity the Univer plugins in the Univer community.
+Univer team is so glad that you can join and help us perfect the plugin and the Univer ecology, You have many ways to join and help us.
+- Clone the repository and `pnpm i` then `pnpm dev` or `pnpm build` so that you can perfect the Univer-plugin.
+- You can create Univer plugins in the community that you want. You can contact us so that we can help you publish the Univer plugins in the Univer community.
 
 ### Screenshots
 ![doc](assets/doc.jpg)
