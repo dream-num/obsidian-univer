@@ -16,6 +16,7 @@ function generate(isDev?: boolean) {
   return {
     name: 'obsidian',
     async writeBundle() {
+      console.log('writing bundle----------')
       await writeFile(resolve(buildDir, 'manifest.json'), JSON.stringify({
         id: Package.name,
         name: 'Univer',
@@ -31,7 +32,7 @@ function generate(isDev?: boolean) {
         await writeFile(resolve(buildDir, '.hotreload'), '')
       rename(resolve(buildDir, 'style.css'), resolve(buildDir, 'styles.css'))
       // eslint-disable-next-line no-console
-      console.log('build!')
+      console.log('build!++++++++++')
     },
   }
 }
