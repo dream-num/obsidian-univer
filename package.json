@@ -2,8 +2,8 @@
   "name": "obsidian-univer",
   "type": "module",
   "version": "0.0.2",
-  "description": "",
-  "author": "karl&gjssss",
+  "description": "Create doc and sheet base on Univer in Obsidian.",
+  "author": "Univer karl gjsss",
   "license": "MIT",
   "keywords": [],
   "scripts": {
