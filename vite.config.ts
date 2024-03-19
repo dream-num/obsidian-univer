@@ -18,7 +18,7 @@ function generate(isDev?: boolean) {
     async writeBundle() {
       await writeFile(resolve(buildDir, 'manifest.json'), JSON.stringify({
         id: Package.name,
-        name: 'Univer',
+        name: 'Univer Doc and Sheet',
         version: Package.version,
         minAppVersion: '0.15.0',
         description: Package.description,

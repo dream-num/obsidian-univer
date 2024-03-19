@@ -1,5 +1,5 @@
 {
-  "name": "obsidian-univer",
+  "name": "univer",
   "type": "module",
   "version": "0.0.2",
   "description": "Create doc and sheet base on Univer in Obsidian.",
