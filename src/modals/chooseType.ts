@@ -21,12 +21,12 @@ export class ChooseTypeModal extends Modal {
 
     docBtn.onclick = () => {
       createNewFile(this.app, 'udoc', UDocType)
-      this.close()
+      this.onClose()
     }
 
     sheetBtn.onclick = () => {
       createNewFile(this.app, 'usheet', USheetType)
-      this.close()
+      this.onClose()
     }
   }
 

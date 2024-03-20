@@ -5,7 +5,6 @@ import { Type as USheetType, USheetView } from "./views/usheet";
 import { Type as UDocType, UDocView } from "./views/udoc";
 import { ChooseTypeModal } from "./modals/chooseType";
 import type { SettingType } from "~/types/setting";
-import { createNewFile } from "./utils/createFile";
 
 export type ViewType = typeof USheetType | typeof UDocType;
 

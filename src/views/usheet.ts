@@ -26,6 +26,7 @@ export class USheetView extends TextFileView {
   }
 
   setViewData(data: string, _: boolean): void {
+    console.log('setting data')
     if (this.univer)
       this.univer.dispose()
     this.univer = sheetInit({
@@ -72,6 +73,7 @@ export class USheetView extends TextFileView {
   }
 
   async onClose() {
+    console.log('doc closing')
     if (this.resizeObserver)
       this.resizeObserver.disconnect()
 

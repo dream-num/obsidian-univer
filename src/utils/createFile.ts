@@ -12,12 +12,18 @@ export async function createNewFile(app: App, suffix: string, type: ViewType, fo
 			console.log(err);
     }
   }
+  console.log('11111111111111111')
   const fileName = `Untitled${fileNum !== undefined ? `-${fileNum}` : ''}.${suffix}`
   const filePath = folderPath !== undefined ? `${folderPath}/${fileName}` : fileName
-
+  console.log('22222222222222')
   try {
-    await app.vault.create(filePath, '')
-
+    await app.vault.create(filePath, '').then(() => {
+      console.log('file created')
+    
+    }).catch((err) => {
+      console.log('file not created')
+    })
+    console.log('333333333333333')
     await app.workspace.getLeaf(true).setViewState({
       type: type,
       active: true, 
@@ -25,6 +31,7 @@ export async function createNewFile(app: App, suffix: string, type: ViewType, fo
         file: filePath
       }
     })
+    console.log('444444444444444')
     new Notice(`Created new ${suffix} file: ${filePath}`)
   }
   catch (err) {

@@ -72,6 +72,7 @@ export class UDocView extends TextFileView {
   }
 
   async onClose() {
+    console.log('doc closing')
     if (this.resizeObserver)
       this.resizeObserver.disconnect()
 
