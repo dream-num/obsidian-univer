@@ -20,7 +20,7 @@ jobs:
           node-version: "16.x "
       - name: Initialize Git user
         run: |
-          git config --global user.name "Release Workflow"
+          git config --global user.name "karsbeard"
           git config --global user.email "2557065675@qq.com"
       - name: Initialize the NPM config
         run: |
