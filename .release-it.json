@@ -4,8 +4,10 @@
     },
     "git": {
         "requireBranch": "master",
-        "commitMessage": "chore: release: v${version}"
+        "commitMessage": "chore: release: v${version}",
+        "tagNam": "${version}"
     },
+    "increment": false,
     "npm": {
         "publish": false
     },
