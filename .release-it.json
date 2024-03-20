@@ -1,20 +1,29 @@
 {
     "github": {
-      "release": true
+        "release": true
     },
     "git": {
-      "commitMessage": "release: v${version}"
+        "requireBranch": "master",
+        "commitMessage": "chore: release: v${version}"
     },
     "npm": {
-      "publish": true
+        "publish": true
     },
     "hooks": {
-      "after:bump": "echo 更新版本成功"
+        "before:init": ["git pull"],
+        "after:bump": "npx auto-changelog -p",
+        "after:release": "echo 发布成功"
     },
     "plugins": {
-      "@release-it/conventional-changelog": {
-        "preset": "见文件",
-        "infile": "CHANGELOG.md"
-      }
+        "@release-it/conventional-changelog": {
+            "preset": "angular",
+            "infile": "CHANGELOG.md"
+        },
+        "@release-it-plugins/workspaces": {
+            "publish": false,
+            "workspace": [
+                "scr/*"
+            ]
+        }
     }
-  }
+}

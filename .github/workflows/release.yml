@@ -17,7 +17,16 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: "16.x"
+          node-version: "16.x "
+      - name: Initialize Git user
+        run: |
+          git config --global user.name "Release Workflow"
+          git config --global user.email "2557065675@qq.com"
+      - name: Initialize the NPM config
+        run: |
+          npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Build
         id: build
@@ -41,6 +50,7 @@ jobs:
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           VERSION: ${{ github.ref }}
         with:
           tag_name: ${{ github.ref }}

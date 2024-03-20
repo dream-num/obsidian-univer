@@ -26,3 +26,5 @@ dist
 *.copy.*
 
 .env
+
+.npmrc
