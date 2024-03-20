@@ -9,7 +9,7 @@
     },
     "increment": false,
     "npm": {
-        "publish": false
+        "publish": true
     },
     "hooks": {
         "before:init": ["git pull"],
