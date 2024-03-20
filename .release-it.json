@@ -18,12 +18,6 @@
         "@release-it/conventional-changelog": {
             "preset": "angular",
             "infile": "CHANGELOG.md"
-        },
-        "@release-it-plugins/workspaces": {
-            "publish": false,
-            "workspace": [
-                "scr/*"
-            ]
         }
     }
 }

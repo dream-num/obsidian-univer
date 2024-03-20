@@ -28,7 +28,6 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.8.3",
-    "@release-it-plugins/workspaces": "^4.2.0",
     "@release-it/conventional-changelog": "^8.0.1",
     "@types/node": "^20.11.28",
     "builtin-modules": "^3.3.0",
