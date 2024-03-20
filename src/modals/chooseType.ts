@@ -1,6 +1,8 @@
 import type { App } from 'obsidian'
 import { Modal } from 'obsidian'
 import { createNewFile } from '~/utils/createFile'
+import { Type as USheetType } from '~/views/usheet'
+import { Type as UDocType } from '~/views/udoc'
 
 export class ChooseTypeModal extends Modal {
   constructor(app: App) {
@@ -18,12 +20,12 @@ export class ChooseTypeModal extends Modal {
     const sheetBtn = btnContainer.createEl('button', { text: '表格', cls: 'univer-mdal-btn' })
 
     docBtn.onclick = () => {
-      createNewFile(this.app, 'udoc')
+      createNewFile(this.app, 'udoc', UDocType)
       this.close()
     }
 
     sheetBtn.onclick = () => {
-      createNewFile(this.app, 'usheet')
+      createNewFile(this.app, 'usheet', USheetType)
       this.close()
     }
   }
