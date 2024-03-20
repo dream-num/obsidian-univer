@@ -3,6 +3,8 @@ import type { WorkspaceLeaf } from 'obsidian'
 import { TextFileView } from 'obsidian'
 import { FUniver } from '@univerjs/facade'
 import { sheetInit } from '~/utils/univer'
+import { setCtxPos } from '~/utils/createFile'
+
 
 export const Type = 'univer-sheet'
 
@@ -12,6 +14,7 @@ export class USheetView extends TextFileView {
   univer: Univer
   workbook: Workbook
   FUniver: FUniver
+  resizeObserver: ResizeObserver | void
 
   constructor(leaf: WorkspaceLeaf) {
     super(leaf)
@@ -33,6 +36,11 @@ export class USheetView extends TextFileView {
     })
     this.FUniver = FUniver.newAPI(this.univer)
     let sheetData: IWorkbookData | object
+
+    this.resizeObserver = new ResizeObserver(() => {
+      window.dispatchEvent(new Event('resize'))
+      setCtxPos(this.rootContainer)
+    }).observe(this.rootContainer)
 
     try {
       sheetData = JSON.parse(data)
@@ -64,6 +72,9 @@ export class USheetView extends TextFileView {
   }
 
   async onClose() {
+    if (this.resizeObserver)
+      this.resizeObserver.disconnect()
+
     this.requestSave()
     this.univer.dispose()
 

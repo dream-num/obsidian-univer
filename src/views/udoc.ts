@@ -5,6 +5,7 @@ import type { WorkspaceLeaf } from 'obsidian'
 import { TextFileView } from 'obsidian'
 import { DEFAULT_DOCUMENT_DATA_CN } from '../data/default-document-data-cn'
 import { docInit } from '~/utils/univer'
+import { setCtxPos } from '~/utils/createFile'
 
 export const Type = 'univer-doc'
 
@@ -13,6 +14,7 @@ export class UDocView extends TextFileView {
   univer: Univer
   FUniver: FUniver
   rootContainer: HTMLDivElement
+  resizeObserver: ResizeObserver | void
 
   constructor(leaf: WorkspaceLeaf) {
     super(leaf)
@@ -35,6 +37,11 @@ export class UDocView extends TextFileView {
     this.FUniver = FUniver.newAPI(this.univer)
 
     let docData: DocumentDataModel | object
+
+    this.resizeObserver = new ResizeObserver(() => {
+      window.dispatchEvent(new Event('resize'))
+      setCtxPos(this.rootContainer)
+    }).observe(this.rootContainer)
 
     try {
       docData = JSON.parse(data)
@@ -65,6 +72,9 @@ export class UDocView extends TextFileView {
   }
 
   async onClose() {
+    if (this.resizeObserver)
+      this.resizeObserver.disconnect()
+
     this.requestSave()
 
     this.univer.dispose()
