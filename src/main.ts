@@ -27,18 +27,6 @@ export default class UniverPlugin extends Plugin {
 
     this.addStatusBarItem().setText("Univer is running");
 
-    this.registerEvent(
-      this.app.workspace.on('file-menu', (menu, file) => {
-        menu.addItem((item) => {
-          item.setTitle('New Univer')
-            .setIcon('cable')
-            .onClick(() => {
-              createNewFile(this.app, 'usheet', USheetType, file.path, 0)
-            });
-        });
-      })
-    )
-
     // register view
     this.registerView(USheetType, (leaf) => new USheetView(leaf));
 
