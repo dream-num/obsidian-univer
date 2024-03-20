@@ -1,5 +1,5 @@
-import { rename, writeFile } from 'node:fs/promises'
-import { resolve } from 'node:path'
+import { rename, writeFile, copyFile } from 'node:fs/promises'
+import { join, resolve } from 'node:path'
 import process from 'node:process'
 import { defineConfig } from 'vite'
 import builtins from 'builtin-modules'
@@ -27,6 +27,7 @@ function generate(isDev?: boolean) {
         fundingUrl: 'https://opencollective.com/univer',
         isDesktopOnly: false,
       }))
+      await copyFile(resolve(buildDir, 'manifest.json'), join(process.cwd(), 'manifest.json'))
       if (isDev)
         await writeFile(resolve(buildDir, '.hotreload'), '')
       rename(resolve(buildDir, 'style.css'), resolve(buildDir, 'styles.css'))
