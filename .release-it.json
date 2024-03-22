@@ -4,7 +4,6 @@
     },
     "git": {
         "requireBranch": "master",
-        "commitMessage": "chore: release: v${version}",
         "tagNam": "${version}"
     },
     "increment": false,
@@ -12,7 +11,6 @@
         "publish": false
     },
     "hooks": {
-        "before:init": ["git pull"],
         "after:bump": "npx auto-changelog -p",
         "after:release": "echo 发布成功"
     },
