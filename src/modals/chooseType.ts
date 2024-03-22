@@ -9,13 +9,13 @@ export class ChooseTypeModal extends Modal {
 
   onOpen(): void {
     const { contentEl } = this
-    this.titleEl.setText('请选择要创建的文件类型')
+    this.titleEl.setText('Please choose the type of file you want to create')
 
     const btnContainer = contentEl.createDiv()
     btnContainer.classList.add('univer-modal-btn-container')
 
-    const docBtn = btnContainer.createEl('button', { text: '文档', cls: 'univer-mdal-btn' })
-    const sheetBtn = btnContainer.createEl('button', { text: '表格', cls: 'univer-mdal-btn' })
+    const docBtn = btnContainer.createEl('button', { text: 'univer-doc', cls: 'univer-mdal-btn' })
+    const sheetBtn = btnContainer.createEl('button', { text: 'univer-sheet', cls: 'univer-mdal-btn' })
 
     docBtn.onclick = () => {
       createNewFile(this.app, 'udoc')

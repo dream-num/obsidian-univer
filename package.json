@@ -2,9 +2,9 @@
   "name": "univer",
   "type": "module",
   "version": "0.0.3",
-  "description": "Create doc and sheet base on Univer in Obsidian.",
+  "description": "Create doc and sheet base on Univer.",
   "main": "dist/main.js",
-  "author": "Univer karl gjsss",
+  "author": "Karl GJSSS",
   "license": "MIT",
   "keywords": [],
   "scripts": {
