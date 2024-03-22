@@ -5,7 +5,7 @@ import type { WorkspaceLeaf } from 'obsidian'
 import { TextFileView } from 'obsidian'
 import { DEFAULT_DOCUMENT_DATA_CN } from '../data/default-document-data-cn'
 import { docInit } from '~/utils/univer'
-import { setCtxPos } from '~/utils/createFile'
+import { setCtxPos } from '~/utils/resize'
 
 export const Type = 'univer-doc'
 
@@ -17,20 +17,17 @@ export class UDocView extends TextFileView {
   resizeObserver: ResizeObserver | void
 
   constructor(leaf: WorkspaceLeaf) {
-    super(leaf)
+    super(leaf);
   }
 
   getViewData(): string {
-    console.log('doc saving')
     return JSON.stringify(Tools.deepClone(this.documentData.getSnapshot()))
   }
 
   setViewData(data: string): void {
-    if (this.univer)
-      this.univer.dispose()
-
+    this.univer?.dispose()
     this.univer = docInit({
-      container: 'udoc-app',
+      container: this.rootContainer,
       header: true,
       toolbar: true,
     })
@@ -47,7 +44,7 @@ export class UDocView extends TextFileView {
       docData = JSON.parse(data)
     }
     catch {
-      docData = DEFAULT_DOCUMENT_DATA_CN
+      docData = Tools.deepClone(DEFAULT_DOCUMENT_DATA_CN)
     }
 
     setTimeout(() => {
@@ -72,7 +69,6 @@ export class UDocView extends TextFileView {
   }
 
   async onClose() {
-    console.log('doc closing')
     if (this.resizeObserver)
       this.resizeObserver.disconnect()
 
