@@ -8,23 +8,17 @@ import type { SettingType } from "~/types/setting";
 
 export type ViewType = typeof USheetType | typeof UDocType;
 
-const DEFAULT_SETTINGS: SettingType = {
-  mySetting: "default",
-};
 
 export default class UniverPlugin extends Plugin {
   settings: SettingType;
 
   async onload() {
-    await this.loadSettings();
 
     // ribbon icon & the class
     this.addRibbonIcon("cable", "Univer", () => {
       const modal = new ChooseTypeModal(this.app);
       modal.open();
     });
-
-    this.addStatusBarItem().setText("Univer is running");
 
     // register view
     this.registerView(USheetType, (leaf) => new USheetView(leaf));
@@ -36,8 +30,4 @@ export default class UniverPlugin extends Plugin {
   }
 
   onunload() {}
-
-  async loadSettings() {
-    this.settings = defu({}, DEFAULT_SETTINGS, await this.loadData());
-  }
 }

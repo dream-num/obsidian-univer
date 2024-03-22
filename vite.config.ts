@@ -20,10 +20,10 @@ function generate(isDev?: boolean) {
         id: Package.name,
         name: 'Univer Doc and Sheet',
         version: Package.version,
-        minAppVersion: '0.15.0',
+        minAppVersion: '1.5.11',
         description: Package.description,
         author: Package.author,
-        authorUrl: 'https://github.com/karlsbeard/obsidian-univer',
+        authorUrl: 'https://github.com/karlsbeard',
         fundingUrl: 'https://opencollective.com/univer',
         isDesktopOnly: false,
       }))
