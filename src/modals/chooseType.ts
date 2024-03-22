@@ -30,6 +30,5 @@ export class ChooseTypeModal extends Modal {
 
   onClose(): void {
     this.contentEl.empty()
-    this.close()
   }
 }
