@@ -3,7 +3,6 @@
   --ctx_menu_y: 0px;
 }
 
-
 .uproduct-container {
   margin: 0;
   padding: 0;
@@ -42,4 +41,23 @@ button.univer-toolbar-btn-active {
 
 .univer-mdal-btn {
   margin: 0 10px;
+}
+
+.uproduct-container input[type="search"],
+input[type="text"] {
+  height: auto;
+  box-shadow: none;
+}
+
+.uproduct-container input[type="text"]:focus,
+input[type="text"]:active,
+[type="text"]:focus-visible {
+  box-shadow: none;
+}
+
+button.univer-button-primary {
+  font-weight: 500;
+  color: rgb(var(--color-white));
+  background-color: rgb(var(--primary-color));
+  border-color: rgb(var(--primary-color));
 }
