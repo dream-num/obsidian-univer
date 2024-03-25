@@ -4,6 +4,7 @@ import { TextFileView } from "obsidian";
 import { FUniver } from "@univerjs/facade";
 import { sheetInit } from "~/utils/univer";
 import { setCtxPos } from "~/utils/resize";
+import { DEFAULT_WORKBOOK_DATA_DEMO } from "~/data/default-workbook-data-demo";
 
 export const Type = "univer-sheet";
 
@@ -42,7 +43,7 @@ export class USheetView extends TextFileView {
     try {
       sheetData = JSON.parse(data);
     } catch (err) {
-      sheetData = {};
+      sheetData = DEFAULT_WORKBOOK_DATA_DEMO;
     }
     setTimeout(() => {
       this.workbook = this.univer.createUniverSheet(sheetData);
