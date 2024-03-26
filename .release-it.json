@@ -3,11 +3,11 @@
         "release": true
     },
     "git": {
-        "requireBranch": "master",
-        "requireCleanWorkingDir": false,
-        "commitMessage": "chore(release): release v${version}",
-        "tagName": "${version}"
+        "commitMessage": "chore(release): v${version}",
+        "tagName": "${version}",
+        "requireCleanWorkingDir": false
     },
+    "increment": false,
     "npm": {
         "publish": false
     },
@@ -18,8 +18,7 @@
     "plugins": {
         "@release-it/conventional-changelog": {
             "preset": "angular",
-            "infile": "CHANGELOG.md",
-            "ignoreRecommendedBump": true
+            "infile": "CHANGELOG.md"
         }
     }
 }
