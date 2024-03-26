@@ -1,7 +1,7 @@
 {
   "name": "univer",
   "type": "module",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Create doc and sheet base on Univer.",
   "main": "dist/main.js",
   "author": "Karl GJSSS",
