@@ -3,9 +3,11 @@
         "release": true
     },
     "git": {
-        "requireBranch": "master"
+        "requireBranch": "master",
+        "requireCleanWorkingDir": false,
+        "commitMessage": "chore(release): release v${version}",
+        "tagName": "${version}"
     },
-    "increment": false,
     "npm": {
         "publish": false
     },
@@ -16,7 +18,8 @@
     "plugins": {
         "@release-it/conventional-changelog": {
             "preset": "angular",
-            "infile": "CHANGELOG.md"
+            "infile": "CHANGELOG.md",
+            "ignoreRecommendedBump": true
         }
     }
 }

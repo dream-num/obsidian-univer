@@ -1,12 +1,16 @@
 
 
-## [0.0.5](https://github.com/karlsbeard/obsidian-univer/compare/0.0.4...0.0.5) (2024-03-26)
+## [0.0.5](https://github.com/karlsbeard/obsidian-univer/compare/0.0.3...0.0.4) (2024-03-26)
 
 
 ### Bug Fixes
 
 * change the usheet & udoc ([23f5b8d](https://github.com/karlsbeard/obsidian-univer/commit/23f5b8d403d6e49d36c1bb9d606232c9c288fe3f))
 * update the version & fix the css ([335dd8b](https://github.com/karlsbeard/obsidian-univer/commit/335dd8b575d3544930479fc32d897a65d01eff7b))
+
+
+
+## [0.0.4](https://github.com/karlsbeard/obsidian-univer/compare/0.0.3...0.0.4) (2024-03-22)
 
 ### Changelog
 
