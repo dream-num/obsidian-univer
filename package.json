@@ -1,7 +1,7 @@
 {
   "name": "univer",
   "type": "module",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Create doc and sheet base on Univer.",
   "main": "dist/main.js",
   "author": "Karl GJSSS",
@@ -20,9 +20,14 @@
     "@univerjs/engine-formula": "^0.1.4",
     "@univerjs/engine-render": "^0.1.4",
     "@univerjs/facade": "^0.1.4",
+    "@univerjs/find-replace": "^0.1.4",
+    "@univerjs/rpc": "^0.1.4",
     "@univerjs/sheets": "^0.1.4",
+    "@univerjs/sheets-find-replace": "^0.1.4",
     "@univerjs/sheets-formula": "^0.1.4",
+    "@univerjs/sheets-numfmt": "^0.1.4",
     "@univerjs/sheets-ui": "^0.1.4",
+    "@univerjs/sheets-zen-editor": "^0.1.4",
     "@univerjs/ui": "^0.1.4",
     "defu": "^6.1.4"
   },
