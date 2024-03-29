@@ -28,7 +28,7 @@ Univer team is so glad that you can join and help us perfect the plugin and the 
 
 ### I18N feature
 
-Univer supports the English and Chines. Now you can choose the language in the plugin setting option. You can find the detail information follow the recording display below.
+Univer supports the English and Chinese. Now you can choose the language in the plugin setting option. You can find the detail information follow the recording display below.
 
 ![img](assets/language.gif)
 
