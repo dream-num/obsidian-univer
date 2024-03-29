@@ -30,7 +30,3 @@ Univer team is so glad that you can join and help us perfect the plugin and the 
 ![doc](assets/doc.jpg)
 
 ![sheet](assets/sheet.jpg)
-
-
-
-
