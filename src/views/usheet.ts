@@ -26,12 +26,10 @@ export class USheetView extends TextFileView {
   }
 
   getViewData(): string {
-    console.log("getViewData++++++++++", this.workbook);
     return JSON.stringify(this.workbook.save());
   }
 
   setViewData(data: string, _: boolean): void {
-    console.log("setViewData++++++++++", this.workbook);
     this.domInit();
     this.univer?.dispose();
     this.workbook?.dispose();
@@ -65,7 +63,6 @@ export class USheetView extends TextFileView {
   clear(): void {}
 
   async onOpen() {
-    console.log("onOpen++++++++", this.workbook);
   }
 
   domInit() {
@@ -76,7 +73,6 @@ export class USheetView extends TextFileView {
   }
 
   async onClose() {
-    console.log("onClose++++++++++", this.univer, this.workbook);
     this.requestSave();
     this.univer?.dispose();
     this.workbook?.dispose();

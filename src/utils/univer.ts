@@ -67,7 +67,6 @@ export function sheetInit(option: IUniverUIConfig, settings: UniverPluginSetting
   // find replace
   univer.registerPlugin(UniverFindReplacePlugin);
   univer.registerPlugin(UniverSheetsFindReplacePlugin);
-  console.log('univer+++++++++++++++++', univer)
   return univer;
 }
 
