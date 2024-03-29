@@ -1,20 +1,28 @@
-import { Tools, type IWorkbookData, type Univer, type Workbook } from "@univerjs/core";
+import {
+  Tools,
+  type IWorkbookData,
+  type Univer,
+  type Workbook,
+} from "@univerjs/core";
 import type { WorkspaceLeaf } from "obsidian";
 import { TextFileView } from "obsidian";
 import { FUniver } from "@univerjs/facade";
 import { sheetInit } from "~/utils/univer";
+import { UniverPluginSettings } from "~/types/setting";
 
 export const Type = "univer-sheet";
 
 export class USheetView extends TextFileView {
-  contentData: string;
   rootContainer: HTMLDivElement;
   univer: Univer;
   workbook: Workbook;
   FUniver: FUniver;
+  sheetData: IWorkbookData | object;
+  settings: UniverPluginSettings;
 
-  constructor(leaf: WorkspaceLeaf) {
+  constructor(leaf: WorkspaceLeaf, settings: UniverPluginSettings) {
     super(leaf);
+    this.settings = settings;
   }
 
   getViewData(): string {
@@ -22,24 +30,27 @@ export class USheetView extends TextFileView {
   }
 
   setViewData(data: string, _: boolean): void {
+    this.domInit();
     this.univer?.dispose();
-    this.univer = sheetInit({
+    this.workbook?.dispose();
+
+    const options = {
       container: this.rootContainer,
       header: true,
       footer: true,
-    });
+    };
+    this.univer = sheetInit(options, this.settings);
     this.FUniver = FUniver.newAPI(this.univer);
     let sheetData: IWorkbookData | object;
-
     try {
-      sheetData = JSON.parse(data);
+      sheetData = Tools.deepClone(JSON.parse(data));
     } catch (err) {
       sheetData = Tools.deepClone({});
     }
     setTimeout(() => {
       this.workbook = this.univer.createUniverSheet(sheetData);
     }, 0);
-    
+
     this.FUniver.onCommandExecuted(() => {
       this.requestSave();
     });
@@ -52,14 +63,19 @@ export class USheetView extends TextFileView {
   clear(): void {}
 
   async onOpen() {
-    this.rootContainer = this.contentEl as HTMLDivElement;
+  }
+
+  domInit() {
+    this.contentEl.empty();
+    this.rootContainer = this.contentEl.createDiv();
     this.rootContainer.id = "usheet-app";
     this.rootContainer.classList.add("uproduct-container");
   }
 
   async onClose() {
-
     this.requestSave();
-    this.univer.dispose();
+    this.univer?.dispose();
+    this.workbook?.dispose();
+    this.contentEl.empty();
   }
 }
