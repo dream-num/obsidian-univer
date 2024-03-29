@@ -8,9 +8,7 @@
         "requireCleanWorkingDir": false
     },
     "increment": false,
-    "npm": {
-        "publish": false
-    },
+    "npm": false,
     "hooks": {
         "after:bump": "npx auto-changelog -p",
         "after:release": "echo 发布成功"
