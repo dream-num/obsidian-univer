@@ -26,7 +26,13 @@ Univer team is so glad that you can join and help us perfect the plugin and the 
 - Clone the repository and `pnpm i` then `pnpm dev` or `pnpm build` so that you can perfect the Univer-plugin.
 - You can create Univer plugins in the community that you want. You can contact us so that we can help you publish the Univer plugins in the Univer community.
 
-### Screenshots
-![doc](assets/doc.jpg)
+### I18N feature
 
-![sheet](assets/sheet.jpg)
+Univer supports the English and Chines. Now you can choose the language in the plugin setting option. You can find the detail information follow the recording display below.
+
+![img](assets/language.gif)
+
+### Screenshots
+![img](assets/doc.jpg)
+
+![img](assets/sheet.jpg)
