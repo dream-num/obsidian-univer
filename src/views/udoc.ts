@@ -3,6 +3,7 @@ import { Tools } from "@univerjs/core";
 import { FUniver } from "@univerjs/facade";
 import type { WorkspaceLeaf } from "obsidian";
 import { TextFileView } from "obsidian";
+import { UniverPluginSettings } from "~/types/setting";
 import { docInit } from "~/utils/univer";
 
 export const Type = "univer-doc";
@@ -12,9 +13,11 @@ export class UDocView extends TextFileView {
   univer: Univer;
   FUniver: FUniver;
   rootContainer: HTMLDivElement;
+  settings: UniverPluginSettings;
 
-  constructor(leaf: WorkspaceLeaf) {
+  constructor(leaf: WorkspaceLeaf, settings: UniverPluginSettings) {
     super(leaf);
+    this.settings = settings;
   }
 
   getViewData(): string {
@@ -23,10 +26,12 @@ export class UDocView extends TextFileView {
 
   setViewData(data: string): void {
     this.univer?.dispose();
-    this.univer = docInit({
+
+    const option  = {
       container: this.rootContainer,
       header: true,
-    });
+    }
+    this.univer = docInit(option, this.settings);
     this.FUniver = FUniver.newAPI(this.univer);
 
     let docData: DocumentDataModel | object;
@@ -34,7 +39,7 @@ export class UDocView extends TextFileView {
     try {
       docData = JSON.parse(data);
     } catch {
-      docData = Tools.deepClone({});
+      docData = {};
     }
 
     setTimeout(() => {

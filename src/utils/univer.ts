@@ -24,6 +24,7 @@ import { UniverSheetsNumfmtPlugin } from "@univerjs/sheets-numfmt";
 import { UniverSheetsZenEditorPlugin } from "@univerjs/sheets-zen-editor";
 import { UniverFindReplacePlugin } from "@univerjs/find-replace";
 import { UniverSheetsFindReplacePlugin } from "@univerjs/sheets-find-replace";
+import { UniverPluginSettings } from "~/types/setting";
 
 const locales = {
   [LocaleType.EN_US]: {
@@ -35,10 +36,10 @@ const locales = {
   },
 };
 
-export function sheetInit(option: IUniverUIConfig) {
+export function sheetInit(option: IUniverUIConfig, settings: UniverPluginSettings) {
   const univer = new Univer({
     theme: defaultTheme,
-    locale: LocaleType.ZH_CN,
+    locale: settings.language === "EN" ? LocaleType.EN_US : LocaleType.ZH_CN,
     locales,
   });
 
@@ -70,10 +71,10 @@ export function sheetInit(option: IUniverUIConfig) {
   return univer;
 }
 
-export function docInit(option: IUniverUIConfig) {
+export function docInit(option: IUniverUIConfig, settings: UniverPluginSettings) {
   const univer = new Univer({
     theme: defaultTheme,
-    locale: LocaleType.ZH_CN,
+    locale: settings.language === "EN" ? LocaleType.EN_US : LocaleType.ZH_CN,
     locales,
   });
 

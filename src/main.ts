@@ -4,15 +4,17 @@ import { Plugin } from "obsidian";
 import { Type as USheetType, USheetView } from "./views/usheet";
 import { Type as UDocType, UDocView } from "./views/udoc";
 import { ChooseTypeModal } from "./modals/chooseType";
-import type { SettingType } from "~/types/setting";
+import { SettingTab } from "./modals/settingTab";
+import type { UniverPluginSettings } from "~/types/setting";
 
 export type ViewType = typeof USheetType | typeof UDocType;
 
 
 export default class UniverPlugin extends Plugin {
-  settings: SettingType;
+  settings: UniverPluginSettings;
 
   async onload() {
+    await this.loadSettings();
 
     // ribbon icon & the class
     this.addRibbonIcon("cable", "Univer", () => {
@@ -20,13 +22,26 @@ export default class UniverPlugin extends Plugin {
       modal.open();
     });
 
-    // register view
-    this.registerView(USheetType, (leaf) => new USheetView(leaf));
+    // add the setting tab
+    this.addSettingTab(new SettingTab(this.app, this));
 
-    this.registerView(UDocType, (leaf) => new UDocView(leaf));
+    // register view
+    this.registerView(USheetType, (leaf) => new USheetView(leaf, this.settings));
+
+    this.registerView(UDocType, (leaf) => new UDocView(leaf, this.settings));
 
     this.registerExtensions(["usheet"], USheetType);
     this.registerExtensions(["udoc"], UDocType);
+  }
+
+  async loadSettings() {
+    this.settings = defu(this.settings, {
+      language: "EN",
+    });
+  }
+
+  async saveSettings() {
+    await this.saveData(this.settings);
   }
 
   onunload() {}

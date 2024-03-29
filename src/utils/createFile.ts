@@ -22,6 +22,7 @@ export async function createNewFile(app: App, suffix: string, folderPath?: strin
         file: filePath
       }
     })
+    
     new Notice(`Created new ${suffix} file: ${filePath}`)
   }
   catch (err) {

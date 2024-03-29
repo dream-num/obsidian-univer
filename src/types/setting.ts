@@ -1,3 +1,3 @@
-export interface SettingType {
-  mySetting: string
+export interface UniverPluginSettings {
+  language: 'ZH' | 'EN';
 }
