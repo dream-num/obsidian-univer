@@ -15,6 +15,7 @@ export async function createNewFile(app: App, suffix: string, folderPath?: strin
   const filePath = folderPath !== undefined ? `${folderPath}/${fileName}` : fileName
   try {
     await app.vault.create(filePath, '')
+    console.log('filePath++++++++++', filePath)
     await app.workspace.getLeaf(true).setViewState({
       type: suffix === 'udoc' ? DocType : SheetType,
       active: true, 

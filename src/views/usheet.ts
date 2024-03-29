@@ -9,6 +9,7 @@ import { TextFileView } from "obsidian";
 import { FUniver } from "@univerjs/facade";
 import { sheetInit } from "~/utils/univer";
 import { UniverPluginSettings } from "~/types/setting";
+import { DEFAULT_WORKBOOK_DATA_DEMO } from "../data/default-workbook-data-demo";
 
 export const Type = "univer-sheet";
 
@@ -39,21 +40,23 @@ export class USheetView extends TextFileView {
       header: true,
       footer: true,
     };
+    debugger
     this.univer = sheetInit(options, this.settings);
     this.FUniver = FUniver.newAPI(this.univer);
-    let sheetData: IWorkbookData | object;
+    let sheetData: IWorkbookData;
     try {
-      sheetData = Tools.deepClone(JSON.parse(data));
+      sheetData = JSON.parse(data);
     } catch (err) {
-      sheetData = Tools.deepClone({});
+      sheetData = {} as IWorkbookData;
     }
     setTimeout(() => {
       this.workbook = this.univer.createUniverSheet(sheetData);
-    }, 0);
 
-    this.FUniver.onCommandExecuted(() => {
-      this.requestSave();
-    });
+      this.FUniver.onCommandExecuted(() => {
+        this.requestSave();
+      });
+    }, 0);
+    
   }
 
   getViewType() {
