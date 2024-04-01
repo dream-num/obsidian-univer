@@ -3,6 +3,7 @@ import "@univerjs/ui/lib/index.css";
 import "@univerjs/docs-ui/lib/index.css";
 import "@univerjs/sheets-ui/lib/index.css";
 import "@univerjs/sheets-formula/lib/index.css";
+import "@univerjs/sheets-numfmt/lib/index.css";
 import { LocaleType, Univer } from "@univerjs/core";
 import { enUS as UniverDesignEnUS, defaultTheme } from "@univerjs/design";
 import { UniverDocsPlugin } from "@univerjs/docs";

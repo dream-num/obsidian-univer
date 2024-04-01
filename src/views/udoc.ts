@@ -1,10 +1,12 @@
-import type { DocumentDataModel, Univer } from "@univerjs/core";
+import type { DocumentDataModel, IDocumentBody, IDocumentData, Univer } from "@univerjs/core";
 import { Tools } from "@univerjs/core";
 import { FUniver } from "@univerjs/facade";
 import type { WorkspaceLeaf } from "obsidian";
 import { TextFileView } from "obsidian";
 import { UniverPluginSettings } from "~/types/setting";
 import { docInit } from "~/utils/univer";
+import { DEFAULT_DOCUMENT_DATA_EN } from '../data/default-document-data-en';
+import { DEFAULT_DOCUMENT_DATA_CN } from "~/data/default-document-data-cn";
 
 export const Type = "univer-doc";
 
@@ -39,7 +41,7 @@ export class UDocView extends TextFileView {
     try {
       docData = JSON.parse(data);
     } catch {
-      docData = {};
+      docData = this.getDefaultData();
     }
 
     setTimeout(() => {
@@ -67,5 +69,15 @@ export class UDocView extends TextFileView {
     this.requestSave();
 
     this.univer.dispose();
+  }
+
+  getDefaultData(): IDocumentData {
+    if(this.settings.doc === "TEMPLATE" && this.settings.language === "EN") {
+      return DEFAULT_DOCUMENT_DATA_EN;
+    } else if(this.settings.doc === "TEMPLATE" && this.settings.language === "ZH") {
+      return DEFAULT_DOCUMENT_DATA_CN;
+    } else {
+      return {} as IDocumentData;
+    }
   }
 }

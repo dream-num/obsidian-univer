@@ -9,7 +9,8 @@ import { TextFileView } from "obsidian";
 import { FUniver } from "@univerjs/facade";
 import { sheetInit } from "~/utils/univer";
 import { UniverPluginSettings } from "~/types/setting";
-import { DEFAULT_WORKBOOK_DATA_DEMO } from "../data/default-workbook-data-demo";
+import { DEFAULT_WORKBOOK_DATA_DEMO as SHEET_EN } from "../data/default-workbook-data-demo-EN";
+import { DEFAULT_WORKBOOK_DATA_DEMO as SHEET_CN } from "../data/default-workbook-data-demo-CN";
 
 export const Type = "univer-sheet";
 
@@ -40,14 +41,13 @@ export class USheetView extends TextFileView {
       header: true,
       footer: true,
     };
-    debugger
     this.univer = sheetInit(options, this.settings);
     this.FUniver = FUniver.newAPI(this.univer);
     let sheetData: IWorkbookData;
     try {
       sheetData = JSON.parse(data);
     } catch (err) {
-      sheetData = {} as IWorkbookData;
+      sheetData = this.getDefaultData();
     }
     setTimeout(() => {
       this.workbook = this.univer.createUniverSheet(sheetData);
@@ -80,5 +80,15 @@ export class USheetView extends TextFileView {
     this.univer?.dispose();
     this.workbook?.dispose();
     this.contentEl.empty();
+  }
+
+  getDefaultData(): IWorkbookData {
+    if(this.settings.doc === "TEMPLATE" && this.settings.language === "EN") {
+      return SHEET_EN;
+    } else if(this.settings.doc === "TEMPLATE" && this.settings.language === "ZH") {
+      return SHEET_CN;
+    } else {
+      return {} as IWorkbookData;
+    }
   }
 }

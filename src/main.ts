@@ -18,7 +18,7 @@ export default class UniverPlugin extends Plugin {
 
     // ribbon icon & the class
     this.addRibbonIcon("cable", "Univer", () => {
-      const modal = new ChooseTypeModal(this.app);
+      const modal = new ChooseTypeModal(this.app, this.settings);
       modal.open();
     });
 
@@ -37,6 +37,8 @@ export default class UniverPlugin extends Plugin {
   async loadSettings() {
     this.settings = defu(this.settings, {
       language: "EN",
+      doc: "DEFAULT",
+      sheet: "DEFAULT",
     });
   }
 
