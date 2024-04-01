@@ -83,9 +83,9 @@ export class USheetView extends TextFileView {
   }
 
   getDefaultData(): IWorkbookData {
-    if(this.settings.doc === "TEMPLATE" && this.settings.language === "EN") {
+    if(this.settings.sheet === "TEMPLATE" && this.settings.language === "EN") {
       return SHEET_EN;
-    } else if(this.settings.doc === "TEMPLATE" && this.settings.language === "ZH") {
+    } else if(this.settings.sheet === "TEMPLATE" && this.settings.language === "ZH") {
       return SHEET_CN;
     } else {
       return {} as IWorkbookData;
