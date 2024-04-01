@@ -7,8 +7,8 @@ interface ModalText {
   title: string;
   docBtn: string;
   sheetBtn: string;
-  defaultDocBtn: string;
-  defaultSheetBtn: string;
+  templateDocBtn: string;
+  templateSheetBtn: string;
 }
 
 export class ChooseTypeModal extends Modal {
@@ -30,7 +30,7 @@ export class ChooseTypeModal extends Modal {
       cls: "univer-mdal-btn",
     });
     const templateDocBtn = btnContainer.createEl("button", {
-      text: this.getModalText().defaultDocBtn,
+      text: this.getModalText().templateDocBtn,
       cls: "univer-mdal-btn",
     });
 
@@ -39,7 +39,7 @@ export class ChooseTypeModal extends Modal {
       cls: "univer-mdal-btn",
     });
     const templateSheetBtn = btnContainer.createEl("button", {
-      text: this.getModalText().defaultSheetBtn,
+      text: this.getModalText().templateSheetBtn,
       cls: "univer-mdal-btn",
     });
 
@@ -77,17 +77,17 @@ export class ChooseTypeModal extends Modal {
       return {
         title: "Please choose the type of file you want to create",
         docBtn: "univer-doc",
-        defaultDocBtn: "univer-doc-template",
+        templateDocBtn: "univer-doc-template",
         sheetBtn: "univer-sheet",
-        defaultSheetBtn: "univer-sheet-template",
+        templateSheetBtn: "univer-sheet-template",
       };
     } else {
       return {
         title: "请选择您要创建的文件类型",
         docBtn: "univer-文档",
-        defaultDocBtn: "univer-文档模板",
+        templateDocBtn: "univer-文档模板",
         sheetBtn: "univer-表格",
-        defaultSheetBtn: "univer-表格模板",
+        templateSheetBtn: "univer-表格模板",
       };
     }
   }
