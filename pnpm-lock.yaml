@@ -67,6 +67,9 @@ devDependencies:
   '@types/node':
     specifier: ^20.11.28
     version: 20.11.30
+  '@univerjs/vite-plugin':
+    specifier: ^0.3.2
+    version: 0.3.2
   builtin-modules:
     specifier: ^3.3.0
     version: 3.3.0
@@ -1793,6 +1796,11 @@ packages:
     transitivePeerDependencies:
       - typescript
     dev: false
+
+  /@univerjs/vite-plugin@0.3.2:
+    resolution: {integrity: sha512-ijf0kgzdFvxd50MgzSxLeSTIfE1thiz/LZDTh0aZv6LRkFNTNXKf/K4qtqa/gGpqAajr3JmqJTXOvVeYQ31sUg==}
+    engines: {node: '>=16.0.0', npm: '>=8.0.0'}
+    dev: true
 
   /@vue/compiler-core@3.4.21:
     resolution: {integrity: sha512-MjXawxZf2SbZszLPYxaFCjxfibYrzr3eYbKxwpLR9EQN+oaziSu3qKVbwBERj1IFIB8OLUewxB5m/BFzi613og==}

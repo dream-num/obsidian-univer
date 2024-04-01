@@ -2,6 +2,7 @@ import { rename, writeFile, copyFile } from 'node:fs/promises'
 import { join, resolve } from 'node:path'
 import process from 'node:process'
 import { defineConfig } from 'vite'
+import { univerPlugin } from '@univerjs/vite-plugin'
 import builtins from 'builtin-modules'
 import dotenv from 'dotenv'
 import Package from './package.json'
@@ -43,6 +44,7 @@ export default defineConfig((_) => {
   return {
     plugins: [
       generate(dev),
+      univerPlugin(),
     ],
     resolve: {
       alias: {
