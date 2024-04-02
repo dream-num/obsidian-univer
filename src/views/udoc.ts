@@ -1,10 +1,10 @@
-import type { DocumentDataModel, IDocumentBody, IDocumentData, Univer } from "@univerjs/core";
+import type { DocumentDataModel, IDocumentData, Univer } from "@univerjs/core";
 import { Tools } from "@univerjs/core";
 import { FUniver } from "@univerjs/facade";
 import type { WorkspaceLeaf } from "obsidian";
 import { TextFileView } from "obsidian";
 import { UniverPluginSettings } from "~/types/setting";
-import { docInit } from "~/utils/univer";
+import { docInit } from "~/univer/docs";
 import { DEFAULT_DOCUMENT_DATA_EN } from '../data/default-document-data-en';
 import { DEFAULT_DOCUMENT_DATA_CN } from "~/data/default-document-data-cn";
 

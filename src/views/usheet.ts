@@ -1,13 +1,8 @@
-import {
-  Tools,
-  type IWorkbookData,
-  type Univer,
-  type Workbook,
-} from "@univerjs/core";
+import { type IWorkbookData, type Univer, type Workbook } from "@univerjs/core";
 import type { WorkspaceLeaf } from "obsidian";
 import { TextFileView } from "obsidian";
 import { FUniver } from "@univerjs/facade";
-import { sheetInit } from "~/utils/univer";
+import { sheetInit } from "~/univer/sheets";
 import { UniverPluginSettings } from "~/types/setting";
 import { DEFAULT_WORKBOOK_DATA_DEMO as SHEET_EN } from "../data/default-workbook-data-demo-EN";
 import { DEFAULT_WORKBOOK_DATA_DEMO as SHEET_CN } from "../data/default-workbook-data-demo-CN";
@@ -56,7 +51,6 @@ export class USheetView extends TextFileView {
         this.requestSave();
       });
     }, 0);
-    
   }
 
   getViewType() {
@@ -65,8 +59,7 @@ export class USheetView extends TextFileView {
 
   clear(): void {}
 
-  async onOpen() {
-  }
+  async onOpen() {}
 
   domInit() {
     this.contentEl.empty();
@@ -83,9 +76,12 @@ export class USheetView extends TextFileView {
   }
 
   getDefaultData(): IWorkbookData {
-    if(this.settings.sheet === "TEMPLATE" && this.settings.language === "EN") {
+    if (this.settings.sheet === "TEMPLATE" && this.settings.language === "EN") {
       return SHEET_EN;
-    } else if(this.settings.sheet === "TEMPLATE" && this.settings.language === "ZH") {
+    } else if (
+      this.settings.sheet === "TEMPLATE" &&
+      this.settings.language === "ZH"
+    ) {
       return SHEET_CN;
     } else {
       return {} as IWorkbookData;
