@@ -40,7 +40,7 @@ function generate(isDev?: boolean) {
 
 export default defineConfig((_) => {
   const dev = process.argv.includes('--watch')
-
+  
   return {
     plugins: [
       generate(dev),
@@ -55,7 +55,7 @@ export default defineConfig((_) => {
     build: {
       outDir: buildDir,
       lib: {
-        entry: './src/main.ts',
+        entry: ['./src/main.ts'],
         name: 'main',
         fileName: () => 'main.js',
         formats: [

@@ -6,7 +6,10 @@
       "DOM",
       "ES5",
       "ES6",
-      "ES7"
+      "ES7",
+      "ESNext",  
+      "DOM.Iterable",
+      "WebWorker"
     ],
     "baseUrl": ".",
     "module": "ESNext",
