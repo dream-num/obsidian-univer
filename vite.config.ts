@@ -29,8 +29,6 @@ function generate(isDev?: boolean) {
         isDesktopOnly: false,
       }))
       await copyFile(resolve(buildDir, 'manifest.json'), join(process.cwd(), 'manifest.json'))
-      if (isDev)
-        await writeFile(resolve(buildDir, '.hotreload'), '')
       rename(resolve(buildDir, 'style.css'), resolve(buildDir, 'styles.css'))
       // eslint-disable-next-line no-console
       console.log('build!')
@@ -55,7 +53,7 @@ export default defineConfig((_) => {
     build: {
       outDir: buildDir,
       lib: {
-        entry: ['./src/main.ts'],
+        entry: './src/main.ts',
         name: 'main',
         fileName: () => 'main.js',
         formats: [
