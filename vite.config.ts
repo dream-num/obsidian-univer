@@ -1,4 +1,4 @@
-import { rename, writeFile, copyFile } from 'node:fs/promises'
+import { copyFile, rename, writeFile } from 'node:fs/promises'
 import { join, resolve } from 'node:path'
 import process from 'node:process'
 import { defineConfig } from 'vite'
@@ -11,9 +11,9 @@ dotenv.config()
 let buildDir = process.env.DIST_DIR ?? 'dist'
 
 function generate(isDev?: boolean) {
-  if(!isDev) {
+  if (!isDev)
     buildDir = 'dist'
-  }
+
   return {
     name: 'obsidian',
     async writeBundle() {
@@ -38,7 +38,7 @@ function generate(isDev?: boolean) {
 
 export default defineConfig((_) => {
   const dev = process.argv.includes('--watch')
-  
+
   return {
     plugins: [
       generate(dev),
