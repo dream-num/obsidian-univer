@@ -14,6 +14,8 @@ import { UniverSheetsNumfmtPlugin } from '@univerjs/sheets-numfmt'
 import { UniverSheetsUIPlugin } from '@univerjs/sheets-ui'
 import { UniverSheetsZenEditorPlugin } from '@univerjs/sheets-zen-editor'
 import { UniverUIPlugin } from '@univerjs/ui'
+import { UniverDataValidationPlugin } from '@univerjs/data-validation';
+import { UniverSheetsDataValidationPlugin } from '@univerjs/sheets-data-validation';
 import type { IUniverUIConfig } from '@univerjs/ui/lib/types/ui-plugin'
 import { legacyLocales } from '~/utils/common'
 import type { UniverPluginSettings } from '~/types/setting'
@@ -39,7 +41,7 @@ export function sheetInit(
   univer.registerPlugin(UniverDocsUIPlugin)
 
   univer.registerPlugin(UniverSheetsPlugin, {
-    notExecuteFormula: true,
+    notExecuteFormula: false,
   })
   univer.registerPlugin(UniverSheetsUIPlugin)
 
@@ -47,15 +49,20 @@ export function sheetInit(
   univer.registerPlugin(UniverSheetsNumfmtPlugin)
   univer.registerPlugin(UniverSheetsZenEditorPlugin)
   univer.registerPlugin(UniverFormulaEnginePlugin, {
-    notExecuteFormula: true,
+    notExecuteFormula: false,
   })
   univer.registerPlugin(UniverSheetsFormulaPlugin)
-  univer.registerPlugin(UniverRPCMainThreadPlugin, {
-    workerURL: workerScriptURL,
-  } as IUniverRPCMainThreadConfig)
+  // TODO: make the webworker useable
+  // univer.registerPlugin(UniverRPCMainThreadPlugin, {
+  //   workerURL: workerScriptURL,
+  // } as IUniverRPCMainThreadConfig)
 
   // find replace
   univer.registerPlugin(UniverFindReplacePlugin)
+
+  // data validation
+  univer.registerPlugin(UniverDataValidationPlugin);
+  univer.registerPlugin(UniverSheetsDataValidationPlugin);
   univer.registerPlugin(UniverSheetsFindReplacePlugin)
 
   return univer

@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@univerjs/core": "^0.1.6",
+    "@univerjs/data-validation": "^0.1.6",
     "@univerjs/design": "^0.1.6",
     "@univerjs/docs": "^0.1.6",
     "@univerjs/docs-ui": "^0.1.6",
@@ -22,13 +23,16 @@
     "@univerjs/find-replace": "^0.1.6",
     "@univerjs/rpc": "^0.1.6",
     "@univerjs/sheets": "^0.1.6",
+    "@univerjs/sheets-conditional-formatting-ui": "^0.1.6",
+    "@univerjs/sheets-data-validation": "^0.1.6",
     "@univerjs/sheets-find-replace": "^0.1.6",
     "@univerjs/sheets-formula": "^0.1.6",
     "@univerjs/sheets-numfmt": "^0.1.6",
     "@univerjs/sheets-ui": "^0.1.6",
     "@univerjs/sheets-zen-editor": "^0.1.6",
     "@univerjs/ui": "^0.1.6",
-    "defu": "^6.1.4"
+    "defu": "^6.1.4",
+    "react": "^18.2.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.8.3",
