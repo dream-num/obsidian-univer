@@ -1,7 +1,7 @@
 {
   "name": "univer",
   "type": "module",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "Create doc and sheet base on Univer.",
   "author": "Karl GJSSS",
   "license": "MIT",
