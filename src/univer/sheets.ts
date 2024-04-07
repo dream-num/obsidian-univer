@@ -5,8 +5,8 @@ import { UniverDocsUIPlugin } from '@univerjs/docs-ui'
 import { UniverFormulaEnginePlugin } from '@univerjs/engine-formula'
 import { UniverRenderEnginePlugin } from '@univerjs/engine-render'
 import { UniverFindReplacePlugin } from '@univerjs/find-replace'
-import type { IUniverRPCMainThreadConfig } from '@univerjs/rpc'
-import { UniverRPCMainThreadPlugin } from '@univerjs/rpc'
+// import type { IUniverRPCMainThreadConfig } from '@univerjs/rpc'
+// import { UniverRPCMainThreadPlugin } from '@univerjs/rpc'
 import { UniverSheetsPlugin } from '@univerjs/sheets'
 import { UniverSheetsFindReplacePlugin } from '@univerjs/sheets-find-replace'
 import { UniverSheetsFormulaPlugin } from '@univerjs/sheets-formula'
@@ -20,7 +20,7 @@ import type { IUniverUIConfig } from '@univerjs/ui/lib/types/ui-plugin'
 import { legacyLocales } from '~/utils/common'
 import type { UniverPluginSettings } from '~/types/setting'
 
-const workerScriptURL = new URL('../utils/worker.js', import.meta.url)
+// const workerScriptURL = new URL('./worker.ts', import.meta.url)
 
 export function sheetInit(
   option: IUniverUIConfig,
