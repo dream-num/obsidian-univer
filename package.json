@@ -2,10 +2,16 @@
   "name": "univer",
   "type": "module",
   "version": "1.0.0",
-  "description": "Create doc and sheet base on Univer.",
-  "author": "Karl GJSSS",
-  "license": "MIT",
-  "keywords": [],
+  "description": "Create, edit, and view spreadsheets and documents in various formats like Excel and Word directly within your knowledge base.",
+  "author": "DreamNum <developer@univer.ai>",
+  "license": "Apache-2.0",
+  "keywords": [
+    "univer",
+    "word",
+    "excel",
+    "spreadsheet",
+    "document"
+  ],
   "scripts": {
     "dev": "vite build --watch",
     "build": "vite build",

@@ -5,7 +5,7 @@ import { defineConfig } from 'vite'
 import { univerPlugin } from '@univerjs/vite-plugin'
 import builtins from 'builtin-modules'
 import dotenv from 'dotenv'
-import Package from './package.json'
+import pkg from './package.json'
 
 dotenv.config()
 let buildDir = process.env.DIST_DIR ?? 'dist'
@@ -18,16 +18,16 @@ function generate(isDev?: boolean) {
     name: 'obsidian',
     async writeBundle() {
       await writeFile(resolve(buildDir, 'manifest.json'), JSON.stringify({
-        id: Package.name,
-        name: 'Univer Doc and Sheet',
-        version: Package.version,
+        id: pkg.name,
+        name: 'Univer',
+        version: pkg.version,
         minAppVersion: '1.5.11',
-        description: Package.description,
-        author: Package.author,
-        authorUrl: 'https://github.com/karlsbeard',
+        description: pkg.description,
+        author: pkg.author,
+        authorUrl: 'https://github.com/dream-num',
         fundingUrl: 'https://opencollective.com/univer',
         isDesktopOnly: false,
-      }))
+      }, null, 2))
       await copyFile(resolve(buildDir, 'manifest.json'), join(process.cwd(), 'manifest.json'))
       rename(resolve(buildDir, 'style.css'), resolve(buildDir, 'styles.css'))
       // eslint-disable-next-line no-console
