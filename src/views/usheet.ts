@@ -3,7 +3,7 @@ import type { WorkspaceLeaf } from "obsidian";
 import { TextFileView } from "obsidian";
 import { FUniver } from "@univerjs/facade";
 import { sheetInit } from "~/univer/sheets";
-import { SheetsConditionalFormattingUiPlugin } from "@univerjs/sheets-conditional-formatting-ui";
+import { UniverSheetsConditionalFormattingUIPlugin  } from "@univerjs/sheets-conditional-formatting-ui";
 import { UniverPluginSettings } from "~/types/setting";
 import { DEFAULT_WORKBOOK_DATA_DEMO as SHEET_EN } from "../data/default-workbook-data-demo-EN";
 import { DEFAULT_WORKBOOK_DATA_DEMO as SHEET_CN } from "../data/default-workbook-data-demo-CN";
@@ -48,7 +48,7 @@ export class USheetView extends TextFileView {
     }
 
     this.workbook = this.univer.createUniverSheet(sheetData);
-    this.univer.registerPlugin(SheetsConditionalFormattingUiPlugin);
+    this.univer.registerPlugin(UniverSheetsConditionalFormattingUIPlugin);
     this.FUniver.onCommandExecuted(() => {
       this.requestSave();
     });
