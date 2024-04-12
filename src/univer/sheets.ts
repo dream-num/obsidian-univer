@@ -14,8 +14,8 @@ import { UniverSheetsNumfmtPlugin } from '@univerjs/sheets-numfmt'
 import { UniverSheetsUIPlugin } from '@univerjs/sheets-ui'
 import { UniverSheetsZenEditorPlugin } from '@univerjs/sheets-zen-editor'
 import { UniverUIPlugin } from '@univerjs/ui'
-import { UniverDataValidationPlugin } from '@univerjs/data-validation';
-import { UniverSheetsDataValidationPlugin } from '@univerjs/sheets-data-validation';
+import { UniverDataValidationPlugin } from '@univerjs/data-validation'
+import { UniverSheetsDataValidationPlugin } from '@univerjs/sheets-data-validation'
 import type { IUniverUIConfig } from '@univerjs/ui/lib/types/ui-plugin'
 import { legacyLocales } from '~/utils/common'
 import type { UniverPluginSettings } from '~/types/setting'
@@ -61,8 +61,8 @@ export function sheetInit(
   univer.registerPlugin(UniverFindReplacePlugin)
 
   // data validation
-  univer.registerPlugin(UniverDataValidationPlugin);
-  univer.registerPlugin(UniverSheetsDataValidationPlugin);
+  univer.registerPlugin(UniverDataValidationPlugin)
+  univer.registerPlugin(UniverSheetsDataValidationPlugin)
   univer.registerPlugin(UniverSheetsFindReplacePlugin)
 
   return univer

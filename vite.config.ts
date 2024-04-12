@@ -17,7 +17,7 @@ function generate(isDev?: boolean) {
   return {
     name: 'obsidian',
     async writeBundle() {
-      await writeFile(resolve(buildDir, 'manifest.json'), JSON.stringify({
+      await writeFile(resolve(buildDir, 'manifest.json'), `${JSON.stringify({
         id: pkg.name,
         name: 'Univer',
         version: pkg.version,
@@ -27,7 +27,7 @@ function generate(isDev?: boolean) {
         authorUrl: 'https://github.com/dream-num',
         fundingUrl: 'https://opencollective.com/univer',
         isDesktopOnly: false,
-      }, null, 2))
+      }, null, 2)}\n`)
       await copyFile(resolve(buildDir, 'manifest.json'), join(process.cwd(), 'manifest.json'))
       rename(resolve(buildDir, 'style.css'), resolve(buildDir, 'styles.css'))
       // eslint-disable-next-line no-console

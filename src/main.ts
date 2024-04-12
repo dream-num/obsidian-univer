@@ -1,51 +1,50 @@
-import "./style/univer.css";
-import { defu } from "defu";
-import { Plugin } from "obsidian";
-import { Type as USheetType, USheetView } from "./views/usheet";
-import { Type as UDocType, UDocView } from "./views/udoc";
-import { ChooseTypeModal } from "./modals/chooseType";
-import { SettingTab } from "./modals/settingTab";
-import type { UniverPluginSettings } from "~/types/setting";
+import './style/univer.css'
+import { defu } from 'defu'
+import { Plugin } from 'obsidian'
+import { Type as USheetType, USheetView } from './views/usheet'
+import { Type as UDocType, UDocView } from './views/udoc'
+import { ChooseTypeModal } from './modals/chooseType'
+import { SettingTab } from './modals/settingTab'
+import type { UniverPluginSettings } from '~/types/setting'
 // import  UniverWorker  from './univer/worker?worker';
 
-export type ViewType = typeof USheetType | typeof UDocType;
+export type ViewType = typeof USheetType | typeof UDocType
 // export const univerWorker = new UniverWorker();
 
-
 export default class UniverPlugin extends Plugin {
-  settings: UniverPluginSettings;
+  settings: UniverPluginSettings
 
   async onload() {
-    await this.loadSettings();
+    await this.loadSettings()
 
     // ribbon icon & the class
-    this.addRibbonIcon("cable", "Univer", () => {
-      const modal = new ChooseTypeModal(this.app, this.settings);
-      modal.open();
-    });
+    this.addRibbonIcon('cable', 'Univer', () => {
+      const modal = new ChooseTypeModal(this.app, this.settings)
+      modal.open()
+    })
 
     // add the setting tab
-    this.addSettingTab(new SettingTab(this.app, this));
+    this.addSettingTab(new SettingTab(this.app, this))
 
     // register view
-    this.registerView(USheetType, (leaf) => new USheetView(leaf, this.settings));
+    this.registerView(USheetType, leaf => new USheetView(leaf, this.settings))
 
-    this.registerView(UDocType, (leaf) => new UDocView(leaf, this.settings));
+    this.registerView(UDocType, leaf => new UDocView(leaf, this.settings))
 
-    this.registerExtensions(["usheet"], USheetType);
-    this.registerExtensions(["udoc"], UDocType);
+    this.registerExtensions(['usheet'], USheetType)
+    this.registerExtensions(['udoc'], UDocType)
   }
 
   async loadSettings() {
     this.settings = defu(this.settings, {
-      language: "EN",
-      doc: "DEFAULT",
-      sheet: "DEFAULT",
-    });
+      language: 'EN',
+      doc: 'DEFAULT',
+      sheet: 'DEFAULT',
+    })
   }
 
   async saveSettings() {
-    await this.saveData(this.settings);
+    await this.saveData(this.settings)
   }
 
   onunload() {}
