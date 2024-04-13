@@ -36,13 +36,13 @@ export class UDocView extends TextFileView {
     this.univer = docInit(option, this.settings)
     this.FUniver = FUniver.newAPI(this.univer)
 
-    let docData: DocumentDataModel | object
+    let docData: DocumentDataModel
 
     try {
       docData = JSON.parse(data)
     }
     catch {
-      docData = this.getDefaultData()
+      docData = {} as DocumentDataModel
     }
 
     setTimeout(() => {
@@ -70,14 +70,5 @@ export class UDocView extends TextFileView {
     this.requestSave()
 
     this.univer.dispose()
-  }
-
-  getDefaultData(): IDocumentData {
-    if (this.settings.doc === 'TEMPLATE' && this.settings.language === 'EN')
-      return DEFAULT_DOCUMENT_DATA_EN
-    else if (this.settings.doc === 'TEMPLATE' && this.settings.language === 'ZH')
-      return DEFAULT_DOCUMENT_DATA_CN
-    else
-      return {} as IDocumentData
   }
 }

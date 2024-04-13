@@ -6,10 +6,8 @@ import { Type as UDocType, UDocView } from './views/udoc'
 import { ChooseTypeModal } from './modals/chooseType'
 import { SettingTab } from './modals/settingTab'
 import type { UniverPluginSettings } from '~/types/setting'
-// import  UniverWorker  from './univer/worker?worker';
 
 export type ViewType = typeof USheetType | typeof UDocType
-// export const univerWorker = new UniverWorker();
 
 export default class UniverPlugin extends Plugin {
   settings: UniverPluginSettings
@@ -38,8 +36,6 @@ export default class UniverPlugin extends Plugin {
   async loadSettings() {
     this.settings = defu(this.settings, {
       language: 'EN',
-      doc: 'DEFAULT',
-      sheet: 'DEFAULT',
     })
   }
 

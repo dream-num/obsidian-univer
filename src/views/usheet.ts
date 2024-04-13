@@ -45,7 +45,7 @@ export class USheetView extends TextFileView {
       sheetData = JSON.parse(data)
     }
     catch (err) {
-      sheetData = this.getDefaultData()
+      sheetData = {} as IWorkbookData
     }
 
     this.workbook = this.univer.createUniverSheet(sheetData)
@@ -75,17 +75,5 @@ export class USheetView extends TextFileView {
     this.univer?.dispose()
     this.workbook?.dispose()
     this.contentEl.empty()
-  }
-
-  getDefaultData(): IWorkbookData {
-    if (this.settings.sheet === 'TEMPLATE' && this.settings.language === 'EN')
-      return SHEET_EN
-    else if (
-      this.settings.sheet === 'TEMPLATE'
-      && this.settings.language === 'ZH'
-    )
-      return SHEET_CN
-    else
-      return {} as IWorkbookData
   }
 }

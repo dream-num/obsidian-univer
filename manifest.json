@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "minAppVersion": "1.5.11",
   "description": "Create, edit, and view spreadsheets and documents in various formats like Excel and Word directly within your knowledge base.",
-  "author": "DreamNum <developer@univer.ai>",
+  "author": "DreamNum",
   "authorUrl": "https://github.com/dream-num",
   "fundingUrl": "https://opencollective.com/univer",
   "isDesktopOnly": false
