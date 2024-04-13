@@ -3,7 +3,7 @@
   "type": "module",
   "version": "1.0.0",
   "description": "Create, edit, and view spreadsheets and documents in various formats like Excel and Word directly within your knowledge base.",
-  "author": "DreamNum <developer@univer.ai>",
+  "author": "DreamNum",
   "license": "Apache-2.0",
   "keywords": [
     "univer",
@@ -13,9 +13,12 @@
     "document"
   ],
   "scripts": {
+    "prepare": "simple-git-hooks",
     "dev": "vite build --watch",
     "build": "vite build",
-    "release": "release-it"
+    "release": "release-it",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "@univerjs/core": "^0.1.7",
@@ -47,8 +50,10 @@
     "builtin-modules": "^3.3.0",
     "dotenv": "^16.4.5",
     "eslint": "^8.57.0",
+    "lint-staged": "^15.2.2",
     "obsidian": "1.5.7-1",
     "release-it": "^17.1.1",
+    "simple-git-hooks": "^2.11.1",
     "typescript": "^5.4.2",
     "vite": "^5.1.6"
   }

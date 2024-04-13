@@ -3,7 +3,6 @@ This plugin gives you all the features of a standard doc and sheet tool in Obisi
 
 This plugin is based on [Univer](https://github.com/dream-num/univer), which is based on [DreamNum](https://github.com/dream-num)
 
-
 ### Features
 
 #### Sheet
@@ -18,7 +17,6 @@ This plugin is based on [Univer](https://github.com/dream-num/univer), which is 
 ### How to use:
 1. Install the plugin
 2. Create a new file(USheet or UDoc) by clicking on the "Doc" or "Sheet" modal button.
-
 
 ### How to perfect the plugin
 
