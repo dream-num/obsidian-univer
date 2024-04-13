@@ -21,13 +21,13 @@ This plugin is based on [Univer](https://github.com/dream-num/univer), which is 
 
 ## Core Features
 
-| <h3>📊 Univer Sheets </h3> |           |
-| :------------------|------------------- |
-| [Sheets](https://www.univer.ai/examples/sheets/)<br>Opened: cell styles, formulas. First quarter: conditional formatting, data validation, search and replace. Second quarter (tentative): floating pictures, filtering, sorting, annotations, charts, pivot tables, super tables (tables), shaped | [![](./assets/sheet.gif)](https://www.univer.ai/examples/sheets/)    |
+| <h3>📊 Univer Sheets</h3> | |
+| :------------------------ | :------------------- |
+| [Sheets](https://www.univer.ai/examples/sheets/)<br>Opened: cell styles, formulas. First quarter: conditional formatting, data validation, search and replace. Second quarter (tentative): floating pictures, filtering, sorting, annotations, charts, pivot tables, super tables (tables), shaped | ![Sheets](./assets/sheet.gif) |
 
-| <h3> 📝 Univer Docs</h3> |             |
-| :------------------|------------------- |
-| [Docs](https://www.univer.ai/examples/docs/)<br>Already open: ordered and unordered lists, paragraph settings, mixed graphics and text, multi-column/single column display in sections (tentative): hyperlinks, comments, tables, charts | [![](./assets/doc.gif)](https://www.univer.ai/examples/docs/)    |
+| <h3>📝 Univer Docs</h3> | |
+| :---------------------- | :------------------- |
+| [Docs](https://www.univer.ai/examples/docs/)<br>Already open: ordered and unordered lists, paragraph settings, mixed graphics and text, multi-column/single column display in sections (tentative): hyperlinks, comments, tables, charts | ![Docs](./assets/doc.gif) |
 
 ## I18N feature
 
