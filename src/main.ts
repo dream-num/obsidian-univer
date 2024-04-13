@@ -1,10 +1,11 @@
 import './style/univer.css'
 import { defu } from 'defu'
-import { Plugin } from 'obsidian'
+import { Plugin, addIcon } from 'obsidian'
 import { Type as USheetType, USheetView } from './views/usheet'
 import { Type as UDocType, UDocView } from './views/udoc'
 import { ChooseTypeModal } from './modals/chooseType'
 import { SettingTab } from './modals/settingTab'
+import { univerIconSvg } from './utils/common'
 import type { UniverPluginSettings } from '~/types/setting'
 
 export type ViewType = typeof USheetType | typeof UDocType
@@ -15,8 +16,10 @@ export default class UniverPlugin extends Plugin {
   async onload() {
     await this.loadSettings()
 
+    addIcon('univer', univerIconSvg)
+
     // ribbon icon & the class
-    this.addRibbonIcon('cable', 'Univer', () => {
+    this.addRibbonIcon('univer', 'Univer', () => {
       const modal = new ChooseTypeModal(this.app, this.settings)
       modal.open()
     })
