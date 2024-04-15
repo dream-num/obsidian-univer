@@ -2,11 +2,12 @@ import './style/univer.css'
 import { defu } from 'defu'
 import { Plugin, addIcon } from 'obsidian'
 import { Type as USheetType, USheetView } from './views/usheet'
+import { Type as XlsxType, XlsxTypeView } from './views/xlsx'
 import { Type as UDocType, UDocView } from './views/udoc'
 import { ChooseTypeModal } from './modals/chooseType'
 import { SettingTab } from './modals/settingTab'
 import { univerIconSvg } from './utils/common'
-import type { UniverPluginSettings } from '~/types/setting'
+import type { UniverPluginSettings } from '@/types/setting'
 
 export type ViewType = typeof USheetType | typeof UDocType
 
@@ -29,11 +30,13 @@ export default class UniverPlugin extends Plugin {
 
     // register view
     this.registerView(USheetType, leaf => new USheetView(leaf, this.settings))
+    this.registerView(XlsxType, leaf => new XlsxTypeView(leaf, this.settings))
 
     this.registerView(UDocType, leaf => new UDocView(leaf, this.settings))
 
     this.registerExtensions(['usheet'], USheetType)
     this.registerExtensions(['udoc'], UDocType)
+    this.registerExtensions(['xlsx'], XlsxType)
   }
 
   async loadSettings() {

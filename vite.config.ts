@@ -1,6 +1,7 @@
 import { copyFile, rename, writeFile } from 'node:fs/promises'
 import { join, resolve } from 'node:path'
 import process from 'node:process'
+import { existsSync } from 'node:fs'
 import { defineConfig } from 'vite'
 import { univerPlugin } from '@univerjs/vite-plugin'
 import builtins from 'builtin-modules'
@@ -36,6 +37,8 @@ function generate(isDev?: boolean) {
   }
 }
 
+const exchangeWasm = resolve(__dirname, './node_modules/@univerjs-pro/exchange-wasm/package.json')
+
 export default defineConfig((_) => {
   const dev = process.argv.includes('--watch')
 
@@ -47,7 +50,7 @@ export default defineConfig((_) => {
     resolve: {
       alias: {
         '@': resolve(__dirname, './src'),
-        '~': resolve(__dirname, './src'),
+        '@univerjs-pro/exchange-wasm': existsSync(exchangeWasm) ? resolve(__dirname, './node_modules/@univerjs-pro/exchange-wasm') : resolve(__dirname, './src/mock'),
       },
     },
     build: {

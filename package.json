@@ -30,6 +30,7 @@
     "@univerjs/engine-render": "^0.1.7",
     "@univerjs/facade": "^0.1.7",
     "@univerjs/find-replace": "^0.1.7",
+    "@univerjs/protocol": "^0.1.17",
     "@univerjs/rpc": "^0.1.7",
     "@univerjs/sheets": "^0.1.7",
     "@univerjs/sheets-conditional-formatting-ui": "^0.1.7",
@@ -42,19 +43,28 @@
     "@univerjs/ui": "^0.1.7",
     "defu": "^6.1.4"
   },
+  "optionalDependencies": {
+    "@univerjs-pro/exchange-wasm": "^1.0.3"
+  },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.8.3",
+    "@antfu/eslint-config": "^2.13.3",
     "@release-it/conventional-changelog": "^8.0.1",
-    "@types/node": "^20.11.28",
+    "@types/node": "^20.12.7",
     "@univerjs/vite-plugin": "^0.3.2",
     "builtin-modules": "^3.3.0",
     "dotenv": "^16.4.5",
     "eslint": "^8.57.0",
     "lint-staged": "^15.2.2",
     "obsidian": "1.5.7-1",
-    "release-it": "^17.1.1",
+    "release-it": "^17.2.0",
     "simple-git-hooks": "^2.11.1",
-    "typescript": "^5.4.2",
-    "vite": "^5.1.6"
+    "typescript": "^5.4.5",
+    "vite": "^5.2.8"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged"
+  },
+  "lint-staged": {
+    "*": "eslint --fix"
   }
 }
