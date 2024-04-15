@@ -27,3 +27,7 @@ dist
 .env
 
 .npmrc
+
+.env.local
+
+src/wasm/
