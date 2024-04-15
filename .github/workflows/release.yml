@@ -13,17 +13,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js
-        uses: actions/setup-node@v1
+      - uses: actions/checkout@v3
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
         with:
-          node-version: 16
+          version: 8
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+          registry-url: ${{ secrets.VERDACCIO_URL }}
+          scope: '@univerjs-pro'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.VERDACCIO_TOKEN }}
 
       - name: Build
         id: build
         run: |
-          npm install
-          npm run build
+          pnpm i
+          pnpm build
           mkdir ${{ env.PLUGIN_NAME }}
           echo "Waiting for build files..."
           while [ ! -f dist/main.js ] || [ ! -f dist/manifest.json ] || [ ! -f dist/styles.css ]; do
