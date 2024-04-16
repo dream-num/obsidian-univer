@@ -3,10 +3,8 @@ import { Tools } from '@univerjs/core'
 import { FUniver } from '@univerjs/facade'
 import type { WorkspaceLeaf } from 'obsidian'
 import { TextFileView } from 'obsidian'
-import { DEFAULT_DOCUMENT_DATA_EN } from '../data/default-document-data-en'
 import type { UniverPluginSettings } from '@/types/setting'
 import { docInit } from '@/univer/docs'
-import { DEFAULT_DOCUMENT_DATA_CN } from '@/data/default-document-data-cn'
 
 export const Type = 'univer-doc'
 
