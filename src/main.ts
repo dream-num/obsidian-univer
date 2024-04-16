@@ -32,18 +32,20 @@ export default class UniverPlugin extends Plugin {
 
     // register view
     this.registerView(USheetType, leaf => new USheetView(leaf, this.settings))
-    this.registerView(XlsxType, leaf => new XlsxTypeView(leaf, this.settings))
+    this.registerExtensions(['usheet'], USheetType)
 
     this.registerView(UDocType, leaf => new UDocView(leaf, this.settings))
-
-    this.registerExtensions(['usheet'], USheetType)
     this.registerExtensions(['udoc'], UDocType)
+
+    this.registerView(XlsxType, leaf => new XlsxTypeView(leaf, this.settings))
     this.registerExtensions(['xlsx', 'xls', 'xlsm'], XlsxType)
   }
 
   async loadSettings() {
-    this.settings = defu(this.settings, {
+    const loadedSettings = await this.loadData()
+    this.settings = defu(loadedSettings, {
       language: 'EN',
+      isSupportXlsx: true,
     })
   }
 
@@ -51,5 +53,5 @@ export default class UniverPlugin extends Plugin {
     await this.saveData(this.settings)
   }
 
-  onunload() {}
+  async onunload() {}
 }

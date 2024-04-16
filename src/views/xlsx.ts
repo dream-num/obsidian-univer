@@ -28,6 +28,11 @@ export class XlsxTypeView extends TextFileView {
   }
 
   async setViewData(_data: string, _: boolean) {
+    if (!this.settings.isSupportXlsx) {
+      this.contentEl.createEl('h2', { text: 'Xlsx file type is not supported, please enable it in the settings' })
+      return
+    }
+
     this.domInit()
     this.univer?.dispose()
     this.workbook?.dispose()
