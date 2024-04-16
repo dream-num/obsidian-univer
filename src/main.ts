@@ -38,8 +38,7 @@ export default class UniverPlugin extends Plugin {
 
     this.registerExtensions(['usheet'], USheetType)
     this.registerExtensions(['udoc'], UDocType)
-    this.registerExtensions(['xlsx'], XlsxType)
-    this.registerExtensions(['xls'], XlsxType)
+    this.registerExtensions(['xlsx', 'xls', 'xlsm'], XlsxType)
   }
 
   async loadSettings() {
