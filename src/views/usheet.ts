@@ -3,8 +3,6 @@ import type { WorkspaceLeaf } from 'obsidian'
 import { TextFileView } from 'obsidian'
 import { FUniver } from '@univerjs/facade'
 import { UniverSheetsConditionalFormattingUIPlugin } from '@univerjs/sheets-conditional-formatting-ui'
-import { DEFAULT_WORKBOOK_DATA_DEMO as SHEET_EN } from '../data/default-workbook-data-demo-EN'
-import { DEFAULT_WORKBOOK_DATA_DEMO as SHEET_CN } from '../data/default-workbook-data-demo-CN'
 import type { UniverPluginSettings } from '@/types/setting'
 import { sheetInit } from '@/univer/sheets'
 
