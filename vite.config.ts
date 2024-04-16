@@ -1,7 +1,7 @@
 import { copyFile, rename, writeFile } from 'node:fs/promises'
 import { join, resolve } from 'node:path'
 import process from 'node:process'
-import { existsSync, readdirSync } from 'node:fs'
+import { existsSync } from 'node:fs'
 import { defineConfig } from 'vite'
 import { univerPlugin } from '@univerjs/vite-plugin'
 import builtins from 'builtin-modules'
@@ -27,7 +27,7 @@ function generate(isDev?: boolean) {
         author: pkg.author,
         authorUrl: 'https://github.com/dream-num',
         fundingUrl: 'https://opencollective.com/univer',
-        isDesktopOnly: false,
+        isDesktopOnly: true,
       }, null, 2)}\n`)
       await copyFile(resolve(buildDir, 'manifest.json'), join(process.cwd(), 'manifest.json'))
       rename(resolve(buildDir, 'style.css'), resolve(buildDir, 'styles.css'))
