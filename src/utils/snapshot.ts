@@ -109,7 +109,7 @@ export function transformSheetBlockMetaToBuffer(sheetBlocks: ISheetBlockJson): I
  */
 export function transformSnapshotJsonToWorkbookData(snapshot: ISnapshotJson, sheetBlocks: ISheetBlockJson): Nullable<IWorkbookData> {
   const snapshotData = transformSnapshotMetaToBuffer(snapshot)
-  if (!snapshotData)
+  if (!snapshotData || !sheetBlocks)
     return null
 
   const blocks = transformSheetBlockMetaToBuffer(sheetBlocks)

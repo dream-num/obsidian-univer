@@ -1650,7 +1650,7 @@ packages:
     dev: false
 
   /@univerjs/sheets-conditional-formatting@0.1.7(@univerjs/core@0.1.7)(@univerjs/engine-formula@0.1.7)(@univerjs/engine-render@0.1.7)(@univerjs/sheets@0.1.7)(@wendellhu/redi@0.13.0)(rxjs@7.8.1):
-    resolution: {integrity: sha512-vaQkVKPBAgYqvuzdnwFFiHuKeUxI8cOKy5trBoG894vBVpEb4sdKNWunLGqsbTvp1gokGHhHHxiX/h85aoxiMA==}
+    resolution: {integrity: sha512-JV1HLPQh/vcAvrQJN7KSkOIyRoCXL2THTPvjk81N46I6pNece3IJq4GKnDO124RJ6iktTDPz1SBIR3wFwzDXXg==}
     engines: {node: '>=16.0.0', npm: '>=8.0.0'}
     peerDependencies:
       '@univerjs/core': 0.1.7

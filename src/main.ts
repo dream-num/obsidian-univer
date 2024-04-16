@@ -7,6 +7,7 @@ import { Type as UDocType, UDocView } from './views/udoc'
 import { ChooseTypeModal } from './modals/chooseType'
 import { SettingTab } from './modals/settingTab'
 import { univerIconSvg } from './utils/common'
+import { injectWasm } from './utils/wasm'
 import type { UniverPluginSettings } from '@/types/setting'
 
 export type ViewType = typeof USheetType | typeof UDocType
@@ -16,6 +17,7 @@ export default class UniverPlugin extends Plugin {
 
   async onload() {
     await this.loadSettings()
+    await injectWasm()
 
     addIcon('univer', univerIconSvg)
 
@@ -36,7 +38,7 @@ export default class UniverPlugin extends Plugin {
 
     this.registerExtensions(['usheet'], USheetType)
     this.registerExtensions(['udoc'], UDocType)
-    this.registerExtensions(['xlsx'], XlsxType)
+    this.registerExtensions(['xlsx', 'xls', 'xlsm'], XlsxType)
   }
 
   async loadSettings() {
