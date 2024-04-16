@@ -6,8 +6,8 @@ import { UniverFormulaEnginePlugin } from '@univerjs/engine-formula'
 import { UniverRenderEnginePlugin } from '@univerjs/engine-render'
 import { UniverUIPlugin } from '@univerjs/ui'
 import type { IUniverUIConfig } from '@univerjs/ui/lib/types/ui-plugin'
-import { legacyLocales } from '~/utils/common'
-import type { UniverPluginSettings } from '~/types/setting'
+import { legacyLocales } from '@/utils/common'
+import type { UniverPluginSettings } from '@/types/setting'
 
 export function docInit(
   option: IUniverUIConfig,

@@ -17,10 +17,8 @@ import { UniverUIPlugin } from '@univerjs/ui'
 import { UniverDataValidationPlugin } from '@univerjs/data-validation'
 import { UniverSheetsDataValidationPlugin } from '@univerjs/sheets-data-validation'
 import type { IUniverUIConfig } from '@univerjs/ui/lib/types/ui-plugin'
-import { legacyLocales } from '~/utils/common'
-import type { UniverPluginSettings } from '~/types/setting'
-
-// const workerScriptURL = new URL('./worker.ts', import.meta.url)
+import { legacyLocales } from '@/utils/common'
+import type { UniverPluginSettings } from '@/types/setting'
 
 export function sheetInit(
   option: IUniverUIConfig,
