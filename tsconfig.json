@@ -25,6 +25,7 @@
     "importHelpers": true,
     "inlineSourceMap": true,
     "inlineSources": true,
+    "allowSyntheticDefaultImports": true,
     "isolatedModules": true
   },
   "include": [

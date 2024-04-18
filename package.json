@@ -41,10 +41,11 @@
     "@univerjs/sheets-ui": "^0.1.7",
     "@univerjs/sheets-zen-editor": "^0.1.7",
     "@univerjs/ui": "^0.1.7",
-    "defu": "^6.1.4"
+    "defu": "^6.1.4",
+    "jszip": "^3.10.1"
   },
   "optionalDependencies": {
-    "@univerjs-pro/exchange-wasm": "^1.0.3"
+    "@univerjs-pro/exchange-wasm": "^1.1.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.13.3",
