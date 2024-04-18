@@ -44,7 +44,7 @@
     "defu": "^6.1.4"
   },
   "optionalDependencies": {
-    "@univerjs-pro/exchange-wasm": "^1.0.3"
+    "@univerjs-pro/exchange-wasm": "^1.1.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.13.3",

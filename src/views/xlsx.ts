@@ -1,11 +1,12 @@
-import type { IWorkbookData, Nullable, Univer, Workbook } from '@univerjs/core'
+import { type IWorkbookData, type Nullable, Tools, type Univer, type Workbook } from '@univerjs/core'
 import type { WorkspaceLeaf } from 'obsidian'
 import { TextFileView } from 'obsidian'
 import { FUniver } from '@univerjs/facade'
 import { UniverSheetsConditionalFormattingUIPlugin } from '@univerjs/sheets-conditional-formatting-ui'
 import type { UniverPluginSettings } from '@/types/setting'
 import { sheetInit } from '@/univer/sheets'
-import { transformSnapshotJsonToWorkbookData } from '@/utils/snapshot'
+import { transformSnapshotJsonToWorkbookData, transformWorkbookDataToSnapshotJson } from '@/utils/snapshot'
+import { transformToExcelBuffer } from '@/utils/file'
 
 export const Type = 'univer-xlsx'
 export class XlsxTypeView extends TextFileView {
@@ -23,19 +24,18 @@ export class XlsxTypeView extends TextFileView {
   }
 
   getViewData(): string {
-    // return JSON.stringify(this.workbook.save())
     return ''
   }
 
-  async setViewData(_data: string, _: boolean) {
+  async setViewData(_data: string, _clear: boolean) {
     if (!this.settings.isSupportXlsx) {
       this.contentEl.createEl('h2', { text: 'Xlsx file type is not supported, please enable it in the settings' })
       return
     }
 
-    this.domInit()
     this.univer?.dispose()
     this.workbook?.dispose()
+    this.domInit()
 
     if (!this.file)
       return
@@ -54,15 +54,12 @@ export class XlsxTypeView extends TextFileView {
     const raw = await this.app.vault.readBinary(this.file)
     // @ts-expect-error
     const transformData = await window.univerProExchangeImport(raw)
-    const json = JSON.parse(transformData)
+    const jsonData = JSON.parse(transformData)
+    this.workbookData = transformSnapshotJsonToWorkbookData(jsonData.snapshot, jsonData.sheetBlocks)
+    if (!this.workbookData)
+      this.workbookData = Tools.deepClone({}) as IWorkbookData
 
-    this.workbookData = transformSnapshotJsonToWorkbookData(json.snapshot, json.sheetBlocks)
-
-    this.workbook = this.univer.createUniverSheet(this.workbookData ?? {})
-
-    // this.FUniver.onCommandExecuted(() => {
-    //   this.requestSave()
-    // })
+    this.workbook = this.univer.createUniverSheet(this.workbookData)
   }
 
   getViewType() {
@@ -81,9 +78,22 @@ export class XlsxTypeView extends TextFileView {
   }
 
   async onClose() {
-    // this.requestSave()
+    await this.saveToExcel()
     this.univer?.dispose()
     this.workbook?.dispose()
     this.contentEl.empty()
+  }
+
+  async saveToExcel() {
+    if (!this.file || !this.workbook)
+      return
+
+    const saveWorkbookData = this.workbook.save()
+    const snapshotJSON = await transformWorkbookDataToSnapshotJson(saveWorkbookData)
+    const snapshot = JSON.stringify(snapshotJSON)
+    // @ts-expect-error
+    const excelRaw = await window.univerProExchangeExport(snapshot)
+    const excelBuffer = await transformToExcelBuffer(excelRaw)
+    await this.app.vault.modifyBinary(this.file, excelBuffer)
   }
 }

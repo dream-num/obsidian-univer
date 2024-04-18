@@ -1,6 +1,6 @@
-import type { IWorkbookData, Nullable } from '@univerjs/core'
-import { b64DecodeUnicode, textEncoder, transformSnapshotToWorkbookData } from '@univerjs/core'
-
+/* eslint-disable jsdoc/require-returns-description */
+import type { ILogContext, ISnapshotServerService, IWorkbookData, Nullable } from '@univerjs/core'
+import { ClientSnapshotServerService, b64DecodeUnicode, b64EncodeUnicode, getSheetBlocksFromSnapshot, textDecoder, textEncoder, transformSnapshotToWorkbookData, transformWorkbookDataToSnapshot } from '@univerjs/core'
 import type { ISheetBlock, ISnapshot, IWorkbookMeta, IWorksheetMeta } from '@univerjs/protocol'
 
 export interface WorksheetMetaJson extends Omit<IWorksheetMeta, 'originalMeta'> {
@@ -115,4 +115,87 @@ export function transformSnapshotJsonToWorkbookData(snapshot: ISnapshotJson, she
   const blocks = transformSheetBlockMetaToBuffer(sheetBlocks)
 
   return transformSnapshotToWorkbookData(snapshotData, blocks)
+}
+
+/**
+ * Convert the Uint8Array in the snapshot to a string for easy transmission to the backend
+ * @param snapshot
+ * @returns
+ */
+export function transformSnapshotMetaToString(snapshot: ISnapshot): Nullable<ISnapshotJson> {
+  const workbook = snapshot.workbook
+  if (!workbook)
+    return null
+
+  const sheets: {
+    [key: string]: Partial<WorksheetMetaJson>
+  } = {}
+
+  if (workbook.sheets) {
+    // Loop through sheets and convert originalMeta
+    Object.keys(workbook.sheets).forEach((sheetKey) => {
+      const sheet = workbook.sheets[sheetKey]
+      sheets[sheetKey] = {
+        ...sheet,
+        originalMeta: b64EncodeUnicode(textDecoder.decode(sheet.originalMeta)),
+      }
+    })
+  }
+
+  const workbookOriginalMeta = b64EncodeUnicode(textDecoder.decode(workbook.originalMeta))
+
+  return {
+    ...snapshot,
+    workbook: {
+      ...workbook,
+      originalMeta: workbookOriginalMeta,
+      sheets,
+    },
+  }
+}
+
+/**
+ * Convert the Uint8Array in the sheet block to a string for easy transmission to the backend
+ * @param sheetBlocks
+ * @returns
+ */
+export function transformSheetBlockMetaToString(sheetBlocks: ISheetBlock[]): ISheetBlockJson {
+  const sheetBlockJson: ISheetBlockJson = {}
+  sheetBlocks.forEach((block) => {
+    sheetBlockJson[block.id] = {
+      ...block,
+      data: b64EncodeUnicode(textDecoder.decode(block.data)),
+    }
+  })
+  return sheetBlockJson
+}
+
+/**
+ * Convert the workbook data to snapshot data
+ * @param workbookData
+ * @returns
+ */
+export async function transformWorkbookDataToSnapshotJson(workbookData: IWorkbookData): Promise<{ snapshot: ISnapshotJson, sheetBlocks: ISheetBlockJson }> {
+  const context: ILogContext = {
+    metadata: undefined,
+  }
+
+  const unitID = workbookData.id
+  const rev = workbookData.rev ?? 0
+
+  const snapshotService: ISnapshotServerService = new ClientSnapshotServerService()
+
+  const { snapshot } = await transformWorkbookDataToSnapshot(context, workbookData, unitID, rev, snapshotService)
+
+  const sheetBlocks = await getSheetBlocksFromSnapshot(snapshot, snapshotService)
+
+  const snapshotJson = transformSnapshotMetaToString(snapshot)
+
+  if (!snapshotJson)
+    throw new Error('Failed to transform snapshot to string')
+
+  return {
+    snapshot: snapshotJson,
+    sheetBlocks: transformSheetBlockMetaToString(sheetBlocks),
+  }
 }
