@@ -33,7 +33,7 @@ dependencies:
     specifier: ^0.1.7
     version: 0.1.7(@univerjs/core@0.1.7)(@univerjs/design@0.1.7)(@univerjs/engine-render@0.1.7)(@univerjs/ui@0.1.7)(@wendellhu/redi@0.13.0)(react-dom@18.2.0)(react@18.2.0)(rxjs@7.8.1)
   '@univerjs/protocol':
-    specifier: ^0.1.17
+    specifier: ^0.1.18
     version: 0.1.18(@grpc/grpc-js@1.10.6)(rxjs@7.8.1)
   '@univerjs/rpc':
     specifier: ^0.1.7
@@ -1394,7 +1394,7 @@ packages:
     dev: false
 
   /@univerjs/data-validation@0.1.7(@univerjs/core@0.1.7)(@univerjs/sheets@0.1.7)(@wendellhu/redi@0.13.0)(rxjs@7.8.1):
-    resolution: {integrity: sha512-yAP4QRWSHjEnw7lYxBdfaGZIkGF2CqjnXaB9EVsAJgE5lCnR6WC4+UA6Jo6K1kNTta7TSTw1TAlWICj/U7pjgA==}
+    resolution: {integrity: sha512-2rAvkJQwaBbvq8e9hrO0W7KG7MOF1Kdw9icp+LnT4OEgTNZ2fHkvlpFH5Grd/HVH9wq3C8VNw+XVVl6slKLsaQ==}
     peerDependencies:
       '@univerjs/core': 0.1.7
       '@univerjs/sheets': 0.1.7
@@ -1444,7 +1444,7 @@ packages:
     dev: false
 
   /@univerjs/docs-ui@0.1.7(@univerjs/core@0.1.7)(@univerjs/design@0.1.7)(@univerjs/docs@0.1.7)(@univerjs/engine-render@0.1.7)(@univerjs/ui@0.1.7)(@wendellhu/redi@0.13.0)(react@18.2.0)(rxjs@7.8.1):
-    resolution: {integrity: sha512-5AGrlVDQqxBrNzIpqTm3Cj/nYSuIVTZhQ4YQhGZDvpay/CqW4zlQkrsZ6ULKFHigtO+VzOM4dAsBEqAUy48YLA==}
+    resolution: {integrity: sha512-6KoPhSgye50i1WUtsOoXTPDU9+WBuB/PbSG8isAdu/3a3XAKtzNle8AT7jX7f0OWTV37oaaalP1T/Igbgs7FgA==}
     engines: {node: '>=16.0.0', npm: '>=8.0.0'}
     peerDependencies:
       '@univerjs/core': 0.1.7
@@ -1519,7 +1519,7 @@ packages:
     dev: false
 
   /@univerjs/facade@0.1.7(@univerjs/core@0.1.7)(@univerjs/docs@0.1.7)(@univerjs/engine-render@0.1.7)(@univerjs/network@0.1.7)(@univerjs/sheets-formula@0.1.7)(@univerjs/sheets-numfmt@0.1.7)(@univerjs/sheets-ui@0.1.7)(@univerjs/sheets@0.1.7)(@wendellhu/redi@0.13.0):
-    resolution: {integrity: sha512-aMT4abmojAW+VwsgjC71/GqQ96D3BhfnozhQ2UBVwOUni1uJJJIVxoB9tPjEjC02a0tZ0oNYTH5lWX9bDWWlwQ==}
+    resolution: {integrity: sha512-ccCqZy6V+BjltexLHP4ob/RrXREgMMklfaxQQqzKSdfU5QSMxuGd+ImOTnKyDU2LZGdgiK0ZQZ0J3LABzDZxsw==}
     engines: {node: '>=16.0.0', npm: '>=8.0.0'}
     peerDependencies:
       '@univerjs/core': 0.1.7
@@ -1615,7 +1615,7 @@ packages:
     dev: false
 
   /@univerjs/sheets-conditional-formatting-ui@0.1.7(@univerjs/core@0.1.7)(@univerjs/design@0.1.7)(@univerjs/engine-formula@0.1.7)(@univerjs/engine-render@0.1.7)(@univerjs/sheets-conditional-formatting@0.1.7)(@univerjs/sheets-ui@0.1.7)(@univerjs/sheets@0.1.7)(@univerjs/ui@0.1.7)(@wendellhu/redi@0.13.0)(clsx@2.1.0)(react-dom@18.2.0)(react@18.2.0)(rxjs@7.8.1):
-    resolution: {integrity: sha512-Js805LGiVAnBm8Iin3FIvpZzvj15ZTCYLb3JwESzZI/IRHULycx2LWPXP3I+xTTfKWW+6O3QxvQAiEpyTeS/GA==}
+    resolution: {integrity: sha512-NL9PjGQqUoSxiYi8gqFU8OViyuwFrjsErf9Fes0gGnkFTbSWeZgkJLR64hg9SEaNrlOwvjyv2LJECsnZ6pI+1w==}
     engines: {node: '>=16.0.0', npm: '>=8.0.0'}
     peerDependencies:
       '@univerjs/core': 0.1.7
@@ -1653,7 +1653,7 @@ packages:
     dev: false
 
   /@univerjs/sheets-conditional-formatting@0.1.7(@univerjs/core@0.1.7)(@univerjs/engine-formula@0.1.7)(@univerjs/engine-render@0.1.7)(@univerjs/sheets@0.1.7)(@wendellhu/redi@0.13.0)(rxjs@7.8.1):
-    resolution: {integrity: sha512-vaQkVKPBAgYqvuzdnwFFiHuKeUxI8cOKy5trBoG894vBVpEb4sdKNWunLGqsbTvp1gokGHhHHxiX/h85aoxiMA==}
+    resolution: {integrity: sha512-JV1HLPQh/vcAvrQJN7KSkOIyRoCXL2THTPvjk81N46I6pNece3IJq4GKnDO124RJ6iktTDPz1SBIR3wFwzDXXg==}
     engines: {node: '>=16.0.0', npm: '>=8.0.0'}
     peerDependencies:
       '@univerjs/core': 0.1.7
@@ -1673,7 +1673,7 @@ packages:
     dev: false
 
   /@univerjs/sheets-data-validation@0.1.7(@univerjs/core@0.1.7)(@univerjs/data-validation@0.1.7)(@univerjs/design@0.1.7)(@univerjs/engine-formula@0.1.7)(@univerjs/engine-render@0.1.7)(@univerjs/sheets-formula@0.1.7)(@univerjs/sheets-ui@0.1.7)(@univerjs/sheets@0.1.7)(@univerjs/ui@0.1.7)(@wendellhu/redi@0.13.0)(clsx@2.1.0)(react-dom@18.2.0)(react@18.2.0)(rxjs@7.8.1):
-    resolution: {integrity: sha512-IgoQOSwRiijaKP5i3CNIye5stRC6TlwJmBjuID6u0lkS58VRUnHSZ+o4lrpFbAAImv/PqBs4vbjVLUSBJUOo5g==}
+    resolution: {integrity: sha512-lMMWkuLxUSjpmUgvcpHZLd/891CzqRSbRnEbWwHq2vi9JX3Tv2PpLshXnGIqH5yKMi+ogOcjOGTkQ6nM4clSQw==}
     peerDependencies:
       '@univerjs/core': 0.1.7
       '@univerjs/data-validation': 0.1.7
@@ -1709,7 +1709,7 @@ packages:
     dev: false
 
   /@univerjs/sheets-find-replace@0.1.7(@univerjs/core@0.1.7)(@univerjs/engine-render@0.1.7)(@univerjs/find-replace@0.1.7)(@univerjs/sheets-ui@0.1.7)(@univerjs/sheets@0.1.7)(@wendellhu/redi@0.13.0)(rxjs@7.8.1):
-    resolution: {integrity: sha512-wQW4wEAjUcYTHlQx4ACpyAts7pBR9NojGGYjqQfL9MtlA3HKg8xakQf6s7sUZ+BSDE5zJgp/s33bmlVdgaOtww==}
+    resolution: {integrity: sha512-h9uWjNG2Pb73QYqtOmnUlFQoLK/15YoqgD/uFHvWQA3p05QFmfcTqL7O7Uc6ARUtn/lIMCHeAzNIjX29jDxXmA==}
     engines: {node: '>=16.0.0', npm: '>=8.0.0'}
     peerDependencies:
       '@univerjs/core': 0.1.7
@@ -1730,7 +1730,7 @@ packages:
     dev: false
 
   /@univerjs/sheets-formula@0.1.7(@univerjs/core@0.1.7)(@univerjs/design@0.1.7)(@univerjs/docs@0.1.7)(@univerjs/engine-formula@0.1.7)(@univerjs/engine-render@0.1.7)(@univerjs/sheets-numfmt@0.1.7)(@univerjs/sheets-ui@0.1.7)(@univerjs/sheets@0.1.7)(@univerjs/ui@0.1.7)(@wendellhu/redi@0.13.0)(react-dom@18.2.0)(react@18.2.0)(rxjs@7.8.1):
-    resolution: {integrity: sha512-M0SjtQzF7GqbHfOpSOslkdZ/zgHytWQRbvAcwMzpKTYWKC+g9DswwElBftTyZ6JikEQif4GrzaeJ3bN289icvw==}
+    resolution: {integrity: sha512-wuhpVXjRRgUoYtExoIhUKliIbDtKv+5oqu6qabvO++Fr67l4/RYU6PfSfp6DzCLmb23x9zP9fxCDPtzHU+UUGw==}
     engines: {node: '>=16.0.0', npm: '>=8.0.0'}
     peerDependencies:
       '@univerjs/core': 0.1.7
@@ -1764,7 +1764,7 @@ packages:
     dev: false
 
   /@univerjs/sheets-numfmt@0.1.7(@univerjs/core@0.1.7)(@univerjs/design@0.1.7)(@univerjs/engine-formula@0.1.7)(@univerjs/engine-numfmt@0.1.7)(@univerjs/engine-render@0.1.7)(@univerjs/sheets-ui@0.1.7)(@univerjs/sheets@0.1.7)(@univerjs/ui@0.1.7)(@wendellhu/redi@0.13.0)(react-dom@18.2.0)(react@18.2.0)(rxjs@7.8.1):
-    resolution: {integrity: sha512-aaCGPqbljp0EoSspjEM+EkLa2MAGY18Mj+DClDJvcmEFRgcWpnNwv9awVpjz0oGocrw11orkE4QapnQlaTfitQ==}
+    resolution: {integrity: sha512-j7XvHQjXIVTGbVrWRmG05YUk5Vn8UdaVbKeIT3LH5hCerIQqWc3GxJdOntxNDT3qPMtSPlcoAQmk1A2hnSLv7A==}
     engines: {node: '>=16.0.0', npm: '>=8.0.0'}
     peerDependencies:
       '@univerjs/core': 0.1.7
@@ -1796,7 +1796,7 @@ packages:
     dev: false
 
   /@univerjs/sheets-ui@0.1.7(@univerjs/core@0.1.7)(@univerjs/design@0.1.7)(@univerjs/docs-ui@0.1.7)(@univerjs/docs@0.1.7)(@univerjs/engine-formula@0.1.7)(@univerjs/engine-numfmt@0.1.7)(@univerjs/engine-render@0.1.7)(@univerjs/sheets@0.1.7)(@univerjs/ui@0.1.7)(@wendellhu/redi@0.13.0)(clsx@2.1.0)(react-dom@18.2.0)(react@18.2.0)(rxjs@7.8.1):
-    resolution: {integrity: sha512-RTVqr2q8d+FxVWeL7ofPX3RiwLTSYRP3ndo2R0jOA2RXoezigL1IzcW7kxemoOvy1Li6ER4XgPm/BNfRdMp4UA==}
+    resolution: {integrity: sha512-Z8ZVuZqVUVh7F3ubFgurZT3/hwdyK1CES97sA8zt6+mnD8JCneQP4O5I+k/6+KxhpW8HLUAdHzzNmE0DDOy13w==}
     engines: {node: '>=16.0.0', npm: '>=8.0.0'}
     peerDependencies:
       '@univerjs/core': 0.1.7
@@ -1832,7 +1832,7 @@ packages:
     dev: false
 
   /@univerjs/sheets-zen-editor@0.1.7(@univerjs/core@0.1.7)(@univerjs/docs@0.1.7)(@univerjs/engine-render@0.1.7)(@univerjs/sheets-ui@0.1.7)(@univerjs/ui@0.1.7)(@wendellhu/redi@0.13.0)(clsx@2.1.0)(react-dom@18.2.0)(react@18.2.0)(rxjs@7.8.1):
-    resolution: {integrity: sha512-BOkLqkVRJhw16ldHrL/UAKKS2CBiaepAI1c58OA4V2oYYslfaitqL2HXn2LX504mcez9Q9OJ4Hzg02Zm5v+VXA==}
+    resolution: {integrity: sha512-VAmkWsao+fTdNuhd9FABQ+REStBJLtiVTxDb/gFrUL5BsWZ5EC2aZ9msUEwq++DU21tCF0CoGHuIYTu/WTQpYw==}
     engines: {node: '>=16.0.0', npm: '>=8.0.0'}
     peerDependencies:
       '@univerjs/core': 0.1.7
@@ -1860,7 +1860,7 @@ packages:
     dev: false
 
   /@univerjs/sheets@0.1.7(@univerjs/core@0.1.7)(@univerjs/engine-formula@0.1.7)(@univerjs/engine-render@0.1.7)(@wendellhu/redi@0.13.0)(rxjs@7.8.1):
-    resolution: {integrity: sha512-uuCJKzpGtK/WKixx8Dp0HCmAu/fYDflZOJ9MY+JkwEd+Df5GKNxBZIckaMRCMJkw86JkCVCCByPBwD9UL0fHgg==}
+    resolution: {integrity: sha512-zWWm0dJHavOsWxQIJ9x62MBcf5WGCQg+zrpTCc1fmOkyR3jwoMqjI+XFD8oByxPAPoYUvXf+1M/NGzbi5vXPLg==}
     engines: {node: '>=16.0.0', npm: '>=8.0.0'}
     peerDependencies:
       '@univerjs/core': 0.1.7
@@ -1877,7 +1877,7 @@ packages:
     dev: false
 
   /@univerjs/ui@0.1.7(@univerjs/core@0.1.7)(@univerjs/design@0.1.7)(@univerjs/engine-formula@0.1.7)(@univerjs/engine-render@0.1.7)(@wendellhu/redi@0.13.0)(clsx@2.1.0)(react-dom@18.2.0)(react@18.2.0)(rxjs@7.8.1)(typescript@5.4.5):
-    resolution: {integrity: sha512-qB3w3f9Hs4pttTjwsVgZG7Um/T8Urpg9F79sr1vun86Xyfaln/zP/BL+Ot16NqOdYXSZymoW3Wu1RU44uGQG+A==}
+    resolution: {integrity: sha512-ZyaqGZ/7xtgNg59PoAnR/FS/9EgilHbedoWgFJ0KvZD5dLm6PGQV1NLwJP4/OvGLU2cXRN7Em/0NBfsKLfKBNg==}
     engines: {node: '>=16.0.0', npm: '>=8.0.0'}
     peerDependencies:
       '@univerjs/core': 0.1.7
