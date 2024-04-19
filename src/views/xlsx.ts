@@ -1,5 +1,4 @@
 import type { IWorkbookData, Univer, Workbook } from '@univerjs/core'
-import { Tools } from '@univerjs/core'
 import type { TFile, WorkspaceLeaf } from 'obsidian'
 import { TextFileView } from 'obsidian'
 import { FUniver } from '@univerjs/facade'
@@ -60,8 +59,20 @@ export class XlsxTypeView extends TextFileView {
     const transformData = await window.univerProExchangeImport(raw)
     const jsonData = JSON.parse(transformData)
     let workbookData = transformSnapshotJsonToWorkbookData(jsonData.snapshot, jsonData.sheetBlocks)
-    if (!workbookData)
-      workbookData = Tools.deepClone({}) as IWorkbookData
+
+    workbookData = workbookData || {} as IWorkbookData
+
+    if (workbookData.sheets) {
+      const sheets = workbookData.sheets
+      Object.keys(sheets).forEach((sheetId) => {
+        const sheet = sheets[sheetId]
+        if (sheet.columnCount)
+          sheet.columnCount = Math.max(36, sheet.columnCount)
+
+        if (sheet.rowCount)
+          sheet.rowCount = Math.max(99, sheet.rowCount)
+      })
+    }
 
     this.workbook = this.univer.createUniverSheet(workbookData)
   }

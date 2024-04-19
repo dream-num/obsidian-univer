@@ -30,7 +30,7 @@
     "@univerjs/engine-render": "^0.1.7",
     "@univerjs/facade": "^0.1.7",
     "@univerjs/find-replace": "^0.1.7",
-    "@univerjs/protocol": "^0.1.17",
+    "@univerjs/protocol": "^0.1.18",
     "@univerjs/rpc": "^0.1.7",
     "@univerjs/sheets": "^0.1.7",
     "@univerjs/sheets-conditional-formatting-ui": "^0.1.7",
