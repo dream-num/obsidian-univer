@@ -1,5 +1,21 @@
 
 
+## [1.0.2](https://github.com/dream-num/obsidian-univer/compare/1.0.1...1.0.2) (2024-04-22)
+
+
+### Bug Fixes
+
+* fix lockfile ([b6484c9](https://github.com/dream-num/obsidian-univer/commit/b6484c9c0ba7178caf02351de2a89387fecb0da7))
+* fix the xlsx View & make the plugin desktoponly ([#55](https://github.com/dream-num/obsidian-univer/issues/55)) ([4d65d89](https://github.com/dream-num/obsidian-univer/commit/4d65d893c53ca264d87ac15728cf584ce037239e))
+
+
+### Features
+
+* add support for opening .xlsx files ([#54](https://github.com/dream-num/obsidian-univer/issues/54)) ([dc9e8dd](https://github.com/dream-num/obsidian-univer/commit/dc9e8dd459b0a96ee7e98287f32c2314ef6392a3))
+* add the export feature ([#58](https://github.com/dream-num/obsidian-univer/issues/58)) ([ba1a8a2](https://github.com/dream-num/obsidian-univer/commit/ba1a8a2ce5548075741913edae52f93850895867))
+* add the min rowCount & columnCount of the default workbookData ([#59](https://github.com/dream-num/obsidian-univer/issues/59)) ([8483b69](https://github.com/dream-num/obsidian-univer/commit/8483b696dd5dfdf49d9e8232138b08507b40cab5))
+* add the xlsx support setting taps ([#56](https://github.com/dream-num/obsidian-univer/issues/56)) ([35b70fb](https://github.com/dream-num/obsidian-univer/commit/35b70fb6ea8611a1233020e10059ff3a0674425a))
+
 ## [0.0.13](https://github.com/karlsbeard/obsidian-univer/compare/0.0.12...0.0.13) (2024-04-07)
 
 

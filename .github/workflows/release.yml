@@ -42,6 +42,8 @@ jobs:
         run: |
           upload_url=$(gh release view --json uploadUrl -q .uploadUrl)
           echo "upload_url=$upload_url" >>  $GITHUB_OUTPUT
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - name: Upload main.js
         id: upload-main
