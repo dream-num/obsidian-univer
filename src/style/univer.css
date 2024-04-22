@@ -23,10 +23,17 @@
 
 button.univer-button-text,
 button.univer-toolbar-btn,
+button.univer-dialog-close,
 button.univer-sheet-bar-btn {
   background-color: transparent;
   box-shadow: none;
 }
+
+.univer-input {
+  box-shadow: none !important;
+  color: rgb(var(--text-color)) !important;
+}
+
 
 button.univer-toolbar-btn-active {
   background-color: rgb(var(--grey-100));
