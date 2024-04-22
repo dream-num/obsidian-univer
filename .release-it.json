@@ -4,6 +4,9 @@
     "tagName": "${version}",
     "requireCleanWorkingDir": false
   },
+  "hooks": {
+    "after:bump": "pnpm build"
+  },
   "npm": {
     "publish": false
   },
