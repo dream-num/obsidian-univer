@@ -16,7 +16,7 @@
     "prepare": "simple-git-hooks",
     "dev": "vite build --watch",
     "build": "vite build",
-    "release": "release-it",
+    "release": "pnpm build && release-it",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },

@@ -1,14 +1,14 @@
 {
   "git": {
     "commitMessage": "chore(release): release v${version}",
-    "tagName": "${version}"
+    "tagName": "${version}",
+    "requireCleanWorkingDir": false
   },
-  "npm": false,
+  "npm": {
+    "publish": false
+  },
   "github": {
     "release": true
-  },
-  "hooks": {
-    "after:bump": ["pnpm build"]
   },
   "plugins": {
     "@release-it/conventional-changelog": {
