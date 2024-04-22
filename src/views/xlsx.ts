@@ -1,4 +1,4 @@
-import type { IWorkbookData, Univer, Workbook } from '@univerjs/core'
+import type { IWorkbookData, Nullable, Univer, Workbook } from '@univerjs/core'
 import type { TFile, WorkspaceLeaf } from 'obsidian'
 import { TextFileView } from 'obsidian'
 import { FUniver } from '@univerjs/facade'
@@ -13,8 +13,8 @@ export class XlsxTypeView extends TextFileView {
   rootContainer: HTMLDivElement
   univer: Univer
   workbook: Workbook
+  workbookData: Nullable<IWorkbookData>
   FUniver: FUniver
-  sheetData: IWorkbookData | object
   settings: UniverPluginSettings
   legacyFile: TFile
 
@@ -55,12 +55,14 @@ export class XlsxTypeView extends TextFileView {
     this.univer.registerPlugin(UniverSheetsConditionalFormattingUIPlugin)
 
     const raw = await this.app.vault.readBinary(this.legacyFile)
-    // @ts-expect-error
-    const transformData = await window.univerProExchangeImport(raw)
-    const jsonData = JSON.parse(transformData)
-    let workbookData = transformSnapshotJsonToWorkbookData(jsonData.snapshot, jsonData.sheetBlocks)
+    if (raw.byteLength !== 0) {
+      // @ts-expect-error
+      const transformData = await window.univerProExchangeImport(raw)
+      const jsonData = JSON.parse(transformData)
+      this.workbookData = transformSnapshotJsonToWorkbookData(jsonData.snapshot, jsonData.sheetBlocks)
+    }
 
-    workbookData = workbookData || {} as IWorkbookData
+    const workbookData = this.workbookData || {} as IWorkbookData
 
     if (workbookData.sheets) {
       const sheets = workbookData.sheets
@@ -73,7 +75,6 @@ export class XlsxTypeView extends TextFileView {
           sheet.rowCount = Math.max(99, sheet.rowCount)
       })
     }
-
     this.workbook = this.univer.createUniverSheet(workbookData)
   }
 
@@ -103,7 +104,6 @@ export class XlsxTypeView extends TextFileView {
   async saveToExcel(file: TFile, workbook: Workbook) {
     if (!file || !workbook)
       return
-
     const saveWorkbookData = workbook.save()
     const snapshotJSON = await transformWorkbookDataToSnapshotJson(saveWorkbookData)
     const snapshot = JSON.stringify(snapshotJSON)

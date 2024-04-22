@@ -7,6 +7,7 @@ interface ModalText {
   title: string
   docBtn: string
   sheetBtn: string
+  excelBtn: string
 }
 
 export class ChooseTypeModal extends Modal {
@@ -33,6 +34,11 @@ export class ChooseTypeModal extends Modal {
       cls: 'univer-mdal-btn',
     })
 
+    const excelBtn = btnContainer.createEl('button', {
+      text: 'Excel',
+      cls: 'univer-mdal-btn',
+    })
+
     docBtn.onclick = () => {
       createNewFile(this.app, 'udoc')
       this.close()
@@ -40,6 +46,11 @@ export class ChooseTypeModal extends Modal {
 
     sheetBtn.onclick = () => {
       createNewFile(this.app, 'usheet')
+      this.close()
+    }
+
+    excelBtn.onclick = () => {
+      createNewFile(this.app, 'xlsx')
       this.close()
     }
   }
@@ -52,15 +63,17 @@ export class ChooseTypeModal extends Modal {
     if (this.settings.language === 'EN') {
       return {
         title: 'Please choose the type of file you want to create',
-        docBtn: 'univer doc',
-        sheetBtn: 'univer sheet',
+        docBtn: 'Univer Doc',
+        sheetBtn: 'Univer Sheet',
+        excelBtn: 'Excel',
       }
     }
     else {
       return {
         title: '请选择您要创建的文件类型',
-        docBtn: 'univer 文档',
-        sheetBtn: 'univer 表格',
+        docBtn: 'Univer 文档',
+        sheetBtn: 'Univer 表格',
+        excelBtn: 'Excel',
       }
     }
   }
