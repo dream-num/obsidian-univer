@@ -7,6 +7,9 @@
   "github": {
     "release": true
   },
+  "hooks": {
+    "after:bump": ["pnpm build"]
+  },
   "plugins": {
     "@release-it/conventional-changelog": {
       "preset": "angular",
