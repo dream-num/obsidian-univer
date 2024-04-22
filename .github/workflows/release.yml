@@ -1,9 +1,11 @@
 name: Release Obsidian plugin
 
 on:
-  push:
-    tags:
-      - '*'
+  # push:
+  #   tags:
+  #     - '*'
+  release:
+    types: [published]
 
 env:
   PLUGIN_NAME: obsidian-univer
@@ -36,20 +38,13 @@ jobs:
           pnpm i
           pnpm build
           mkdir ${{ env.PLUGIN_NAME }}
-          echo "Waiting for build files..."
-          while [ ! -f dist/main.js ] || [ ! -f dist/manifest.json ] || [ ! -f dist/styles.css ]; do
-            echo "Still waiting for build files..."
-            sleep 1
-          done
           echo "All build files are ready."
 
       - name: Get latest release upload URL
         id: get_latest_release
         run: |
           upload_url=$(gh release view --json uploadUrl -q .uploadUrl)
-          echo "::set-output name=upload_url::$upload_url"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          echo "upload_url=$upload_url" >>  $GITHUB_OUTPUT
 
       - name: Upload main.js
         id: upload-main
