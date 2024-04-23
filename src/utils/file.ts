@@ -51,7 +51,7 @@ export function transformToExcelBuffer(data: Record<string, any>): Promise<Array
   })
 }
 
-function readFileHandler(file: Blob) {
+export function readFileHandler(file: Blob) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader()
 
@@ -76,4 +76,21 @@ function getFileType(suffix: string) {
     default:
       return SheetType
   }
+}
+
+export function getUploadXlsxFile() {
+  return new Promise((resolve: (file: File | null) => void, reject) => {
+    const input = document.createElement('input')
+    input.type = 'file'
+    input.accept = '.xlsx .xls .xlsm'
+
+    input.onchange = () => {
+      if (input.files && input.files.length > 0)
+        resolve(input.files[0])
+      else
+        reject(new Error('No file selected'))
+    }
+
+    input.click()
+  })
 }

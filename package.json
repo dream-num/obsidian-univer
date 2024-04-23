@@ -30,6 +30,7 @@
     "@univerjs/engine-render": "^0.1.7",
     "@univerjs/facade": "^0.1.7",
     "@univerjs/find-replace": "^0.1.7",
+    "@univerjs/icons": "^0.1.44",
     "@univerjs/protocol": "^0.1.18",
     "@univerjs/rpc": "^0.1.7",
     "@univerjs/sheets": "^0.1.7",
@@ -41,8 +42,10 @@
     "@univerjs/sheets-ui": "^0.1.7",
     "@univerjs/sheets-zen-editor": "^0.1.7",
     "@univerjs/ui": "^0.1.7",
+    "@wendellhu/redi": "^0.13.0",
     "defu": "^6.1.4",
-    "jszip": "^3.10.1"
+    "jszip": "^3.10.1",
+    "tslib": "^2.6.2"
   },
   "optionalDependencies": {
     "@univerjs-pro/exchange-wasm": "^1.1.0"

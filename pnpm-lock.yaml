@@ -32,6 +32,9 @@ dependencies:
   '@univerjs/find-replace':
     specifier: ^0.1.7
     version: 0.1.7(@univerjs/core@0.1.7)(@univerjs/design@0.1.7)(@univerjs/engine-render@0.1.7)(@univerjs/ui@0.1.7)(@wendellhu/redi@0.13.0)(react-dom@18.2.0)(react@18.2.0)(rxjs@7.8.1)
+  '@univerjs/icons':
+    specifier: ^0.1.44
+    version: 0.1.44(react-dom@18.2.0)(react@18.2.0)
   '@univerjs/protocol':
     specifier: ^0.1.18
     version: 0.1.18(@grpc/grpc-js@1.10.6)(rxjs@7.8.1)
@@ -65,12 +68,18 @@ dependencies:
   '@univerjs/ui':
     specifier: ^0.1.7
     version: 0.1.7(@univerjs/core@0.1.7)(@univerjs/design@0.1.7)(@univerjs/engine-formula@0.1.7)(@univerjs/engine-render@0.1.7)(@wendellhu/redi@0.13.0)(clsx@2.1.0)(react-dom@18.2.0)(react@18.2.0)(rxjs@7.8.1)(typescript@5.4.5)
+  '@wendellhu/redi':
+    specifier: ^0.13.0
+    version: 0.13.0
   defu:
     specifier: ^6.1.4
     version: 6.1.4
   jszip:
     specifier: ^3.10.1
     version: 3.10.1
+  tslib:
+    specifier: ^2.6.2
+    version: 2.6.2
 
 optionalDependencies:
   '@univerjs-pro/exchange-wasm':
@@ -1653,7 +1662,7 @@ packages:
     dev: false
 
   /@univerjs/sheets-conditional-formatting@0.1.7(@univerjs/core@0.1.7)(@univerjs/engine-formula@0.1.7)(@univerjs/engine-render@0.1.7)(@univerjs/sheets@0.1.7)(@wendellhu/redi@0.13.0)(rxjs@7.8.1):
-    resolution: {integrity: sha512-vaQkVKPBAgYqvuzdnwFFiHuKeUxI8cOKy5trBoG894vBVpEb4sdKNWunLGqsbTvp1gokGHhHHxiX/h85aoxiMA==}
+    resolution: {integrity: sha512-JV1HLPQh/vcAvrQJN7KSkOIyRoCXL2THTPvjk81N46I6pNece3IJq4GKnDO124RJ6iktTDPz1SBIR3wFwzDXXg==}
     engines: {node: '>=16.0.0', npm: '>=8.0.0'}
     peerDependencies:
       '@univerjs/core': 0.1.7

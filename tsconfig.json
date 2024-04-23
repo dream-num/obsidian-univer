@@ -11,6 +11,7 @@
       "DOM.Iterable",
       "WebWorker"
     ],
+    "experimentalDecorators": true,
     "baseUrl": ".",
     "module": "ESNext",
     "moduleResolution": "node",
@@ -26,7 +27,7 @@
     "inlineSourceMap": true,
     "inlineSources": true,
     "allowSyntheticDefaultImports": true,
-    "isolatedModules": true
+    "isolatedModules": false
   },
   "include": [
     "src/**/*"
