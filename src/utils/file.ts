@@ -51,7 +51,7 @@ export function transformToExcelBuffer(data: Record<string, any>): Promise<Array
   })
 }
 
-export function readFileHandler(file: Blob) {
+export function readFileHandler(file: Blob): Promise<ArrayBuffer> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader()
 
@@ -82,7 +82,7 @@ export function getUploadXlsxFile() {
   return new Promise((resolve: (file: File | null) => void, reject) => {
     const input = document.createElement('input')
     input.type = 'file'
-    input.accept = '.xlsx .xls .xlsm'
+    input.accept = '.xlsx'
 
     input.onchange = () => {
       if (input.files && input.files.length > 0)

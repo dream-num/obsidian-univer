@@ -19,7 +19,6 @@ import { UniverSheetsDataValidationPlugin } from '@univerjs/sheets-data-validati
 import type { IUniverUIConfig } from '@univerjs/ui/lib/types/ui-plugin'
 import { legacyLocales } from '@/utils/common'
 import type { UniverPluginSettings } from '@/types/setting'
-import ImportExcelButtonPlugin from '@/plugins/ImportCSVButton'
 import { ExchangePlugin } from '@/plugins/ExchangePlugin'
 
 export function sheetInit(
@@ -66,7 +65,6 @@ export function sheetInit(
   univer.registerPlugin(UniverSheetsFindReplacePlugin)
 
   univer.registerPlugin(ExchangePlugin)
-  univer.registerPlugin(ImportExcelButtonPlugin)
 
   return univer
 }

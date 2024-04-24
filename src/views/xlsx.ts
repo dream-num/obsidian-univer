@@ -1,4 +1,4 @@
-import type { IWorkbookData, Nullable, Univer, Workbook } from '@univerjs/core'
+import { type IWorkbookData, type Nullable, Tools, type Univer, UniverInstanceType, type Workbook } from '@univerjs/core'
 import type { TFile, WorkspaceLeaf } from 'obsidian'
 import { TextFileView } from 'obsidian'
 import { FUniver } from '@univerjs/facade'
@@ -62,7 +62,7 @@ export class XlsxTypeView extends TextFileView {
       this.workbookData = transformSnapshotJsonToWorkbookData(jsonData.snapshot, jsonData.sheetBlocks)
     }
 
-    const workbookData = this.workbookData || {} as IWorkbookData
+    const workbookData = this.workbookData || { id: Tools.generateRandomId(6) } as IWorkbookData
 
     if (workbookData.sheets) {
       const sheets = workbookData.sheets
@@ -75,7 +75,7 @@ export class XlsxTypeView extends TextFileView {
           sheet.rowCount = Math.max(99, sheet.rowCount)
       })
     }
-    this.workbook = this.univer.createUniverSheet(workbookData)
+    this.workbook = this.univer.createUnit(UniverInstanceType.SHEET, workbookData)
   }
 
   getViewType() {
