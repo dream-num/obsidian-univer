@@ -65,6 +65,7 @@ export class XlsxTypeView extends TextFileView {
     const workbookData = this.workbookData || { id: Tools.generateRandomId(6) } as IWorkbookData
     const filledWorkbookData = fillDefaultSheetBlock(workbookData)
     this.workbook = this.univer.createUnit(UniverInstanceType.SHEET, filledWorkbookData)
+    window.workbook = this.workbook
   }
 
   getViewType() {

@@ -83,7 +83,6 @@ export class USheetView extends TextFileView {
     else
       sheetData = { id: Tools.generateRandomId(6) } as IWorkbookData
     const filledWorkbookData = fillDefaultSheetBlock(sheetData)
-    window.workbookData = sheetData
     this.workbook = this.univer.createUnit(UniverInstanceType.SHEET, filledWorkbookData)
     window.workbook = this.workbook
     this.univer.registerPlugin(UniverSheetsConditionalFormattingUIPlugin)

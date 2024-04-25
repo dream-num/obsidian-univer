@@ -46,9 +46,9 @@ export class ExchangeService implements IExchangeService, IDisposable {
 
       if (!excel2WorkbookData.id)
         excel2WorkbookData.id = Tools.generateRandomId(6)
-
-      this._univerInstanceService.disposeUnit(window.workbookData.id)
-      window.univer?.createUnit(UniverInstanceType.SHEET, excel2WorkbookData)
+      this._univerInstanceService.disposeUnit(window.workbook.getUnitId())
+      this._univerInstanceService.createUnit(UniverInstanceType.SHEET, excel2WorkbookData)
+      // window.univer?.createUnit(UniverInstanceType.SHEET, excel2WorkbookData)
       // emitter.emit('exchange-upload', excel2WorkbookData)
     }
     else {
