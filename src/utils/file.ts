@@ -94,3 +94,18 @@ export function getUploadXlsxFile() {
     input.click()
   })
 }
+
+export async function downLoadExcel(excelBuffer: ArrayBuffer): Promise<void> {
+  const blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
+
+  const url = window.URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = `univer.xlsx`
+  document.body.appendChild(a)
+
+  a.click()
+
+  window.URL.revokeObjectURL(url)
+  document.body.removeChild(a)
+}

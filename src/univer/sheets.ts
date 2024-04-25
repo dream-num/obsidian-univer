@@ -66,5 +66,7 @@ export function sheetInit(
 
   univer.registerPlugin(ExchangePlugin)
 
+  window.univer = univer
+
   return univer
 }

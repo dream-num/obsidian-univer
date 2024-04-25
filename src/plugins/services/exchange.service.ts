@@ -1,12 +1,11 @@
 /* eslint-disable ts/no-redeclare */
-import { IUniverInstanceService, LocaleService, Tools } from '@univerjs/core'
+import { IUniverInstanceService, LocaleService, Tools, UniverInstanceType } from '@univerjs/core'
 import { IMessageService } from '@univerjs/ui'
 import type { IDisposable } from '@wendellhu/redi'
 import { Inject, createIdentifier } from '@wendellhu/redi'
 import { MessageType } from '@univerjs/design'
-import { emitter } from '@/main'
-import { transformSnapshotJsonToWorkbookData } from '@/utils/snapshot'
-import { readFileHandler } from '@/utils/file'
+import { transformSnapshotJsonToWorkbookData, transformWorkbookDataToSnapshotJson } from '@/utils/snapshot'
+import { downLoadExcel, readFileHandler, transformToExcelBuffer } from '@/utils/file'
 
 export interface IExchangeService {
   uploadJson: (file: File | string) => Promise<void>
@@ -48,7 +47,9 @@ export class ExchangeService implements IExchangeService, IDisposable {
       if (!excel2WorkbookData.id)
         excel2WorkbookData.id = Tools.generateRandomId(6)
 
-      emitter.emit('exchange-upload', excel2WorkbookData)
+      this._univerInstanceService.disposeUnit(window.workbookData.id)
+      window.univer?.createUnit(UniverInstanceType.SHEET, excel2WorkbookData)
+      // emitter.emit('exchange-upload', excel2WorkbookData)
     }
     else {
       this._messageService.show({
@@ -59,6 +60,13 @@ export class ExchangeService implements IExchangeService, IDisposable {
   }
 
   async downloadJson() {
+    const saveWorkbookData = window.workbook.save()
+    const snapshotJSON = await transformWorkbookDataToSnapshotJson(saveWorkbookData)
+    const snapshot = JSON.stringify(snapshotJSON)
+    // @ts-expect-error
+    const excelRaw = await window.univerProExchangeExport(snapshot)
+    const excelBuffer = await transformToExcelBuffer(excelRaw)
 
+    await downLoadExcel(excelBuffer)
   }
 }

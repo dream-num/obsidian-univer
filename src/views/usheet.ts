@@ -6,7 +6,7 @@ import { FUniver } from '@univerjs/facade'
 import { UniverSheetsConditionalFormattingUIPlugin } from '@univerjs/sheets-conditional-formatting-ui'
 import type { UniverPluginSettings } from '@/types/setting'
 import { sheetInit } from '@/univer/sheets'
-import { emitter } from '@/main'
+import { fillDefaultSheetBlock } from '@/utils/snapshot'
 
 export const Type = 'univer-sheet'
 
@@ -26,9 +26,9 @@ export class USheetView extends TextFileView {
     //   this.createUniverSheet(this.oriData, excel2WorkbookData)
     // })
 
-    emitter.on('exchange-upload', (excel2WorkbookData: IWorkbookData) => {
-      this.createUniverSheet(this.oriData, excel2WorkbookData)
-    })
+    // emitter.on('exchange-upload', (excel2WorkbookData: IWorkbookData) => {
+    //   this.createUniverSheet(this.oriData, excel2WorkbookData)
+    // })
   }
 
   getViewData(): string {
@@ -82,8 +82,10 @@ export class USheetView extends TextFileView {
       sheetData = JSON.parse(data)
     else
       sheetData = { id: Tools.generateRandomId(6) } as IWorkbookData
-
-    this.workbook = this.univer.createUnit(UniverInstanceType.SHEET, sheetData)
+    const filledWorkbookData = fillDefaultSheetBlock(sheetData)
+    window.workbookData = sheetData
+    this.workbook = this.univer.createUnit(UniverInstanceType.SHEET, filledWorkbookData)
+    window.workbook = this.workbook
     this.univer.registerPlugin(UniverSheetsConditionalFormattingUIPlugin)
     this.FUniver.onCommandExecuted(() => {
       this.requestSave()

@@ -5,7 +5,7 @@ import { FUniver } from '@univerjs/facade'
 import { UniverSheetsConditionalFormattingUIPlugin } from '@univerjs/sheets-conditional-formatting-ui'
 import type { UniverPluginSettings } from '@/types/setting'
 import { sheetInit } from '@/univer/sheets'
-import { transformSnapshotJsonToWorkbookData, transformWorkbookDataToSnapshotJson } from '@/utils/snapshot'
+import { fillDefaultSheetBlock, transformSnapshotJsonToWorkbookData, transformWorkbookDataToSnapshotJson } from '@/utils/snapshot'
 import { transformToExcelBuffer } from '@/utils/file'
 
 export const Type = 'univer-xlsx'
@@ -63,19 +63,8 @@ export class XlsxTypeView extends TextFileView {
     }
 
     const workbookData = this.workbookData || { id: Tools.generateRandomId(6) } as IWorkbookData
-
-    if (workbookData.sheets) {
-      const sheets = workbookData.sheets
-      Object.keys(sheets).forEach((sheetId) => {
-        const sheet = sheets[sheetId]
-        if (sheet.columnCount)
-          sheet.columnCount = Math.max(36, sheet.columnCount)
-
-        if (sheet.rowCount)
-          sheet.rowCount = Math.max(99, sheet.rowCount)
-      })
-    }
-    this.workbook = this.univer.createUnit(UniverInstanceType.SHEET, workbookData)
+    const filledWorkbookData = fillDefaultSheetBlock(workbookData)
+    this.workbook = this.univer.createUnit(UniverInstanceType.SHEET, filledWorkbookData)
   }
 
   getViewType() {

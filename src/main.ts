@@ -2,6 +2,7 @@ import './style/univer.css'
 import { defu } from 'defu'
 import { Plugin, addIcon } from 'obsidian'
 import mitt from 'mitt'
+import type { IWorkbookData, Univer, Workbook } from '@univerjs/core'
 import { Type as USheetType, USheetView } from './views/usheet'
 import { Type as XlsxType, XlsxTypeView } from './views/xlsx'
 import { Type as UDocType, UDocView } from './views/udoc'
@@ -55,4 +56,12 @@ export default class UniverPlugin extends Plugin {
   }
 
   async onunload() {}
+}
+
+declare global {
+  interface Window {
+    workbookData: IWorkbookData
+    univer: Univer
+    workbook: Workbook
+  }
 }
