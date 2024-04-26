@@ -1,4 +1,5 @@
 /* eslint-disable ts/no-redeclare */
+import type { Workbook } from '@univerjs/core'
 import { IUniverInstanceService, LocaleService, Tools, UniverInstanceType } from '@univerjs/core'
 import { IMessageService } from '@univerjs/ui'
 import type { IDisposable } from '@wendellhu/redi'
@@ -46,10 +47,9 @@ export class ExchangeService implements IExchangeService, IDisposable {
 
       if (!excel2WorkbookData.id)
         excel2WorkbookData.id = Tools.generateRandomId(6)
-      this._univerInstanceService.disposeUnit(window.workbook.getUnitId())
-      this._univerInstanceService.createUnit(UniverInstanceType.SHEET, excel2WorkbookData)
-      // window.univer?.createUnit(UniverInstanceType.SHEET, excel2WorkbookData)
-      // emitter.emit('exchange-upload', excel2WorkbookData)
+
+      this._univerInstanceService.disposeUnit(this._getUnitID())
+      this._univerInstanceService.createUnit(UniverInstanceType.UNIVER_SHEET, excel2WorkbookData)
     }
     else {
       this._messageService.show({
@@ -66,7 +66,14 @@ export class ExchangeService implements IExchangeService, IDisposable {
     // @ts-expect-error
     const excelRaw = await window.univerProExchangeExport(snapshot)
     const excelBuffer = await transformToExcelBuffer(excelRaw)
+    await downLoadExcel(excelBuffer, this._getUnitName())
+  }
 
-    await downLoadExcel(excelBuffer)
+  private _getUnitID(): string {
+    return this._univerInstanceService.getCurrentUnitForType<Workbook>(UniverInstanceType.UNIVER_SHEET)!.getUnitId()
+  }
+
+  private _getUnitName(): string {
+    return this._univerInstanceService.getCurrentUnitForType<Workbook>(UniverInstanceType.UNIVER_SHEET)!.getActiveSpreadsheet().getName() || 'univer'
   }
 }

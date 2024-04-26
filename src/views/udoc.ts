@@ -44,7 +44,7 @@ export class UDocView extends TextFileView {
     }
 
     setTimeout(() => {
-      this.documentModal = this.univer.createUnit(UniverInstanceType.DOC, docData)
+      this.documentModal = this.univer.createUnit(UniverInstanceType.UNIVER_DOC, docData)
     }, 0)
 
     this.FUniver.onCommandExecuted(() => {

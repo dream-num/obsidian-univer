@@ -3,7 +3,6 @@ import type { WorkspaceLeaf } from 'obsidian'
 import { Tools, UniverInstanceType } from '@univerjs/core'
 import { TextFileView } from 'obsidian'
 import { FUniver } from '@univerjs/facade'
-import { UniverSheetsConditionalFormattingUIPlugin } from '@univerjs/sheets-conditional-formatting-ui'
 import type { UniverPluginSettings } from '@/types/setting'
 import { sheetInit } from '@/univer/sheets'
 import { fillDefaultSheetBlock } from '@/utils/snapshot'
@@ -73,6 +72,7 @@ export class USheetView extends TextFileView {
       footer: true,
     }
     this.univer = sheetInit(options, this.settings)
+    window.univer = this.univer
     this.FUniver = FUniver.newAPI(this.univer)
     let sheetData: IWorkbookData
 
@@ -83,9 +83,8 @@ export class USheetView extends TextFileView {
     else
       sheetData = { id: Tools.generateRandomId(6) } as IWorkbookData
     const filledWorkbookData = fillDefaultSheetBlock(sheetData)
-    this.workbook = this.univer.createUnit(UniverInstanceType.SHEET, filledWorkbookData)
-    window.workbook = this.workbook
-    this.univer.registerPlugin(UniverSheetsConditionalFormattingUIPlugin)
+    this.workbook = this.univer.createUnit(UniverInstanceType.UNIVER_SHEET, filledWorkbookData)
+
     this.FUniver.onCommandExecuted(() => {
       this.requestSave()
     })
