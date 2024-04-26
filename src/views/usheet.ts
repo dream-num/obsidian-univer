@@ -6,6 +6,7 @@ import { FUniver } from '@univerjs/facade'
 import type { UniverPluginSettings } from '@/types/setting'
 import { sheetInit } from '@/univer/sheets'
 import { fillDefaultSheetBlock } from '@/utils/snapshot'
+import { emitter } from '@/main'
 
 export const Type = 'univer-sheet'
 
@@ -21,13 +22,10 @@ export class USheetView extends TextFileView {
   constructor(leaf: WorkspaceLeaf, settings: UniverPluginSettings) {
     super(leaf)
     this.settings = settings
-    // this.exchangeServiceInstance.exchangeUpload$.subscribe((excel2WorkbookData: IWorkbookData) => {
-    //   this.createUniverSheet(this.oriData, excel2WorkbookData)
-    // })
 
-    // emitter.on('exchange-upload', (excel2WorkbookData: IWorkbookData) => {
-    //   this.createUniverSheet(this.oriData, excel2WorkbookData)
-    // })
+    emitter.on('exchange-upload', (excel2WorkbookData: IWorkbookData) => {
+      this.createUniverSheet(this.oriData, excel2WorkbookData)
+    })
   }
 
   getViewData(): string {
