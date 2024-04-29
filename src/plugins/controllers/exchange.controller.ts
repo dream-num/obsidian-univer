@@ -3,7 +3,7 @@ import type { IMenuItemFactory } from '@univerjs/ui'
 import { IMenuService } from '@univerjs/ui'
 import { Inject, Injector } from '@wendellhu/redi'
 import { ExchangeClientDownloadJsonOperation, ExchangeClientUploadJsonOperation } from '../commands/exchange.operation'
-import { ExchangeDownloadJsonMenuItemFactory, ExchangeMenuItemFactory, ExchangeUploadJsonMenuItemFactory } from './menu'
+import { ExchangeDownloadJsonMenuItemFactory } from './menu'
 
 @OnLifecycle(LifecycleStages.Steady, ExchangeController)
 export class ExchangeController extends Disposable {
@@ -26,10 +26,11 @@ export class ExchangeController extends Disposable {
     })
   }
 
+  // TODO: release the menu item
   private _initMenus() {
     ([
-      ExchangeMenuItemFactory,
-      ExchangeUploadJsonMenuItemFactory,
+      // ExchangeMenuItemFactory,
+      // ExchangeUploadJsonMenuItemFactory,
       ExchangeDownloadJsonMenuItemFactory,
     ] as IMenuItemFactory[]).forEach((factory) => {
       this.disposeWithMe(this._menuService.addMenuItem(this._injector.invoke(factory)))

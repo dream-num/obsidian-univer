@@ -9,7 +9,6 @@ import { Type as UDocType, UDocView } from './views/udoc'
 import { ChooseTypeModal } from './modals/chooseType'
 import { SettingTab } from './modals/settingTab'
 import { univerIconSvg } from './utils/common'
-import { injectWasm } from './utils/wasm'
 import type { UniverPluginSettings } from '@/types/setting'
 
 export type ViewType = typeof USheetType | typeof UDocType
@@ -19,7 +18,7 @@ export default class UniverPlugin extends Plugin {
 
   async onload() {
     await this.loadSettings()
-    await injectWasm()
+    // await injectWasm()
 
     addIcon('univer', univerIconSvg)
 
@@ -47,7 +46,7 @@ export default class UniverPlugin extends Plugin {
     const loadedSettings = await this.loadData()
     this.settings = defu(loadedSettings, {
       language: 'EN',
-      isSupportXlsx: true,
+      isSupportXlsx: false,
     })
   }
 
