@@ -47,7 +47,7 @@ export default class UniverPlugin extends Plugin {
     const loadedSettings = await this.loadData()
     this.settings = defu(loadedSettings, {
       language: 'EN',
-      isSupportXlsx: false,
+      isSupportXlsx: true,
     })
   }
 

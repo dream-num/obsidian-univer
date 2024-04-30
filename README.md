@@ -35,6 +35,12 @@ Univer supports the English and Chinese. Now you can choose the language in the 
 
 ![img](assets/language.gif)
 
+## Xlsx format support feature
+
+Univer default supports xls、xlsm、xlsx in three formats to read and save. You can close this feature when you do not want to use it.
+
+![img](assets/excel.gif)
+
 ## How to install and use
 
 Text tutorial:
