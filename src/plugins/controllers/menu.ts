@@ -26,14 +26,12 @@ export function ExchangeUploadJsonMenuItemFactory(accessor: IAccessor): IMenuBut
   }
 }
 
-// TODO: change the exchange.downloadJson to a subitem
 export function ExchangeDownloadJsonMenuItemFactory(accessor: IAccessor): IMenuButtonItem<string> {
   return {
     id: ExchangeClientDownloadJsonOperation.id,
-    tooltip: 'exchange.downloadJson',
     type: MenuItemType.BUTTON,
-    // title: 'exchange.downloadJson',
+    title: 'exchange.downloadJson',
     icon: 'ExportSingle',
-    positions: [MenuPosition.TOOLBAR_START],
+    positions: [EXCHANGE_OPERATION_ID],
   }
 }

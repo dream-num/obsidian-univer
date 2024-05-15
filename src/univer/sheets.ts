@@ -58,7 +58,7 @@ export function sheetInit(
   //   workerURL: workerScriptURL,
   // } as IUniverRPCMainThreadConfig)
 
-  // find replace
+  // // find replace
   univer.registerPlugin(UniverFindReplacePlugin)
 
   // data validation
@@ -71,8 +71,6 @@ export function sheetInit(
   univer.registerPlugin(ExchangePlugin)
 
   univer.registerPlugin(UniverSheetsConditionalFormattingUIPlugin)
-
-  window.univer = univer
 
   return univer
 }

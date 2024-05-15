@@ -1,8 +1,6 @@
 import './style/univer.css'
 import { defu } from 'defu'
 import { Plugin, addIcon } from 'obsidian'
-import mitt from 'mitt'
-import type { Univer, Workbook } from '@univerjs/core'
 import { Type as USheetType, USheetView } from './views/usheet'
 import { Type as XlsxType, XlsxTypeView } from './views/xlsx'
 import { Type as UDocType, UDocView } from './views/udoc'
@@ -13,7 +11,6 @@ import { injectWasm } from './utils/wasm'
 import type { UniverPluginSettings } from '@/types/setting'
 
 export type ViewType = typeof USheetType | typeof UDocType
-export const emitter = mitt()
 export default class UniverPlugin extends Plugin {
   settings: UniverPluginSettings
 
@@ -56,11 +53,4 @@ export default class UniverPlugin extends Plugin {
   }
 
   async onunload() {}
-}
-
-declare global {
-  interface Window {
-    univer: Univer
-    workbook: Workbook
-  }
 }

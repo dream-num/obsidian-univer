@@ -7,7 +7,6 @@ import { Inject, createIdentifier } from '@wendellhu/redi'
 import { MessageType } from '@univerjs/design'
 import { transformSnapshotJsonToWorkbookData, transformWorkbookDataToSnapshotJson } from '@/utils/snapshot'
 import { downLoadExcel, readFileHandler, transformToExcelBuffer } from '@/utils/file'
-import { emitter } from '@/main'
 
 export interface IExchangeService {
   uploadJson: (file: File | string) => Promise<void>
@@ -47,11 +46,8 @@ export class ExchangeService implements IExchangeService, IDisposable {
 
       if (!excel2WorkbookData.id)
         excel2WorkbookData.id = Tools.generateRandomId(6)
-
-      emitter.emit('exchange-upload', excel2WorkbookData)
-      // TODO: unvierinstanceService disposeUnit
-      // this._univerInstanceService.disposeUnit(this._getUnitID())
-      // this._univerInstanceService.createUnit(UniverInstanceType.UNIVER_SHEET, excel2WorkbookData)
+      this._univerInstanceService.disposeUnit(this._getUnitID())
+      this._univerInstanceService.createUnit(UniverInstanceType.UNIVER_SHEET, excel2WorkbookData)
     }
     else {
       this._messageService.show({
