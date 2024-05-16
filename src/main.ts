@@ -13,10 +13,8 @@ import type { UniverPluginSettings } from '@/types/setting'
 
 export type ViewType = typeof USheetType | typeof UDocType
 export const emitter = mitt()
-
 export default class UniverPlugin extends Plugin {
   settings: UniverPluginSettings
-
   async onload() {
     await this.loadSettings()
     await injectWasm()

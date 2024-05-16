@@ -16,19 +16,12 @@ export interface IExchangeService {
 
 export const IExchangeService = createIdentifier<IExchangeService>('exchange-client.exchange-service')
 
-export interface IRequestService {
-  openModal: (content: string) => void
-  closeModal: () => void
-}
-
-export const IRequestService = createIdentifier<IRequestService>('exchange-client.request-service')
-
 export class ExchangeService implements IExchangeService, IDisposable {
   constructor(
-        @IUniverInstanceService private readonly _univerInstanceService: IUniverInstanceService,
+        @Inject(IUniverInstanceService) private _univerInstanceService: IUniverInstanceService,
         @IMessageService private readonly _messageService: IMessageService,
         @Inject(LocaleService) private readonly _localeService: LocaleService,
-  ) { }
+  ) {}
 
   dispose(): void {
   }
@@ -61,7 +54,7 @@ export class ExchangeService implements IExchangeService, IDisposable {
         this._univerInstanceService.createUnit(UniverInstanceType.UNIVER_SHEET, workbookData)
         const workbook = this._univerInstanceService.getCurrentUnitForType<Workbook>(UniverInstanceType.UNIVER_SHEET)
         emitter.emit('exchange-upload', workbook)
-      }, 1000)
+      }, 500)
     }
     else {
       this._messageService.show({
