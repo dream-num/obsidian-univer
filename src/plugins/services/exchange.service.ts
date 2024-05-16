@@ -46,15 +46,33 @@ export class ExchangeService implements IExchangeService, IDisposable {
         excel2WorkbookData.id = Tools.generateRandomId(6)
       const workbookData = fillDefaultSheetBlock(excel2WorkbookData)
       this._univerInstanceService.disposeUnit(this._getUnitID())
-      this._messageService.show({
-        type: MessageType.Warning,
-        content: this._localeService.t('exchange.uploading'),
+
+      const observer = new MutationObserver((mutationsList, observer) => {
+        for (const mutation of mutationsList) {
+          if (mutation.type === 'childList') {
+            const univerSheetBar = document.querySelector('.univer-sheet-bar')
+            if (!univerSheetBar)
+              return
+            observer.disconnect()
+
+            this._univerInstanceService.createUnit(UniverInstanceType.UNIVER_SHEET, workbookData)
+            const workbook = this._univerInstanceService.getCurrentUnitForType<Workbook>(UniverInstanceType.UNIVER_SHEET)
+            emitter.emit('exchange-upload', workbook)
+            break
+          }
+        }
       })
-      setTimeout(() => {
-        this._univerInstanceService.createUnit(UniverInstanceType.UNIVER_SHEET, workbookData)
-        const workbook = this._univerInstanceService.getCurrentUnitForType<Workbook>(UniverInstanceType.UNIVER_SHEET)
-        emitter.emit('exchange-upload', workbook)
-      }, 500)
+
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true,
+      })
+
+      // setTimeout(() => {
+      //   this._univerInstanceService.createUnit(UniverInstanceType.UNIVER_SHEET, workbookData)
+      //   const workbook = this._univerInstanceService.getCurrentUnitForType<Workbook>(UniverInstanceType.UNIVER_SHEET)
+      //   emitter.emit('exchange-upload', workbook)
+      // }, 500)
     }
     else {
       this._messageService.show({
