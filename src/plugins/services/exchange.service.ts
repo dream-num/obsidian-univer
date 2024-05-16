@@ -5,8 +5,9 @@ import { IMessageService } from '@univerjs/ui'
 import type { IDisposable } from '@wendellhu/redi'
 import { Inject, createIdentifier } from '@wendellhu/redi'
 import { MessageType } from '@univerjs/design'
-import { transformSnapshotJsonToWorkbookData, transformWorkbookDataToSnapshotJson } from '@/utils/snapshot'
+import { fillDefaultSheetBlock, transformSnapshotJsonToWorkbookData, transformWorkbookDataToSnapshotJson } from '@/utils/snapshot'
 import { downLoadExcel, readFileHandler, transformToExcelBuffer } from '@/utils/file'
+import { emitter } from '@/main'
 
 export interface IExchangeService {
   uploadJson: (file: File | string) => Promise<void>
@@ -15,10 +16,14 @@ export interface IExchangeService {
 
 export const IExchangeService = createIdentifier<IExchangeService>('exchange-client.exchange-service')
 
-export class ExchangeService implements IExchangeService, IDisposable {
-  // public _exchangeUpload$ = new BehaviorSubject<IWorkbookData>({} as IWorkbookData)
-  // readonly exchangeUpload$ = this._exchangeUpload$.asObservable()
+export interface IRequestService {
+  openModal: (content: string) => void
+  closeModal: () => void
+}
 
+export const IRequestService = createIdentifier<IRequestService>('exchange-client.request-service')
+
+export class ExchangeService implements IExchangeService, IDisposable {
   constructor(
         @IUniverInstanceService private readonly _univerInstanceService: IUniverInstanceService,
         @IMessageService private readonly _messageService: IMessageService,
@@ -46,8 +51,17 @@ export class ExchangeService implements IExchangeService, IDisposable {
 
       if (!excel2WorkbookData.id)
         excel2WorkbookData.id = Tools.generateRandomId(6)
+      const workbookData = fillDefaultSheetBlock(excel2WorkbookData)
       this._univerInstanceService.disposeUnit(this._getUnitID())
-      this._univerInstanceService.createUnit(UniverInstanceType.UNIVER_SHEET, excel2WorkbookData)
+      this._messageService.show({
+        type: MessageType.Warning,
+        content: this._localeService.t('exchange.uploading'),
+      })
+      setTimeout(() => {
+        this._univerInstanceService.createUnit(UniverInstanceType.UNIVER_SHEET, workbookData)
+        const workbook = this._univerInstanceService.getCurrentUnitForType<Workbook>(UniverInstanceType.UNIVER_SHEET)
+        emitter.emit('exchange-upload', workbook)
+      }, 1000)
     }
     else {
       this._messageService.show({
@@ -58,7 +72,7 @@ export class ExchangeService implements IExchangeService, IDisposable {
   }
 
   async downloadJson() {
-    const saveWorkbookData = this._univerInstanceService.getUniverSheetInstance(this._getUnitID())?.save()
+    const saveWorkbookData = this._univerInstanceService.getCurrentUnitForType<Workbook>(UniverInstanceType.UNIVER_SHEET)?.save()
     if (!saveWorkbookData)
       return
 

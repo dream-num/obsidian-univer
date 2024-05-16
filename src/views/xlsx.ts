@@ -7,6 +7,7 @@ import type { UniverPluginSettings } from '@/types/setting'
 import { sheetInit } from '@/univer/sheets'
 import { fillDefaultSheetBlock, transformSnapshotJsonToWorkbookData, transformWorkbookDataToSnapshotJson } from '@/utils/snapshot'
 import { transformToExcelBuffer } from '@/utils/file'
+import { emitter } from '@/main'
 
 export const Type = 'univer-xlsx'
 export class XlsxTypeView extends TextFileView {
@@ -17,10 +18,19 @@ export class XlsxTypeView extends TextFileView {
   FUniver: FUniver
   settings: UniverPluginSettings
   legacyFile: TFile
+  private isFileDeleted: boolean = false
 
   constructor(leaf: WorkspaceLeaf, settings: UniverPluginSettings) {
     super(leaf)
     this.settings = settings
+    emitter.on('exchange-upload', (_workbook: Workbook) => {
+      this.workbook = _workbook
+    })
+
+    this.app.vault.on('delete', (file: TFile) => {
+      if (file === this.file)
+        this.isFileDeleted = true
+    })
   }
 
   getViewData(): string {
@@ -64,7 +74,9 @@ export class XlsxTypeView extends TextFileView {
   }
 
   async onClose() {
-    await this.saveToExcel(this.file!, this.workbook)
+    if (!this.isFileDeleted)
+      await this.saveToExcel(this.file!, this.workbook)
+
     this.univer?.dispose()
     this.workbook?.dispose()
     this.contentEl.empty()

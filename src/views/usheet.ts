@@ -1,11 +1,12 @@
 import type { IWorkbookData, Univer, Workbook } from '@univerjs/core'
-import type { WorkspaceLeaf } from 'obsidian'
+import type { TFile, WorkspaceLeaf } from 'obsidian'
 import { Tools, UniverInstanceType } from '@univerjs/core'
 import { TextFileView } from 'obsidian'
 import { FUniver } from '@univerjs/facade'
 import type { UniverPluginSettings } from '@/types/setting'
 import { sheetInit } from '@/univer/sheets'
 import { fillDefaultSheetBlock } from '@/utils/snapshot'
+import { emitter } from '@/main'
 
 export const Type = 'univer-sheet'
 
@@ -16,11 +17,14 @@ export class USheetView extends TextFileView {
   FUniver: FUniver
   sheetData: IWorkbookData | object
   settings: UniverPluginSettings
-  oriData: string
+  legacyFile: TFile
 
   constructor(leaf: WorkspaceLeaf, settings: UniverPluginSettings) {
     super(leaf)
     this.settings = settings
+    emitter.on('exchange-upload', (_workbook: Workbook) => {
+      this.workbook = _workbook
+    })
   }
 
   getViewData(): string {
@@ -28,8 +32,6 @@ export class USheetView extends TextFileView {
   }
 
   setViewData(data: string, _: boolean): void {
-    this.domInit()
-    this.oriData = data
     this.createUniverSheet(data, null)
   }
 
@@ -58,6 +60,11 @@ export class USheetView extends TextFileView {
   createUniverSheet(data: string, excel2WorkbookData: IWorkbookData | null) {
     this.univer?.dispose()
     this.workbook?.dispose()
+    this.domInit()
+
+    if (!this.file)
+      return
+    this.legacyFile = this.file
 
     const options = {
       container: this.rootContainer,
