@@ -94,6 +94,6 @@ export class ExchangeService implements IExchangeService, IDisposable {
   }
 
   private _getUnitName(): string {
-    return this._univerInstanceService.getCurrentUnitForType<Workbook>(UniverInstanceType.UNIVER_SHEET)!.getActiveSpreadsheet().getName() || 'univer'
+    return this._univerInstanceService.getCurrentUnitForType<Workbook>(UniverInstanceType.UNIVER_SHEET)!.getActiveSpreadsheet().getName() || document.title.split(' - ')[0]
   }
 }
