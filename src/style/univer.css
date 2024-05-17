@@ -4,12 +4,6 @@
 }
 
 
-.excel-enable-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-}
 
 .excel-enable-btn {
   background-color: #007bff;
@@ -26,38 +20,6 @@
   background-color: #0056b3;
 }
 
-.excel-progress-bar {
-  justify-center: center;
-  width: 100%;
-  height: 20px;
-  background-color: #007bff;
-  border-radius: 5px;
-  margin-top: 10px;
-  position: relative;
-}
-
-.excel-progress-bar::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #0056b3;
-  border-radius: 5px;
-  animation: download 2s linear infinite;
-  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.1) 75%, transparent 75%, transparent);
-  background-size: 50px 50px; 
-}
-
-@keyframes download {
-  0% {
-      background-position: 0 0; 
-  }
-  100% {
-      background-position: 50px 0; 
-  }
-}
 
 .uproduct-container {
   margin: 0;
