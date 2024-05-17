@@ -29,7 +29,6 @@ export default class UniverPlugin extends Plugin {
 
     // add the setting tab
     this.addSettingTab(new SettingTab(this.app, this))
-
     // register view
     this.registerView(USheetType, leaf => new USheetView(leaf, this.settings))
     this.registerExtensions(['usheet'], USheetType)
