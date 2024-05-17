@@ -1,4 +1,4 @@
-import { type IWorkbookData, type Nullable, Tools, type Univer, UniverInstanceType, type Workbook } from '@univerjs/core'
+import { IUniverInstanceService, type IWorkbookData, type Nullable, Tools, type Univer, UniverInstanceType, type Workbook } from '@univerjs/core'
 import type { TFile, WorkspaceLeaf } from 'obsidian'
 import { TextFileView } from 'obsidian'
 import { FUniver } from '@univerjs/facade'
@@ -7,7 +7,6 @@ import type { UniverPluginSettings } from '@/types/setting'
 import { sheetInit } from '@/univer/sheets'
 import { fillDefaultSheetBlock, transformSnapshotJsonToWorkbookData, transformWorkbookDataToSnapshotJson } from '@/utils/snapshot'
 import { transformToExcelBuffer } from '@/utils/file'
-import { emitter } from '@/main'
 
 export const Type = 'univer-xlsx'
 export class XlsxTypeView extends TextFileView {
@@ -19,13 +18,11 @@ export class XlsxTypeView extends TextFileView {
   settings: UniverPluginSettings
   legacyFile: TFile
   private isFileDeleted: boolean = false
+  private univerInstanceService: IUniverInstanceService
 
   constructor(leaf: WorkspaceLeaf, settings: UniverPluginSettings) {
     super(leaf)
     this.settings = settings
-    emitter.on('exchange-upload', (_workbook: Workbook) => {
-      this.workbook = _workbook
-    })
 
     this.app.vault.on('delete', (file: TFile) => {
       if (file === this.file)
@@ -34,7 +31,8 @@ export class XlsxTypeView extends TextFileView {
   }
 
   getViewData(): string {
-    this.saveToExcel(this.legacyFile, this.workbook)
+    const workbook = this.univerInstanceService.getCurrentUnitForType<Workbook>(UniverInstanceType.UNIVER_SHEET)!
+    this.saveToExcel(this.legacyFile, workbook)
     return ''
   }
 
@@ -74,11 +72,11 @@ export class XlsxTypeView extends TextFileView {
   }
 
   async onClose() {
+    const workbook = this.univerInstanceService.getCurrentUnitForType<Workbook>(UniverInstanceType.UNIVER_SHEET)!
     if (!this.isFileDeleted)
-      await this.saveToExcel(this.file!, this.workbook)
+      await this.saveToExcel(this.file!, workbook)
 
     this.univer?.dispose()
-    this.workbook?.dispose()
     this.contentEl.empty()
   }
 
@@ -95,8 +93,6 @@ export class XlsxTypeView extends TextFileView {
   }
 
   async setUniverView() {
-    this.univer?.dispose()
-    this.workbook?.dispose()
     this.domInit()
 
     if (!this.file)
@@ -112,7 +108,7 @@ export class XlsxTypeView extends TextFileView {
     this.univer = sheetInit(options, this.settings)
 
     this.FUniver = FUniver.newAPI(this.univer)
-
+    this.univerInstanceService = this.univer.__getInjector().get(IUniverInstanceService)
     this.univer.registerPlugin(UniverSheetsConditionalFormattingUIPlugin)
 
     const raw = await this.app.vault.readBinary(this.legacyFile)
@@ -125,6 +121,6 @@ export class XlsxTypeView extends TextFileView {
 
     const workbookData = this.workbookData || { id: Tools.generateRandomId(6) } as IWorkbookData
     const filledWorkbookData = fillDefaultSheetBlock(workbookData)
-    this.workbook = this.univer.createUnit(UniverInstanceType.UNIVER_SHEET, filledWorkbookData)
+    this.univer.createUnit(UniverInstanceType.UNIVER_SHEET, filledWorkbookData)
   }
 }

@@ -1,12 +1,12 @@
 import type { IWorkbookData, Univer, Workbook } from '@univerjs/core'
+import { IUniverInstanceService, Tools, UniverInstanceType } from '@univerjs/core'
 import type { TFile, WorkspaceLeaf } from 'obsidian'
-import { Tools, UniverInstanceType } from '@univerjs/core'
+
 import { TextFileView } from 'obsidian'
 import { FUniver } from '@univerjs/facade'
 import type { UniverPluginSettings } from '@/types/setting'
 import { sheetInit } from '@/univer/sheets'
 import { fillDefaultSheetBlock } from '@/utils/snapshot'
-import { emitter } from '@/main'
 
 export const Type = 'univer-sheet'
 
@@ -18,17 +18,16 @@ export class USheetView extends TextFileView {
   sheetData: IWorkbookData | object
   settings: UniverPluginSettings
   legacyFile: TFile
+  private univerInstanceService: IUniverInstanceService
 
   constructor(leaf: WorkspaceLeaf, settings: UniverPluginSettings) {
     super(leaf)
     this.settings = settings
-    emitter.on('exchange-upload', (_workbook: Workbook) => {
-      this.workbook = _workbook
-    })
   }
 
   getViewData(): string {
-    return JSON.stringify(this.workbook.save())
+    const workbook = this.univerInstanceService.getCurrentUnitForType<Workbook>(UniverInstanceType.UNIVER_SHEET)!
+    return JSON.stringify(workbook.save())
   }
 
   setViewData(data: string, _: boolean): void {
@@ -53,13 +52,11 @@ export class USheetView extends TextFileView {
   async onClose() {
     this.requestSave()
     this.univer?.dispose()
-    this.workbook?.dispose()
     this.contentEl.empty()
   }
 
   createUniverSheet(data: string, excel2WorkbookData: IWorkbookData | null) {
     this.univer?.dispose()
-    this.workbook?.dispose()
     this.domInit()
 
     if (!this.file)
@@ -73,6 +70,7 @@ export class USheetView extends TextFileView {
     }
     this.univer = sheetInit(options, this.settings)
     this.FUniver = FUniver.newAPI(this.univer)
+    this.univerInstanceService = this.univer.__getInjector().get(IUniverInstanceService)
     let sheetData: IWorkbookData
 
     if (excel2WorkbookData)
@@ -82,7 +80,7 @@ export class USheetView extends TextFileView {
     else
       sheetData = { id: Tools.generateRandomId(6) } as IWorkbookData
     const filledWorkbookData = fillDefaultSheetBlock(sheetData)
-    this.workbook = this.univer.createUnit(UniverInstanceType.UNIVER_SHEET, filledWorkbookData)
+    this.univer.createUnit(UniverInstanceType.UNIVER_SHEET, filledWorkbookData)
 
     this.FUniver.onCommandExecuted(() => {
       this.requestSave()

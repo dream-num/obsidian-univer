@@ -7,7 +7,6 @@ import { Inject, createIdentifier } from '@wendellhu/redi'
 import { MessageType } from '@univerjs/design'
 import { fillDefaultSheetBlock, transformSnapshotJsonToWorkbookData, transformWorkbookDataToSnapshotJson } from '@/utils/snapshot'
 import { downLoadExcel, readFileHandler, transformToExcelBuffer } from '@/utils/file'
-import { emitter } from '@/main'
 
 export interface IExchangeService {
   uploadJson: (file: File | string) => Promise<void>
@@ -46,15 +45,15 @@ export class ExchangeService implements IExchangeService, IDisposable {
         excel2WorkbookData.id = Tools.generateRandomId(6)
 
       const workbookData = fillDefaultSheetBlock(excel2WorkbookData)
+      const previousSheetBarCount = document.querySelectorAll('.univer-sheet-bar').length
       const observer = new MutationObserver((mutationsList, observer) => {
         for (const mutation of mutationsList) {
           if (mutation.type === 'childList') {
-            const univerSheetBar = document.querySelector('.univer-sheet-bar')
-            if (!univerSheetBar) {
+            const currentUniverSheetBar = document.querySelectorAll('.univer-sheet-bar').length
+            if (currentUniverSheetBar !== previousSheetBarCount) {
               observer.disconnect()
               this._univerInstanceService.createUnit(UniverInstanceType.UNIVER_SHEET, workbookData)
               const workbook = this._univerInstanceService.getCurrentUnitForType<Workbook>(UniverInstanceType.UNIVER_SHEET)
-              emitter.emit('exchange-upload', workbook)
               break
             }
           }
