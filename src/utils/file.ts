@@ -51,7 +51,7 @@ export function transformToExcelBuffer(data: Record<string, any>): Promise<Array
   })
 }
 
-function readFileHandler(file: Blob) {
+export function readFileHandler(file: Blob): Promise<ArrayBuffer> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader()
 
@@ -76,4 +76,36 @@ function getFileType(suffix: string) {
     default:
       return SheetType
   }
+}
+
+export function getUploadXlsxFile() {
+  return new Promise((resolve: (file: File | null) => void, reject) => {
+    const input = document.createElement('input')
+    input.type = 'file'
+    input.accept = '.xlsx'
+
+    input.onchange = () => {
+      if (input.files && input.files.length > 0)
+        resolve(input.files[0])
+      else
+        reject(new Error('No file selected'))
+    }
+
+    input.click()
+  })
+}
+
+export async function downLoadExcel(excelBuffer: ArrayBuffer, fileName: string): Promise<void> {
+  const blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
+
+  const url = window.URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = `${fileName}.xlsx`
+  document.body.appendChild(a)
+
+  a.click()
+
+  window.URL.revokeObjectURL(url)
+  document.body.removeChild(a)
 }

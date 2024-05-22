@@ -1,10 +1,12 @@
 import type { IWorkbookData, Univer, Workbook } from '@univerjs/core'
-import type { WorkspaceLeaf } from 'obsidian'
+import { IUniverInstanceService, Tools, UniverInstanceType } from '@univerjs/core'
+import type { TFile, WorkspaceLeaf } from 'obsidian'
+
 import { TextFileView } from 'obsidian'
 import { FUniver } from '@univerjs/facade'
-import { UniverSheetsConditionalFormattingUIPlugin } from '@univerjs/sheets-conditional-formatting-ui'
 import type { UniverPluginSettings } from '@/types/setting'
 import { sheetInit } from '@/univer/sheets'
+import { fillDefaultSheetBlock } from '@/utils/snapshot'
 
 export const Type = 'univer-sheet'
 
@@ -15,6 +17,8 @@ export class USheetView extends TextFileView {
   FUniver: FUniver
   sheetData: IWorkbookData | object
   settings: UniverPluginSettings
+  legacyFile: TFile
+  private univerInstanceService: IUniverInstanceService
 
   constructor(leaf: WorkspaceLeaf, settings: UniverPluginSettings) {
     super(leaf)
@@ -22,35 +26,12 @@ export class USheetView extends TextFileView {
   }
 
   getViewData(): string {
-    return JSON.stringify(this.workbook.save())
+    const workbook = this.univerInstanceService.getCurrentUnitForType<Workbook>(UniverInstanceType.UNIVER_SHEET)!
+    return JSON.stringify(workbook.save())
   }
 
   setViewData(data: string, _: boolean): void {
-    this.domInit()
-    this.univer?.dispose()
-    this.workbook?.dispose()
-
-    const options = {
-      container: this.rootContainer,
-      header: true,
-      footer: true,
-    }
-    this.univer = sheetInit(options, this.settings)
-
-    this.FUniver = FUniver.newAPI(this.univer)
-    let sheetData: IWorkbookData
-    try {
-      sheetData = JSON.parse(data)
-    }
-    catch (err) {
-      sheetData = {} as IWorkbookData
-    }
-
-    this.workbook = this.univer.createUniverSheet(sheetData)
-    this.univer.registerPlugin(UniverSheetsConditionalFormattingUIPlugin)
-    this.FUniver.onCommandExecuted(() => {
-      this.requestSave()
-    })
+    this.createUniverSheet(data, null)
   }
 
   getViewType() {
@@ -71,7 +52,38 @@ export class USheetView extends TextFileView {
   async onClose() {
     this.requestSave()
     this.univer?.dispose()
-    this.workbook?.dispose()
     this.contentEl.empty()
+  }
+
+  createUniverSheet(data: string, excel2WorkbookData: IWorkbookData | null) {
+    this.univer?.dispose()
+    this.domInit()
+
+    if (!this.file)
+      return
+    this.legacyFile = this.file
+
+    const options = {
+      container: this.rootContainer,
+      header: true,
+      footer: true,
+    }
+    this.univer = sheetInit(options, this.settings)
+    this.FUniver = FUniver.newAPI(this.univer)
+    this.univerInstanceService = this.univer.__getInjector().get(IUniverInstanceService)
+    let sheetData: IWorkbookData
+
+    if (excel2WorkbookData)
+      sheetData = excel2WorkbookData
+    else if (data)
+      sheetData = JSON.parse(data)
+    else
+      sheetData = { id: Tools.generateRandomId(6) } as IWorkbookData
+    const filledWorkbookData = fillDefaultSheetBlock(sheetData)
+    this.univer.createUnit(UniverInstanceType.UNIVER_SHEET, filledWorkbookData)
+
+    this.FUniver.onCommandExecuted(() => {
+      this.requestSave()
+    })
   }
 }

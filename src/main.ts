@@ -11,10 +11,8 @@ import { injectWasm } from './utils/wasm'
 import type { UniverPluginSettings } from '@/types/setting'
 
 export type ViewType = typeof USheetType | typeof UDocType
-
 export default class UniverPlugin extends Plugin {
   settings: UniverPluginSettings
-
   async onload() {
     await this.loadSettings()
     await injectWasm()
@@ -29,7 +27,6 @@ export default class UniverPlugin extends Plugin {
 
     // add the setting tab
     this.addSettingTab(new SettingTab(this.app, this))
-
     // register view
     this.registerView(USheetType, leaf => new USheetView(leaf, this.settings))
     this.registerExtensions(['usheet'], USheetType)

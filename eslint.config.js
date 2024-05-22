@@ -6,5 +6,6 @@ export default antfu({
   rules: {
     'no-new': 'off',
     'ts/ban-ts-comment': 'off',
+    'unused-imports/no-unused-vars': 'off',
   },
 })

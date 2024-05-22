@@ -3,6 +3,24 @@
   --ctx_menu_y: 0px;
 }
 
+
+
+.excel-enable-btn {
+  background-color: #007bff;
+  color: #fff;
+  padding: 5px 10px;
+  margin: 10px 10px 10px 0px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.excel-enable-btn:hover {
+  background-color: #0056b3;
+}
+
+
 .uproduct-container {
   margin: 0;
   padding: 0;

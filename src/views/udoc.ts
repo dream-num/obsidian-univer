@@ -1,5 +1,5 @@
 import type { DocumentDataModel, IDocumentData, Univer } from '@univerjs/core'
-import { Tools } from '@univerjs/core'
+import { Tools, UniverInstanceType } from '@univerjs/core'
 import { FUniver } from '@univerjs/facade'
 import type { WorkspaceLeaf } from 'obsidian'
 import { TextFileView } from 'obsidian'
@@ -9,7 +9,7 @@ import { docInit } from '@/univer/docs'
 export const Type = 'univer-doc'
 
 export class UDocView extends TextFileView {
-  documentData: DocumentDataModel
+  documentModal: DocumentDataModel
   univer: Univer
   FUniver: FUniver
   rootContainer: HTMLDivElement
@@ -21,7 +21,7 @@ export class UDocView extends TextFileView {
   }
 
   getViewData(): string {
-    return JSON.stringify(Tools.deepClone(this.documentData.getSnapshot()))
+    return JSON.stringify(Tools.deepClone(this.documentModal.getSnapshot()))
   }
 
   setViewData(data: string): void {
@@ -34,17 +34,17 @@ export class UDocView extends TextFileView {
     this.univer = docInit(option, this.settings)
     this.FUniver = FUniver.newAPI(this.univer)
 
-    let docData: DocumentDataModel
+    let docData: IDocumentData
 
     try {
       docData = JSON.parse(data)
     }
     catch {
-      docData = {} as DocumentDataModel
+      docData = {} as IDocumentData
     }
 
     setTimeout(() => {
-      this.documentData = this.univer.createUniverDoc(docData)
+      this.documentModal = this.univer.createUnit(UniverInstanceType.UNIVER_DOC, docData)
     }, 0)
 
     this.FUniver.onCommandExecuted(() => {
