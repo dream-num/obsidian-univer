@@ -60,19 +60,27 @@ export class ChooseTypeModal extends Modal {
   }
 
   getModalText(): ModalText {
-    if (this.settings.language === 'EN') {
+    if (this.settings.language === 'RU') {
       return {
-        title: 'Please choose the type of file you want to create',
-        docBtn: 'Univer Doc',
-        sheetBtn: 'Univer Sheet',
+        title: 'Выберите тип создаваемого файла',
+        docBtn: 'Univer Документ',
+        sheetBtn: 'Univer Таблица',
+        excelBtn: 'Excel',
+      }
+    }
+    else if (this.settings.language === 'ZH') {
+      return {
+        title: '请选择您要创建的文件类型',
+        docBtn: 'Univer 文档',
+        sheetBtn: 'Univer 表格',
         excelBtn: 'Excel',
       }
     }
     else {
       return {
-        title: '请选择您要创建的文件类型',
-        docBtn: 'Univer 文档',
-        sheetBtn: 'Univer 表格',
+        title: 'Please choose the type of file you want to create',
+        docBtn: 'Univer Doc',
+        sheetBtn: 'Univer Sheet',
         excelBtn: 'Excel',
       }
     }

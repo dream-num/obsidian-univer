@@ -9,6 +9,8 @@ import { enUS as UniverSheetsDataValidationEnUS } from '@univerjs/sheets-data-va
 import { enUS as UniverSheetsConditionalFormattingUIEnUS } from '@univerjs/sheets-conditional-formatting-ui'
 import { enUS as UniverSheetsZenEditorEnUS } from '@univerjs/sheets-zen-editor'
 import { enUS as UniverUiEnUS } from '@univerjs/ui'
+import { enUS, ruRU, zhCN } from 'univer:locales'
+import type { UniverPluginSettings } from '@/types/setting'
 
 export const legacyLocales = {
   [LocaleType.EN_US]: Tools.deepMerge(
@@ -23,6 +25,12 @@ export const legacyLocales = {
     UniverUiEnUS,
     UniverDesignEnUS,
   ),
+}
+
+export const univerLocales = {
+  [LocaleType.EN_US]: enUS,
+  [LocaleType.ZH_CN]: zhCN,
+  [LocaleType.RU_RU]: ruRU,
 }
 
 export const univerIconSvg = `
@@ -42,3 +50,16 @@ export const univerIconSvg = `
 </clipPath>
 </defs>
 `
+
+export function getLanguage(setting: UniverPluginSettings) {
+  switch (setting.language) {
+    case 'EN':
+      return LocaleType.EN_US
+    case 'ZH':
+      return LocaleType.ZH_CN
+    case 'RU':
+      return LocaleType.RU_RU
+    default:
+      return LocaleType.EN_US
+  }
+}

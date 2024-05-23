@@ -1,6 +1,5 @@
 import {
   LocaleService,
-
   Plugin,
   UniverInstanceType,
 } from '@univerjs/core'
@@ -9,8 +8,7 @@ import type { Dependency } from '@wendellhu/redi'
 import { Inject, Injector } from '@wendellhu/redi'
 import { ExchangeController } from './controllers/exchange.controller'
 import { ExchangeService, IExchangeService } from './services/exchange.service'
-import zhCN from './locale/zh-CN'
-import enUS from './locale/en-US'
+import { enUS, ruRU, zhCN } from './locale/index'
 
 export class ExchangePlugin extends Plugin {
   static override type = UniverInstanceType.UNIVER_SHEET
@@ -26,6 +24,7 @@ export class ExchangePlugin extends Plugin {
     this._localeService.load({
       zhCN,
       enUS,
+      ruRU,
     })
 
     const dependencies: Dependency[] = [

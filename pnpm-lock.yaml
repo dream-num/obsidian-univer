@@ -104,8 +104,8 @@ importers:
         specifier: ^20.12.12
         version: 20.12.12
       '@univerjs/vite-plugin':
-        specifier: ^0.3.3
-        version: 0.3.3
+        specifier: ^0.3.5
+        version: 0.3.5
       builtin-modules:
         specifier: ^3.3.0
         version: 3.3.0
@@ -1084,8 +1084,8 @@ packages:
       react-dom: ^16.9.0 || ^17.0.0 || ^18.0.0
       rxjs: '>=7.0.0'
 
-  '@univerjs/vite-plugin@0.3.3':
-    resolution: {integrity: sha512-cxT5sqOiT0Dh/63BmzoL+c4MGi+E3nacJLdn51/c3XarDVC/CCgf50vOGQ/k66yqBBMPa+3w9IESxl8FrrHe0A==}
+  '@univerjs/vite-plugin@0.3.5':
+    resolution: {integrity: sha512-AZP6V3pbLnuEAvJ0NttKe7l8YADHvELfXDvHTGfnt6fEZfvRdtj6AbQl7E18QQ/yxuXYSJiq7uGb6pNOIE3Naw==}
     engines: {node: '>=16.0.0', npm: '>=8.0.0'}
 
   '@vue/compiler-core@3.4.27':
@@ -4821,7 +4821,7 @@ snapshots:
     transitivePeerDependencies:
       - typescript
 
-  '@univerjs/vite-plugin@0.3.3': {}
+  '@univerjs/vite-plugin@0.3.5': {}
 
   '@vue/compiler-core@3.4.27':
     dependencies:

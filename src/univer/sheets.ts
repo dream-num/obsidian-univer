@@ -1,4 +1,4 @@
-import { LocaleType, Univer } from '@univerjs/core'
+import { Univer } from '@univerjs/core'
 import { defaultTheme } from '@univerjs/design'
 import { UniverDocsPlugin } from '@univerjs/docs'
 import { UniverDocsUIPlugin } from '@univerjs/docs-ui'
@@ -19,7 +19,7 @@ import { UniverDataValidationPlugin } from '@univerjs/data-validation'
 import { UniverSheetsDataValidationPlugin } from '@univerjs/sheets-data-validation'
 import { UniverSheetsConditionalFormattingUIPlugin } from '@univerjs/sheets-conditional-formatting-ui'
 import type { IUniverUIConfig } from '@univerjs/ui/lib/types/ui-plugin'
-import { legacyLocales } from '@/utils/common'
+import { getLanguage, univerLocales } from '@/utils/common'
 import type { UniverPluginSettings } from '@/types/setting'
 import { ExchangePlugin } from '@/plugins/ExchangePlugin'
 
@@ -29,8 +29,8 @@ export function sheetInit(
 ) {
   const univer = new Univer({
     theme: defaultTheme,
-    locale: settings.language === 'EN' ? LocaleType.EN_US : LocaleType.ZH_CN,
-    locales: legacyLocales,
+    locale: getLanguage(settings),
+    locales: univerLocales,
   })
 
   univer.registerPlugin(UniverDocsPlugin, {

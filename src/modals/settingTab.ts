@@ -23,9 +23,10 @@ export class SettingTab extends PluginSettingTab {
           .addOptions({
             EN: 'English',
             ZH: '简体中文',
+            RU: 'Русский',
           })
           .setValue(this.plugin.settings.language)
-          .onChange(async (value: 'ZH' | 'EN') => {
+          .onChange(async (value: 'ZH' | 'EN' | 'RU') => {
             this.plugin.settings.language = value
             await this.plugin.saveSettings()
           })
