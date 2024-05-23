@@ -1,4 +1,4 @@
-import { LocaleType, Univer } from '@univerjs/core'
+import { Univer } from '@univerjs/core'
 import { defaultTheme } from '@univerjs/design'
 import { UniverDocsPlugin } from '@univerjs/docs'
 import { UniverDocsUIPlugin } from '@univerjs/docs-ui'
@@ -6,7 +6,7 @@ import { UniverFormulaEnginePlugin } from '@univerjs/engine-formula'
 import { UniverRenderEnginePlugin } from '@univerjs/engine-render'
 import { UniverUIPlugin } from '@univerjs/ui'
 import type { IUniverUIConfig } from '@univerjs/ui/lib/types/ui-plugin'
-import { legacyLocales } from '@/utils/common'
+import { getLanguage, univerLocales } from '@/utils/common'
 import type { UniverPluginSettings } from '@/types/setting'
 
 export function docInit(
@@ -15,8 +15,8 @@ export function docInit(
 ) {
   const univer = new Univer({
     theme: defaultTheme,
-    locale: settings.language === 'EN' ? LocaleType.EN_US : LocaleType.ZH_CN,
-    locales: legacyLocales,
+    locale: getLanguage(settings),
+    locales: univerLocales,
   })
 
   univer.registerPlugin(UniverRenderEnginePlugin)

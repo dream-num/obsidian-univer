@@ -56,7 +56,7 @@
     "@antfu/eslint-config": "^2.13.3",
     "@release-it/conventional-changelog": "^8.0.1",
     "@types/node": "^20.12.12",
-    "@univerjs/vite-plugin": "^0.3.3",
+    "@univerjs/vite-plugin": "^0.3.5",
     "builtin-modules": "^3.3.0",
     "dotenv": "^16.4.5",
     "eslint": "^8.57.0",
