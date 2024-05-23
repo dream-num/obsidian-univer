@@ -1,5 +1,14 @@
 
 
+## [1.0.3](https://github.com/dream-num/obsidian-univer/compare/1.0.2...1.0.3) (2024-05-23)
+
+
+### Features
+
+* add the file exchange function ([#73](https://github.com/dream-num/obsidian-univer/issues/73)) ([344c583](https://github.com/dream-num/obsidian-univer/commit/344c583e27d0f167a2f885a99ade98f9543cfb87))
+* add the new excel feature ([#63](https://github.com/dream-num/obsidian-univer/issues/63)) ([436c15f](https://github.com/dream-num/obsidian-univer/commit/436c15f07bb9c617db1b781c76b8d5035154243e))
+* add the russia i18n ([#75](https://github.com/dream-num/obsidian-univer/issues/75)) ([4b242a1](https://github.com/dream-num/obsidian-univer/commit/4b242a1323102a1d2652d8d7b5c4c19b86ab3e70))
+
 ## [1.0.2](https://github.com/dream-num/obsidian-univer/compare/1.0.1...1.0.2) (2024-04-22)
 
 
