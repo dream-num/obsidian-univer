@@ -1,7 +1,7 @@
 {
   "id": "univer",
   "name": "Univer",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "minAppVersion": "1.5.11",
   "description": "Create, edit, and view spreadsheets and documents in various formats like Excel and Word directly within your knowledge base.",
   "author": "DreamNum",
