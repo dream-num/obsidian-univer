@@ -1,31 +1,6 @@
-import { LocaleType, Tools } from '@univerjs/core'
-import { enUS as UniverDesignEnUS } from '@univerjs/design'
-import { enUS as UniverDocsUIEnUS } from '@univerjs/docs-ui'
-import { enUS as UniverSheetsEnUS } from '@univerjs/sheets'
-import { enUS as UniverSheetsUIEnUS } from '@univerjs/sheets-ui'
-import { enUS as UniverFindReplaceEnUS } from '@univerjs/find-replace'
-import { enUS as UniverSheetsFormulaEnUS } from '@univerjs/sheets-formula'
-import { enUS as UniverSheetsDataValidationEnUS } from '@univerjs/sheets-data-validation'
-import { enUS as UniverSheetsConditionalFormattingUIEnUS } from '@univerjs/sheets-conditional-formatting-ui'
-import { enUS as UniverSheetsZenEditorEnUS } from '@univerjs/sheets-zen-editor'
-import { enUS as UniverUiEnUS } from '@univerjs/ui'
+import { LocaleType } from '@univerjs/core'
 import { enUS, ruRU, zhCN } from 'univer:locales'
 import type { UniverPluginSettings } from '@/types/setting'
-
-export const legacyLocales = {
-  [LocaleType.EN_US]: Tools.deepMerge(
-    UniverSheetsEnUS,
-    UniverDocsUIEnUS,
-    UniverFindReplaceEnUS,
-    UniverSheetsUIEnUS,
-    UniverSheetsFormulaEnUS,
-    UniverSheetsDataValidationEnUS,
-    UniverSheetsConditionalFormattingUIEnUS,
-    UniverSheetsZenEditorEnUS,
-    UniverUiEnUS,
-    UniverDesignEnUS,
-  ),
-}
 
 export const univerLocales = {
   [LocaleType.EN_US]: enUS,
