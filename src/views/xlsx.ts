@@ -2,7 +2,6 @@ import { IUniverInstanceService, type IWorkbookData, type Nullable, Tools, type 
 import type { TFile, WorkspaceLeaf } from 'obsidian'
 import { TextFileView } from 'obsidian'
 import { FUniver } from '@univerjs/facade'
-import { UniverSheetsConditionalFormattingUIPlugin } from '@univerjs/sheets-conditional-formatting-ui'
 import type { UniverPluginSettings } from '@/types/setting'
 import { sheetInit } from '@/univer/sheets'
 import { fillDefaultSheetBlock, transformSnapshotJsonToWorkbookData, transformWorkbookDataToSnapshotJson } from '@/utils/snapshot'
@@ -109,7 +108,6 @@ export class XlsxTypeView extends TextFileView {
 
     this.FUniver = FUniver.newAPI(this.univer)
     this.univerInstanceService = this.univer.__getInjector().get(IUniverInstanceService)
-    this.univer.registerPlugin(UniverSheetsConditionalFormattingUIPlugin)
 
     const raw = await this.app.vault.readBinary(this.legacyFile)
     if (raw.byteLength !== 0) {
