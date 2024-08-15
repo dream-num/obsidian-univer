@@ -1,11 +1,13 @@
 import { LocaleType } from '@univerjs/core'
-import { enUS, ruRU, zhCN } from 'univer:locales'
+import { enUS, ruRU, viVN, zhCN, zhTW } from 'univer:locales'
 import type { UniverPluginSettings } from '@/types/setting'
 
 export const univerLocales = {
   [LocaleType.EN_US]: enUS,
   [LocaleType.ZH_CN]: zhCN,
   [LocaleType.RU_RU]: ruRU,
+  [LocaleType.ZH_TW]: zhTW,
+  [LocaleType.VI_VN]: viVN,
 }
 
 export const univerIconSvg = `
@@ -34,6 +36,10 @@ export function getLanguage(setting: UniverPluginSettings) {
       return LocaleType.ZH_CN
     case 'RU':
       return LocaleType.RU_RU
+    case 'VN':
+      return LocaleType.VI_VN
+    case 'TW':
+      return LocaleType.ZH_TW
     default:
       return LocaleType.EN_US
   }

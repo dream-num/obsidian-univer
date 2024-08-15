@@ -56,6 +56,7 @@ export class ChooseTypeModal extends Modal {
   }
 
   onClose(): void {
+  // 清空 contentEl 元素的内容
     this.contentEl.empty()
   }
 
@@ -73,6 +74,22 @@ export class ChooseTypeModal extends Modal {
         title: '请选择您要创建的文件类型',
         docBtn: 'Univer 文档',
         sheetBtn: 'Univer 表格',
+        excelBtn: 'Excel',
+      }
+    }
+    else if (this.settings.language === 'TW') {
+      return {
+        title: '請選擇要建立的文件類型',
+        docBtn: 'Univer 文檔',
+        sheetBtn: 'Univer 表格',
+        excelBtn: 'Excel',
+      }
+    }
+    else if (this.settings.language === 'VN') {
+      return {
+        title: 'Vui lòng chọn loại tệp bạn muốn tạo',
+        docBtn: 'Univer Tài liệu',
+        sheetBtn: 'Univer Bảng',
         excelBtn: 'Excel',
       }
     }

@@ -1,7 +1,6 @@
-import { Disposable, ICommandService, LifecycleStages, OnLifecycle } from '@univerjs/core'
+import { Disposable, ICommandService, Inject, Injector, LifecycleStages, OnLifecycle } from '@univerjs/core'
 import type { IMenuItemFactory } from '@univerjs/ui'
 import { IMenuService } from '@univerjs/ui'
-import { Inject, Injector } from '@wendellhu/redi'
 import { ExchangeClientDownloadJsonOperation, ExchangeClientUploadJsonOperation } from '../commands/exchange.operation'
 import { ExchangeDownloadJsonMenuItemFactory, ExchangeMenuItemFactory, ExchangeUploadJsonMenuItemFactory } from './menu'
 
@@ -32,7 +31,7 @@ export class ExchangeController extends Disposable {
       ExchangeUploadJsonMenuItemFactory,
       ExchangeDownloadJsonMenuItemFactory,
     ] as IMenuItemFactory[]).forEach((factory) => {
-      this.disposeWithMe(this._menuService.addMenuItem(this._injector.invoke(factory)))
+      this.disposeWithMe(this._menuService.addMenuItem(this._injector.invoke(factory), {}))
     })
   }
 }

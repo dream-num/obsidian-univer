@@ -24,6 +24,7 @@ import { UniverFormulaEnginePlugin } from '@univerjs/engine-formula'
 import { UniverDocsThreadCommentUIPlugin } from '@univerjs/docs-thread-comment-ui'
 import { UniverDocsHyperLinkUIPlugin } from '@univerjs/docs-hyper-link-ui'
 import type { IUniverUIConfig } from '@univerjs/ui/lib/types/controllers/ui/ui.controller'
+// import { UniverDocsDrawingUIPlugin } from '@univerjs/docs-drawing-ui'
 import { getLanguage, univerLocales } from '@/utils/common'
 import type { UniverPluginSettings } from '@/types/setting'
 

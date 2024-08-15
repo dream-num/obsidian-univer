@@ -1,4 +1,4 @@
 export interface UniverPluginSettings {
-  language: 'ZH' | 'EN' | 'RU'
+  language: 'ZH' | 'EN' | 'RU' | 'VN' | 'TW'
   isSupportXlsx: boolean
 }

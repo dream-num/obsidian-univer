@@ -1,6 +1,6 @@
 import type { IMenuButtonItem, IMenuSelectorItem } from '@univerjs/ui'
 import { MenuGroup, MenuItemType, MenuPosition } from '@univerjs/ui'
-import type { IAccessor } from '@wendellhu/redi'
+import type { IAccessor } from '@univerjs/core'
 import { ExchangeClientDownloadJsonOperation, ExchangeClientUploadJsonOperation } from '@/plugins/commands/exchange.operation'
 
 const EXCHANGE_OPERATION_ID = 'exchange-client.operation.exchange'
