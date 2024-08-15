@@ -1,5 +1,7 @@
 
 
+## [1.1.3](https://github.com/dream-num/obsidian-univer/compare/1.1.2...1.1.3) (2024-08-15)
+
 ## [1.1.2](https://github.com/dream-num/obsidian-univer/compare/1.1.1...1.1.2) (2024-07-15)
 
 ## [1.1.1](https://github.com/dream-num/obsidian-univer/compare/1.1.0...1.1.1) (2024-07-09)
