@@ -1,9 +1,7 @@
 /* eslint-disable ts/no-redeclare */
-import type { Workbook } from '@univerjs/core'
-import { IUniverInstanceService, LocaleService, Tools, UniverInstanceType } from '@univerjs/core'
+import type { IDisposable, Workbook } from '@univerjs/core'
+import { IUniverInstanceService, Inject, LocaleService, Tools, UniverInstanceType, createIdentifier, generateRandomId } from '@univerjs/core'
 import { IMessageService } from '@univerjs/ui'
-import type { IDisposable } from '@wendellhu/redi'
-import { Inject, createIdentifier } from '@wendellhu/redi'
 import { MessageType } from '@univerjs/design'
 import { fillDefaultSheetBlock, transformSnapshotJsonToWorkbookData, transformWorkbookDataToSnapshotJson } from '@/utils/snapshot'
 import { downLoadExcel, readFileHandler, transformToExcelBuffer } from '@/utils/file'
@@ -42,7 +40,7 @@ export class ExchangeService implements IExchangeService, IDisposable {
         return
 
       if (!excel2WorkbookData.id)
-        excel2WorkbookData.id = Tools.generateRandomId(6)
+        excel2WorkbookData.id = generateRandomId(6)
 
       const workbookData = fillDefaultSheetBlock(excel2WorkbookData)
       const previousSheetBarCount = document.querySelectorAll('.univer-sheet-bar').length

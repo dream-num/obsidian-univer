@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-import type { ICommand } from '@univerjs/core'
+import type { IAccessor, ICommand } from '@univerjs/core'
 import { CommandType } from '@univerjs/core'
-import type { IAccessor } from '@wendellhu/redi'
 import { getUploadXlsxFile } from '@/utils/file'
 import { IExchangeService } from '@/plugins/services/exchange.service'
 
@@ -24,7 +23,7 @@ export const ExchangeClientUploadJsonOperation: ICommand = {
   id: 'exchange-client.operation.upload-json',
   type: CommandType.OPERATION,
   handler: async (accessor: IAccessor) => {
-    const exchangeService = accessor.get(IExchangeService)
+    const exchangeService = accessor.get(IExchangeService) as any
 
     const file = await getUploadXlsxFile()
 
@@ -40,7 +39,8 @@ export const ExchangeClientDownloadJsonOperation: ICommand = {
   id: 'exchange-client.operation.download-json',
   type: CommandType.OPERATION,
   handler: async (accessor: IAccessor) => {
-    const exchangeService = accessor.get(IExchangeService)
+    const exchangeService = accessor.get(IExchangeService) as any
+
     exchangeService.downloadJson()
     return true
   },
