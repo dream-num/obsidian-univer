@@ -1,6 +1,6 @@
 /* eslint-disable ts/no-redeclare */
 import type { IDisposable, Workbook } from '@univerjs/core'
-import { IUniverInstanceService, Inject, LocaleService, Tools, UniverInstanceType, createIdentifier, generateRandomId } from '@univerjs/core'
+import { IUniverInstanceService, Inject, LocaleService, UniverInstanceType, createIdentifier, generateRandomId } from '@univerjs/core'
 import { IMessageService } from '@univerjs/ui'
 import { MessageType } from '@univerjs/design'
 import { fillDefaultSheetBlock, transformSnapshotJsonToWorkbookData, transformWorkbookDataToSnapshotJson } from '@/utils/snapshot'
