@@ -9,6 +9,7 @@ import { SettingTab } from './modals/settingTab'
 import { univerIconSvg } from './utils/common'
 import { injectWasm } from './utils/wasm'
 import type { UniverPluginSettings } from '@/types/setting'
+import { createNewFile } from '@/utils/file'
 
 export type ViewType = typeof USheetType | typeof UDocType
 export default class UniverPlugin extends Plugin {
@@ -23,6 +24,30 @@ export default class UniverPlugin extends Plugin {
     this.addRibbonIcon('univer', 'Univer', () => {
       const modal = new ChooseTypeModal(this.app, this.settings)
       modal.open()
+    })
+
+    this.addCommand({
+      id: 'univer-sheet',
+      name: 'Create Univer Sheet',
+      callback: () => {
+        createNewFile(this.app, 'usheet')
+      },
+    })
+
+    this.addCommand({
+      id: 'univer-doc',
+      name: 'Create Univer Doc',
+      callback: () => {
+        createNewFile(this.app, 'udoc')
+      },
+    })
+
+    this.addCommand({
+      id: 'univer-xlsx',
+      name: 'Create Univer Xlsx',
+      callback: () => {
+        createNewFile(this.app, 'xlsx')
+      },
     })
 
     // add the setting tab

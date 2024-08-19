@@ -43,4 +43,34 @@ jobs:
       - name: 📦 Build
         run: |
           pnpm i
-          pnpm run build
+          pnpm build
+  lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 18
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+          registry-url: ${{ secrets.VERDACCIO_URL }}
+          scope: '@univerjs-pro'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.VERDACCIO_TOKEN }}
+
+      - name: 📦 Build
+        run: |
+          pnpm i
+          pnpm lint --quiet
