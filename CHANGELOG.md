@@ -1,5 +1,12 @@
 
 
+## [1.1.4](https://github.com/dream-num/obsidian-univer/compare/1.1.3...1.1.4) (2024-08-19)
+
+
+### Features
+
+* Add command for quick creation of new universal file ([#85](https://github.com/dream-num/obsidian-univer/issues/85)) ([27f52b9](https://github.com/dream-num/obsidian-univer/commit/27f52b95ce4d159969844d69f55c8baad96e61e5))
+
 ## [1.1.3](https://github.com/dream-num/obsidian-univer/compare/1.1.2...1.1.3) (2024-08-15)
 
 ## [1.1.2](https://github.com/dream-num/obsidian-univer/compare/1.1.1...1.1.2) (2024-07-15)
