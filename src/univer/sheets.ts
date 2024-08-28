@@ -97,18 +97,18 @@ export function sheetInit(option: IUniverUIConfig, settings: UniverPluginSetting
 
     async getMentions() {
       return [
-        {
-          id: mockUser.userID,
-          label: mockUser.name,
-          type: 'user',
-          icon: mockUser.avatar,
-        },
-        {
-          id: '2',
-          label: 'User2',
-          type: 'user',
-          icon: mockUser.avatar,
-        },
+        // {
+        //   id: mockUser.userID,
+        //   label: mockUser.name,
+        //   type: 'user',
+        //   icon: mockUser.avatar,
+        // },
+        // {
+        //   id: '2',
+        //   label: 'User2',
+        //   type: 'user',
+        //   icon: mockUser.avatar,
+        // },
       ]
     }
   }
