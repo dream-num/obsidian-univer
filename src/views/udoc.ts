@@ -1,5 +1,5 @@
 import type { DocumentDataModel, IDocumentData, Univer } from '@univerjs/core'
-import { Tools, UniverInstanceType } from '@univerjs/core'
+import { IResourceLoaderService, Tools, UniverInstanceType } from '@univerjs/core'
 import { FUniver } from '@univerjs/facade'
 import type { WorkspaceLeaf } from 'obsidian'
 import { TextFileView } from 'obsidian'
@@ -21,7 +21,9 @@ export class UDocView extends TextFileView {
   }
 
   getViewData(): string {
-    return JSON.stringify(Tools.deepClone(this.documentModal.getSnapshot()))
+    const resourceLoaderService = this.univer.__getInjector().get(IResourceLoaderService)
+    const snapshot = resourceLoaderService.saveDoc(this.documentModal)
+    return JSON.stringify(Tools.deepClone(snapshot))
   }
 
   setViewData(data: string): void {
@@ -56,7 +58,7 @@ export class UDocView extends TextFileView {
     return Type
   }
 
-  clear(): void {}
+  clear(): void { }
 
   async onOpen() {
     this.rootContainer = this.contentEl as HTMLDivElement
