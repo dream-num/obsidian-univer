@@ -82,7 +82,10 @@ export class XlsxTypeView extends TextFileView {
   async saveToExcel(file: TFile, workbook: Workbook) {
     if (!file || !workbook)
       return
-    const saveWorkbookData = workbook.save()
+    const saveWorkbookData = this.FUniver.getUniverSheet(workbook.getUnitId())?.getSnapshot()
+    if (!saveWorkbookData) {
+      return
+    }
     const snapshotJSON = await transformWorkbookDataToSnapshotJson(saveWorkbookData)
     const snapshot = JSON.stringify(snapshotJSON)
     // @ts-expect-error
