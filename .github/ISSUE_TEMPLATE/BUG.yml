@@ -32,8 +32,8 @@ body:
     attributes:
       label: Are you using the mobile app?
       options:
-        - Yes
-        - No
+        - 'Yes'
+        - 'No'
     validations:
       required: true
   - type: textarea
