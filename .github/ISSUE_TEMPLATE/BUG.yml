@@ -32,7 +32,9 @@ body:
     attributes:
       label: Are you using the mobile app?
       options:
+        # eslint-disable-next-line yaml/plain-scalar
         - 'Yes'
+        # eslint-disable-next-line yaml/plain-scalar
         - 'No'
     validations:
       required: true
