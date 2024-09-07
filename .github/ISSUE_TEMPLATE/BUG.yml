@@ -32,8 +32,10 @@ body:
     attributes:
       label: Are you using the mobile app?
       options:
-        - Yes
-        - No
+        # eslint-disable-next-line yaml/plain-scalar
+        - 'Yes'
+        # eslint-disable-next-line yaml/plain-scalar
+        - 'No'
     validations:
       required: true
   - type: textarea
