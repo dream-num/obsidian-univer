@@ -1,10 +1,10 @@
+import type { UniverPluginSettings } from '@/types/setting'
 import type { DocumentDataModel, IDocumentData, Univer } from '@univerjs/core'
+import type { WorkspaceLeaf } from 'obsidian'
+import { docInit } from '@/univer/docs'
 import { IResourceLoaderService, Tools, UniverInstanceType } from '@univerjs/core'
 import { FUniver } from '@univerjs/facade'
-import type { WorkspaceLeaf } from 'obsidian'
 import { TextFileView } from 'obsidian'
-import type { UniverPluginSettings } from '@/types/setting'
-import { docInit } from '@/univer/docs'
 
 export const Type = 'univer-doc'
 
@@ -22,7 +22,8 @@ export class UDocView extends TextFileView {
 
   getViewData(): string {
     const resourceLoaderService = this.univer.__getInjector().get(IResourceLoaderService)
-    const snapshot = resourceLoaderService.saveDoc(this.documentModal)
+    const unitId = this.documentModal.getUnitId()
+    const snapshot = resourceLoaderService.saveUnit(unitId)
     return JSON.stringify(Tools.deepClone(snapshot))
   }
 

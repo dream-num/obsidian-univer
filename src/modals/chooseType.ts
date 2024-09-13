@@ -1,7 +1,7 @@
-import type { App } from 'obsidian'
-import { Modal } from 'obsidian'
 import type { UniverPluginSettings } from '@/types/setting'
+import type { App } from 'obsidian'
 import { createNewFile } from '@/utils/file'
+import { Modal } from 'obsidian'
 
 interface ModalText {
   title: string

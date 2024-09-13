@@ -15,9 +15,9 @@
  */
 
 import type { IAccessor, ICommand } from '@univerjs/core'
-import { CommandType } from '@univerjs/core'
-import { getUploadXlsxFile } from '@/utils/file'
 import { IExchangeService } from '@/plugins/services/exchange.service'
+import { getUploadXlsxFile } from '@/utils/file'
+import { CommandType } from '@univerjs/core'
 
 export const ExchangeClientUploadJsonOperation: ICommand = {
   id: 'exchange-client.operation.upload-json',

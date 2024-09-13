@@ -1,9 +1,9 @@
-import type { IMenuButtonItem, IMenuSelectorItem } from '@univerjs/ui'
-import { MenuGroup, MenuItemType, MenuPosition } from '@univerjs/ui'
 import type { IAccessor } from '@univerjs/core'
+import type { IMenuButtonItem, IMenuSelectorItem } from '@univerjs/ui'
 import { ExchangeClientDownloadJsonOperation, ExchangeClientUploadJsonOperation } from '@/plugins/commands/exchange.operation'
+import { MenuGroup, MenuItemType, MenuPosition } from '@univerjs/ui'
 
-const EXCHANGE_OPERATION_ID = 'exchange-client.operation.exchange'
+export const EXCHANGE_OPERATION_ID = 'exchange-client.operation.exchange'
 
 export function ExchangeMenuItemFactory(): IMenuSelectorItem<string> {
   return {

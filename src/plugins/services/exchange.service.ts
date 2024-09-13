@@ -1,10 +1,10 @@
 /* eslint-disable ts/no-redeclare */
 import type { IDisposable, Workbook } from '@univerjs/core'
-import { IUniverInstanceService, Inject, LocaleService, UniverInstanceType, createIdentifier, generateRandomId } from '@univerjs/core'
-import { IMessageService } from '@univerjs/ui'
-import { MessageType } from '@univerjs/design'
-import { fillDefaultSheetBlock, transformSnapshotJsonToWorkbookData, transformWorkbookDataToSnapshotJson } from '@/utils/snapshot'
 import { downLoadExcel, readFileHandler, transformToExcelBuffer } from '@/utils/file'
+import { fillDefaultSheetBlock, transformSnapshotJsonToWorkbookData, transformWorkbookDataToSnapshotJson } from '@/utils/snapshot'
+import { createIdentifier, generateRandomId, Inject, IUniverInstanceService, LocaleService, UniverInstanceType } from '@univerjs/core'
+import { MessageType } from '@univerjs/design'
+import { IMessageService } from '@univerjs/ui'
 
 export interface IExchangeService {
   uploadJson: (file: File | string) => Promise<void>

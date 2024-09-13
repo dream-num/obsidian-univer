@@ -1,11 +1,11 @@
+import { existsSync } from 'node:fs'
 import { copyFile, rename, writeFile } from 'node:fs/promises'
+import { builtinModules } from 'node:module'
 import { join, resolve } from 'node:path'
 import process from 'node:process'
-import { existsSync } from 'node:fs'
-import { builtinModules } from 'node:module'
-import { defineConfig } from 'vite'
 import { univerPlugin } from '@univerjs/vite-plugin'
 import dotenv from 'dotenv'
+import { defineConfig } from 'vite'
 import pkg from './package.json'
 
 dotenv.config()
@@ -27,7 +27,7 @@ function generate(isDev?: boolean) {
         author: pkg.author,
         authorUrl: 'https://github.com/dream-num',
         fundingUrl: 'https://opencollective.com/univer',
-        isDesktopOnly: false,
+        isDesktopOnly: true,
       }, null, 2)}\n`)
       await copyFile(resolve(buildDir, 'manifest.json'), join(process.cwd(), 'manifest.json'))
       rename(resolve(buildDir, 'style.css'), resolve(buildDir, 'styles.css'))

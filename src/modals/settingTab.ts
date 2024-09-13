@@ -1,6 +1,6 @@
 import type { App } from 'obsidian'
-import { PluginSettingTab, Setting } from 'obsidian'
 import type UniverPlugin from '../main'
+import { PluginSettingTab, Setting } from 'obsidian'
 
 export class SettingTab extends PluginSettingTab {
   plugin: UniverPlugin

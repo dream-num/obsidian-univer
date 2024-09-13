@@ -1,7 +1,134 @@
-/* eslint-disable jsdoc/require-returns-description */
-import type { ILogContext, ISnapshotServerService, IWorkbookData, Nullable } from '@univerjs/core'
-import { ClientSnapshotServerService, b64DecodeUnicode, b64EncodeUnicode, getSheetBlocksFromSnapshot, textDecoder, textEncoder, transformSnapshotToWorkbookData, transformWorkbookDataToSnapshot } from '@univerjs/core'
-import type { ISheetBlock, ISnapshot, IWorkbookMeta, IWorksheetMeta } from '@univerjs/protocol'
+import type { IWorkbookData, Nullable } from '@univerjs/core'
+import type {
+  IFetchMissingChangesetsRequest,
+  IFetchMissingChangesetsResponse,
+  IGetResourcesRequest,
+  IGetResourcesResponse,
+  IGetSheetBlockRequest,
+  IGetSheetBlockResponse,
+  IGetUnitOnRevRequest,
+  IGetUnitOnRevResponse,
+  ISaveChangesetRequest,
+  ISaveChangesetResponse,
+  ISaveSheetBlockRequest,
+  ISaveSheetBlockResponse,
+  ISaveSnapshotRequest,
+  ISaveSnapshotResponse,
+  ISheetBlock,
+  ISnapshot,
+  IWorkbookMeta,
+  IWorksheetMeta,
+} from '@univerjs/protocol'
+import type { ILogContext, ISnapshotServerService } from '@univerjs-pro/collaboration'
+import { ErrorCode, UniverType } from '@univerjs/protocol'
+import { b64DecodeUnicode, b64EncodeUnicode, getSheetBlocksFromSnapshot, textDecoder, textEncoder, transformSnapshotToWorkbookData, transformWorkbookDataToSnapshot } from '@univerjs-pro/collaboration'
+
+export class ClientSnapshotServerService implements ISnapshotServerService {
+  private _sheetBlockCache: Map<string, ISheetBlock> = new Map()
+
+  /** Load snapshot from a database. */
+  getUnitOnRev(context: ILogContext, params: IGetUnitOnRevRequest): Promise<IGetUnitOnRevResponse> {
+    return Promise.resolve({
+      snapshot: {
+        unitID: '',
+        type: UniverType.UNIVER_SHEET,
+        rev: 0,
+        workbook: undefined,
+        doc: undefined,
+      },
+      changesets: [],
+      error: {
+        code: ErrorCode.OK,
+        message: '',
+      },
+    })
+  }
+
+  /** Load sheet block from a database.  */
+  getSheetBlock(context: ILogContext, params: IGetSheetBlockRequest): Promise<IGetSheetBlockResponse> {
+    // get block from cache
+    const block = this._sheetBlockCache.get(params.blockID)
+
+    return Promise.resolve({
+      block,
+      error: {
+        code: ErrorCode.OK,
+        message: '',
+      },
+    })
+  }
+
+  /** Fetch missing changeset */
+  fetchMissingChangesets(
+    context: ILogContext,
+    params: IFetchMissingChangesetsRequest,
+  ): Promise<IFetchMissingChangesetsResponse> {
+    return Promise.resolve({
+      changesets: [],
+      error: {
+        code: ErrorCode.OK,
+        message: '',
+      },
+    })
+  }
+
+  getResourcesRequest(context: ILogContext, params: IGetResourcesRequest): Promise<IGetResourcesResponse> {
+    return Promise.resolve({
+      resources: {},
+      error: {
+        code: ErrorCode.OK,
+        message: '',
+      },
+    })
+  }
+
+  /** Save snapshot to a database. */
+  saveSnapshot(context: ILogContext, params: ISaveSnapshotRequest): Promise<ISaveSnapshotResponse> {
+    return Promise.resolve({
+      error: {
+        code: ErrorCode.OK,
+        message: '',
+      },
+    })
+  };
+
+  /** Save sheet block to a database. */
+  saveSheetBlock(context: ILogContext, params: ISaveSheetBlockRequest): Promise<ISaveSheetBlockResponse> {
+    const { block } = params
+
+    if (!block) {
+      return Promise.resolve({
+        error: {
+          code: ErrorCode.UNDEFINED,
+          message: 'block is required',
+        },
+        blockID: '',
+      })
+    }
+
+    // save block to cache
+    this._sheetBlockCache.set(block.id, block)
+
+    return Promise.resolve({
+      error: {
+        code: ErrorCode.OK,
+        message: '',
+      },
+      blockID: block.id,
+    })
+  };
+
+  /** Save changeset to a database. */
+  saveChangeset(context: ILogContext, params: ISaveChangesetRequest): Promise<ISaveChangesetResponse> {
+    return Promise.resolve({
+      error: {
+        code: ErrorCode.OK,
+        message: '',
+      },
+      concurrent: [],
+    })
+  };
+}
 
 export interface WorksheetMetaJson extends Omit<IWorksheetMeta, 'originalMeta'> {
   originalMeta: string
@@ -189,7 +316,7 @@ export async function transformWorkbookDataToSnapshotJson(workbookData: IWorkboo
 
   const sheetBlocks = await getSheetBlocksFromSnapshot(snapshot, snapshotService)
 
-  const snapshotJson = transformSnapshotMetaToString(snapshot)
+  const snapshotJson = transformSnapshotMetaToString(snapshot as any)
 
   if (!snapshotJson)
     throw new Error('Failed to transform snapshot to string')

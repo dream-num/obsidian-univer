@@ -14,38 +14,38 @@
  * limitations under the License.
  */
 
+import type { UniverPluginSettings } from '@/types/setting'
 import type { Nullable } from '@univerjs/core'
-import { Univer, UserManagerService } from '@univerjs/core'
-
-import { UniverRenderEnginePlugin } from '@univerjs/engine-render'
-import { UniverFormulaEnginePlugin } from '@univerjs/engine-formula'
-
-import { defaultTheme } from '@univerjs/design'
-import { UniverUIPlugin } from '@univerjs/ui'
-
-import { UniverDocsPlugin } from '@univerjs/docs'
-import { UniverDocsUIPlugin } from '@univerjs/docs-ui'
-import { UniverSheetsPlugin } from '@univerjs/sheets'
-import { UniverSheetsUIPlugin } from '@univerjs/sheets-ui'
-
-import { UniverSheetsConditionalFormattingUIPlugin } from '@univerjs/sheets-conditional-formatting-ui'
-
-import { UniverSheetsHyperLinkUIPlugin } from '@univerjs/sheets-hyper-link-ui'
 
 import type { IThreadCommentMentionDataSource } from '@univerjs/thread-comment-ui'
-import { IThreadCommentMentionDataService, UniverThreadCommentUIPlugin } from '@univerjs/thread-comment-ui'
-import { UniverSheetsThreadCommentPlugin } from '@univerjs/sheets-thread-comment'
+import type { IUniverUIConfig } from '@univerjs/ui'
 
-import { UniverSheetsFormulaPlugin } from '@univerjs/sheets-formula'
-import { UniverSheetsNumfmtPlugin } from '@univerjs/sheets-numfmt'
-import { UniverSheetsDataValidationPlugin } from '@univerjs/sheets-data-validation'
-import { UniverSheetsZenEditorPlugin } from '@univerjs/sheets-zen-editor'
-import { UniverSheetsSortUIPlugin } from '@univerjs/sheets-sort-ui'
-import { UniverSheetsDrawingUIPlugin } from '@univerjs/sheets-drawing-ui'
-import type { IUniverUIConfig } from '@univerjs/ui/lib/types/controllers/ui/ui.controller'
-import { getLanguage, univerLocales } from '@/utils/common'
-import type { UniverPluginSettings } from '@/types/setting'
 import { ExchangePlugin } from '@/plugins/ExchangePlugin'
+import { getLanguage, univerLocales } from '@/utils/common'
+
+import { Univer, UserManagerService } from '@univerjs/core'
+import { defaultTheme } from '@univerjs/design'
+import { UniverDocsPlugin } from '@univerjs/docs'
+import { UniverDocsUIPlugin } from '@univerjs/docs-ui'
+
+import { UniverFormulaEnginePlugin } from '@univerjs/engine-formula'
+
+import { UniverRenderEnginePlugin } from '@univerjs/engine-render'
+
+import { UniverSheetsPlugin } from '@univerjs/sheets'
+import { UniverSheetsConditionalFormattingUIPlugin } from '@univerjs/sheets-conditional-formatting-ui'
+import { UniverSheetsDataValidationPlugin } from '@univerjs/sheets-data-validation'
+
+import { UniverSheetsDrawingUIPlugin } from '@univerjs/sheets-drawing-ui'
+import { UniverSheetsFormulaPlugin } from '@univerjs/sheets-formula'
+import { UniverSheetsHyperLinkUIPlugin } from '@univerjs/sheets-hyper-link-ui'
+import { UniverSheetsNumfmtPlugin } from '@univerjs/sheets-numfmt'
+import { UniverSheetsSortUIPlugin } from '@univerjs/sheets-sort-ui'
+import { UniverSheetsThreadCommentPlugin } from '@univerjs/sheets-thread-comment'
+import { UniverSheetsUIPlugin } from '@univerjs/sheets-ui'
+import { UniverSheetsZenEditorPlugin } from '@univerjs/sheets-zen-editor'
+import { IThreadCommentMentionDataService, UniverThreadCommentUIPlugin } from '@univerjs/thread-comment-ui'
+import { UniverUIPlugin } from '@univerjs/ui'
 
 export function sheetInit(option: IUniverUIConfig, settings: UniverPluginSettings) {
 // univer

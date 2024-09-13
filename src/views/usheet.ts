@@ -1,12 +1,12 @@
+import type { UniverPluginSettings } from '@/types/setting'
 import type { IWorkbookData, Univer, Workbook } from '@univerjs/core'
-import { IUniverInstanceService, Tools, UniverInstanceType } from '@univerjs/core'
 import type { TFile, WorkspaceLeaf } from 'obsidian'
 
-import { TextFileView } from 'obsidian'
-import { FUniver } from '@univerjs/facade'
-import type { UniverPluginSettings } from '@/types/setting'
 import { sheetInit } from '@/univer/sheets'
 import { fillDefaultSheetBlock } from '@/utils/snapshot'
+import { IUniverInstanceService, Tools, UniverInstanceType } from '@univerjs/core'
+import { FUniver } from '@univerjs/facade'
+import { TextFileView } from 'obsidian'
 
 export const Type = 'univer-sheet'
 

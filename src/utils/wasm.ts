@@ -1,5 +1,5 @@
-import exec from '@univerjs-pro/exchange-wasm/wasm_exec?raw'
 import init from '@univerjs-pro/exchange-wasm/exchange.wasm?init'
+import exec from '@univerjs-pro/exchange-wasm/wasm_exec?raw'
 
 export async function injectWasm() {
   try {
