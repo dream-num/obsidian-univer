@@ -22,7 +22,8 @@ export class UDocView extends TextFileView {
 
   getViewData(): string {
     const resourceLoaderService = this.univer.__getInjector().get(IResourceLoaderService)
-    const snapshot = resourceLoaderService.saveDoc(this.documentModal)
+    const unitId = this.documentModal.getUnitId()
+    const snapshot = resourceLoaderService.saveUnit(unitId)
     return JSON.stringify(Tools.deepClone(snapshot))
   }
 
