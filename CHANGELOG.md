@@ -1,5 +1,17 @@
 
 
+## [1.1.5](https://github.com/dream-num/obsidian-univer/compare/1.1.4...1.1.5) (2024-09-13)
+
+
+### Bug Fixes
+
+* save data error ([#88](https://github.com/dream-num/obsidian-univer/issues/88)) ([c0dc254](https://github.com/dream-num/obsidian-univer/commit/c0dc2541219c42fbd657a4bd9b6cd38d7a625630))
+
+
+### Features
+
+* upgrade univer to 0.2.14 ([#91](https://github.com/dream-num/obsidian-univer/issues/91)) ([36f48ed](https://github.com/dream-num/obsidian-univer/commit/36f48ed6427a210c19814fcace7b7dd9b74e35af))
+
 ## [1.1.4](https://github.com/dream-num/obsidian-univer/compare/1.1.3...1.1.4) (2024-08-19)
 
 
