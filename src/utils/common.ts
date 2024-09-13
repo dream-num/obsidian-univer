@@ -1,6 +1,6 @@
+import type { UniverPluginSettings } from '@/types/setting'
 import { LocaleType } from '@univerjs/core'
 import { enUS, ruRU, viVN, zhCN, zhTW } from 'univer:locales'
-import type { UniverPluginSettings } from '@/types/setting'
 
 export const univerLocales = {
   [LocaleType.EN_US]: enUS,

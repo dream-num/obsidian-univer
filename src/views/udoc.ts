@@ -1,10 +1,10 @@
+import type { UniverPluginSettings } from '@/types/setting'
 import type { DocumentDataModel, IDocumentData, Univer } from '@univerjs/core'
+import type { WorkspaceLeaf } from 'obsidian'
+import { docInit } from '@/univer/docs'
 import { IResourceLoaderService, Tools, UniverInstanceType } from '@univerjs/core'
 import { FUniver } from '@univerjs/facade'
-import type { WorkspaceLeaf } from 'obsidian'
 import { TextFileView } from 'obsidian'
-import type { UniverPluginSettings } from '@/types/setting'
-import { docInit } from '@/univer/docs'
 
 export const Type = 'univer-doc'
 

@@ -8,8 +8,8 @@ import {
 } from '@univerjs/core'
 
 import { ExchangeController } from './controllers/exchange.controller'
-import { ExchangeService, IExchangeService } from './services/exchange.service'
 import { enUS, ruRU, viVN, zhCN, zhTW } from './locale/index'
+import { ExchangeService, IExchangeService } from './services/exchange.service'
 
 export class ExchangePlugin extends Plugin {
   static override type = UniverInstanceType.UNIVER_SHEET

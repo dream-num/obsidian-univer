@@ -1,8 +1,8 @@
-import JSZip from 'jszip'
-import { type App, Notice } from 'obsidian'
 import { Type as DocType } from '@/views/udoc'
 import { Type as SheetType } from '@/views/usheet'
 import { Type as XlsxType } from '@/views/xlsx'
+import JSZip from 'jszip'
+import { type App, Notice } from 'obsidian'
 
 export async function createNewFile(app: App, suffix: string, folderPath?: string, fileNum?: number): Promise<void> {
   if (folderPath) {

@@ -1,15 +1,13 @@
-import { Disposable, ICommandService, Inject, Injector, LifecycleStages, OnLifecycle } from '@univerjs/core'
-import type { IMenuItemFactory } from '@univerjs/ui'
-import { IMenuService } from '@univerjs/ui'
+import { Disposable, ICommandService, LifecycleStages, OnLifecycle } from '@univerjs/core'
+import { IMenuManagerService, RibbonStartGroup } from '@univerjs/ui'
 import { ExchangeClientDownloadJsonOperation, ExchangeClientUploadJsonOperation } from '../commands/exchange.operation'
-import { ExchangeDownloadJsonMenuItemFactory, ExchangeMenuItemFactory, ExchangeUploadJsonMenuItemFactory } from './menu'
+import { EXCHANGE_OPERATION_ID, ExchangeDownloadJsonMenuItemFactory, ExchangeUploadJsonMenuItemFactory } from './menu'
 
 @OnLifecycle(LifecycleStages.Steady, ExchangeController)
 export class ExchangeController extends Disposable {
   constructor(
-    @Inject(Injector) private readonly _injector: Injector,
     @ICommandService private readonly _commandService: ICommandService,
-    @IMenuService private readonly _menuService: IMenuService,
+    @IMenuManagerService private readonly _menuManagerService: IMenuManagerService,
   ) {
     super()
     this._initCommands()
@@ -26,12 +24,20 @@ export class ExchangeController extends Disposable {
   }
 
   private _initMenus() {
-    ([
-      ExchangeMenuItemFactory,
-      ExchangeUploadJsonMenuItemFactory,
-      ExchangeDownloadJsonMenuItemFactory,
-    ] as IMenuItemFactory[]).forEach((factory) => {
-      this.disposeWithMe(this._menuService.addMenuItem(this._injector.invoke(factory), {}))
+    this._menuManagerService.mergeMenu({
+      [RibbonStartGroup.OTHERS]: {
+        [EXCHANGE_OPERATION_ID]: {
+          order: 12,
+          [ExchangeClientUploadJsonOperation.id]: {
+            order: 0,
+            menuItemFactory: ExchangeUploadJsonMenuItemFactory,
+          },
+          [ExchangeClientDownloadJsonOperation.id]: {
+            order: 1,
+            menuItemFactory: ExchangeDownloadJsonMenuItemFactory,
+          },
+        },
+      },
     })
   }
 }

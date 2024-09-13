@@ -14,19 +14,19 @@
  * limitations under the License.
  */
 
+import type { UniverPluginSettings } from '@/types/setting'
+import type { IUniverUIConfig } from '@univerjs/ui'
+// import { UniverDocsDrawingUIPlugin } from '@univerjs/docs-drawing-ui'
+import { getLanguage, univerLocales } from '@/utils/common'
 import { Univer, UserManagerService } from '@univerjs/core'
 import { defaultTheme } from '@univerjs/design'
 import { UniverDocsPlugin } from '@univerjs/docs'
+import { UniverDocsHyperLinkUIPlugin } from '@univerjs/docs-hyper-link-ui'
+import { UniverDocsThreadCommentUIPlugin } from '@univerjs/docs-thread-comment-ui'
 import { UniverDocsUIPlugin } from '@univerjs/docs-ui'
+import { UniverFormulaEnginePlugin } from '@univerjs/engine-formula'
 import { UniverRenderEnginePlugin } from '@univerjs/engine-render'
 import { UniverUIPlugin } from '@univerjs/ui'
-import { UniverFormulaEnginePlugin } from '@univerjs/engine-formula'
-import { UniverDocsThreadCommentUIPlugin } from '@univerjs/docs-thread-comment-ui'
-import { UniverDocsHyperLinkUIPlugin } from '@univerjs/docs-hyper-link-ui'
-import type { IUniverUIConfig } from '@univerjs/ui/lib/types/controllers/ui/ui.controller'
-// import { UniverDocsDrawingUIPlugin } from '@univerjs/docs-drawing-ui'
-import { getLanguage, univerLocales } from '@/utils/common'
-import type { UniverPluginSettings } from '@/types/setting'
 
 export function docInit(option: IUniverUIConfig, settings: UniverPluginSettings) {
   const univer = new Univer({

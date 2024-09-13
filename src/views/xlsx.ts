@@ -1,11 +1,11 @@
-import { IUniverInstanceService, type IWorkbookData, type Nullable, Tools, type Univer, UniverInstanceType, type Workbook } from '@univerjs/core'
-import type { TFile, WorkspaceLeaf } from 'obsidian'
-import { TextFileView } from 'obsidian'
-import { FUniver } from '@univerjs/facade'
 import type { UniverPluginSettings } from '@/types/setting'
+import type { TFile, WorkspaceLeaf } from 'obsidian'
 import { sheetInit } from '@/univer/sheets'
-import { fillDefaultSheetBlock, transformSnapshotJsonToWorkbookData, transformWorkbookDataToSnapshotJson } from '@/utils/snapshot'
 import { transformToExcelBuffer } from '@/utils/file'
+import { fillDefaultSheetBlock, transformSnapshotJsonToWorkbookData, transformWorkbookDataToSnapshotJson } from '@/utils/snapshot'
+import { IUniverInstanceService, type IWorkbookData, type Nullable, Tools, type Univer, UniverInstanceType, type Workbook } from '@univerjs/core'
+import { FUniver } from '@univerjs/facade'
+import { TextFileView } from 'obsidian'
 
 export const Type = 'univer-xlsx'
 export class XlsxTypeView extends TextFileView {

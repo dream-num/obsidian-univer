@@ -1,15 +1,15 @@
-import './style/univer.css'
+import type { UniverPluginSettings } from '@/types/setting'
+import { createNewFile } from '@/utils/file'
 import { defu } from 'defu'
-import { Plugin, addIcon } from 'obsidian'
-import { Type as USheetType, USheetView } from './views/usheet'
-import { Type as XlsxType, XlsxTypeView } from './views/xlsx'
-import { Type as UDocType, UDocView } from './views/udoc'
+import { addIcon, Plugin } from 'obsidian'
 import { ChooseTypeModal } from './modals/chooseType'
 import { SettingTab } from './modals/settingTab'
 import { univerIconSvg } from './utils/common'
 import { injectWasm } from './utils/wasm'
-import type { UniverPluginSettings } from '@/types/setting'
-import { createNewFile } from '@/utils/file'
+import { Type as UDocType, UDocView } from './views/udoc'
+import { Type as USheetType, USheetView } from './views/usheet'
+import { Type as XlsxType, XlsxTypeView } from './views/xlsx'
+import './style/univer.css'
 
 export type ViewType = typeof USheetType | typeof UDocType
 export default class UniverPlugin extends Plugin {
